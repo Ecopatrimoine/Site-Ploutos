@@ -109,12 +109,13 @@
     font-size: 12px;
   }
   footer a { color: var(--gold); text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 </style>
 </head>
 <body>
 
 <header>
-  <img src="/lettrage.ploutos.blanc.svg" alt="Lettrage Ploutos" onerror="this.style.color='#E3AF64';this.outerHTML='<span style=\'color:#E3AF64;font-size:20px;font-weight:600\'>Ploutos</span>'">
+  <a href="/" aria-label="Ploutos — accueil" style="display:inline-flex;align-items:center"><img src="/lettrage.ploutos.blanc.svg" alt="Lettrage Ploutos" onerror="this.style.color='#E3AF64';this.outerHTML='<span style=\'color:#E3AF64;font-size:20px;font-weight:600\'>Ploutos</span>'"></a>
   <a href="/">← Retour</a>
 </header>
 
@@ -138,6 +139,7 @@
     <li><strong>Compte utilisateur</strong> (nom, email professionnel, mot de passe chiffré, informations du cabinet) — création et gestion du compte, fourniture du Service — <em>exécution du contrat</em>.</li>
     <li><strong>Facturation</strong> (identité, coordonnées, historique d'abonnement ; les données de carte bancaire sont traitées exclusivement par Stripe) — paiement, comptabilité — <em>exécution du contrat et obligation légale</em>.</li>
     <li><strong>Support</strong> (échanges par email) — assistance — <em>exécution du contrat</em>.</li>
+    <li><strong>Formulaire de contact</strong> (nom, email, message) — réponse à votre demande — <em>mesures précontractuelles et intérêt légitime</em>.</li>
     <li><strong>Données techniques</strong> (journaux de connexion et de sécurité) — sécurité, prévention des abus — <em>intérêt légitime</em>.</li>
     <li><strong>Prospection professionnelle</strong> (coordonnées professionnelles publiques de cabinets de conseil) — information sur le Service, avec faculté de désinscription immédiate dans chaque message — <em>intérêt légitime, encadré B2B</em>.</li>
   </ul>
