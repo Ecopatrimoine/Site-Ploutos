@@ -294,6 +294,104 @@ footer a:hover { color: var(--gold); }
   .section-title { font-size: 2rem; }
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://ploutos-cgp.fr/#organization",
+      "name": "EcoPatrimoine Conseil",
+      "url": "https://ploutos-cgp.fr",
+      "logo": "https://ploutos-cgp.fr/logo.ploutos.png",
+      "founder": {
+        "@type": "Person",
+        "name": "David Perry"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Perpignan",
+        "addressCountry": "FR"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Ploutos",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web, Windows, iPadOS, Android",
+      "description": "Logiciel de gestion patrimoniale pour CGP indépendants : calculs IR, IFI, succession, prévoyance, rapports PDF personnalisés.",
+      "publisher": { "@id": "https://ploutos-cgp.fr/#organization" },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Abonnement mensuel",
+          "price": "50",
+          "priceCurrency": "EUR"
+        },
+        {
+          "@type": "Offer",
+          "name": "Abonnement annuel",
+          "price": "500",
+          "priceCurrency": "EUR"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Mes données clients sont-elles en sécurité ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vos données sont stockées localement sur votre appareil et synchronisées sur votre propre espace cloud chiffré. Personne d'autre que vous n'y a accès. Architecture local-first — si vous êtes hors-ligne, l'application continue de fonctionner normalement pendant 72h."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "L'essai gratuit nécessite-t-il une carte bancaire ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. L'essai gratuit de 15 jours s'active dès la création de votre compte, sans carte bancaire ni engagement. À la fin de la période d'essai, vous choisissez de continuer ou non. Aucun prélèvement automatique."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Les barèmes fiscaux sont-ils à jour pour les revenus 2025 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. Tous les barèmes (IR sur revenus 2025, IFI, Succession, PFU) sont intégrés et vérifiés. Les mises à jour sont déployées automatiquement — vous n'avez rien à faire."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "La lettre de mission est-elle conforme ACPR 2025 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La lettre de mission intègre les mentions issues de L521-2, R521-2, l'arrêté du 29 octobre 2024 (RCP 2025) et la recommandation ACPR 2024-R-02 sur le profil investisseur. Elle est mise à jour à chaque évolution réglementaire."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je utiliser Ploutos sur iPad et Windows ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. Ploutos est disponible en version web (tout navigateur), en application installable sur iPad et Android (PWA), et en application bureau Windows. La synchronisation est automatique entre tous vos appareils. La version macOS arrive très prochainement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment fonctionne le support ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le support est assuré par email à contact@ploutos-cgp.fr avec un délai de réponse de 48h ouvrées. Une aide contextuelle est disponible directement dans l'application sur chaque champ. En cas de bug bloquant, un retour est garanti sous 24h."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
