@@ -25,11 +25,9 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // Ne pas intercepter Supabase, Google Fonts, analytics
+  // Ne pas intercepter Supabase, Stripe
   if (
     url.hostname.includes('supabase.co') ||
-    url.hostname.includes('fonts.googleapis.com') ||
-    url.hostname.includes('fonts.gstatic.com') ||
     url.hostname.includes('buy.stripe.com')
   ) {
     return;
