@@ -130,12 +130,13 @@
     font-size: 12px;
   }
   footer a { color: var(--gold); text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 </style>
 </head>
 <body>
 
 <header>
-  <img src="/lettrage.ploutos.blanc.svg" alt="Lettrage Ploutos" onerror="this.style.color='#E3AF64';this.outerHTML='<span style=\'color:#E3AF64;font-size:20px;font-weight:600\'>Ploutos</span>'">
+  <a href="/" aria-label="Ploutos — accueil" style="display:inline-flex;align-items:center"><img src="/lettrage.ploutos.blanc.svg" alt="Lettrage Ploutos" onerror="this.style.color='#E3AF64';this.outerHTML='<span style=\'color:#E3AF64;font-size:20px;font-weight:600\'>Ploutos</span>'"></a>
   <a href="/">← Retour</a>
 </header>
 
