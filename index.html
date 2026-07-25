@@ -36,10 +36,13 @@
   --white: #ffffff;
   --muted: #6B7280;
   --border: rgba(16,27,59,0.1);
+  --shadow-card: 0 2px 8px rgba(16,27,59,0.06);
+  --shadow-card-hover: 0 16px 40px rgba(16,27,59,0.12);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: 'Lato', sans-serif; color: var(--navy); background: var(--white); overflow-x: hidden; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 
 /* ── NAVBAR ── */
 nav {
@@ -148,9 +151,9 @@ h1 em { font-style: normal; color: var(--gold); }
 /* ── FEATURES ── */
 .features-bg { background: var(--cream2); }
 .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
-.feature-card { background: white; border-radius: 20px; padding: 2rem; border: 1px solid var(--border); transition: transform 0.25s, box-shadow 0.25s; position: relative; overflow: hidden; }
+.feature-card { background: white; border-radius: 20px; padding: 2rem; border: 1px solid var(--border); box-shadow: var(--shadow-card); transition: transform 0.25s, box-shadow 0.25s; position: relative; overflow: hidden; }
 .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--sky)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
-.feature-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(16,27,59,0.1); }
+.feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
 .feature-card:hover::before { transform: scaleX(1); }
 .feature-icon { font-size: 2rem; margin-bottom: 1.2rem; }
 .feature-title { font-weight: 900; font-size: 1rem; color: var(--navy); margin-bottom: 0.6rem; }
@@ -161,8 +164,8 @@ h1 em { font-style: normal; color: var(--gold); }
 /* ── TÉLÉCHARGEMENTS ── */
 .downloads { background: white; }
 .downloads-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem; max-width: 1200px; margin: 0 auto; }
-.dl-card { border: 2px solid var(--border); border-radius: 20px; padding: 2rem 1.5rem; text-align: center; transition: all 0.25s; cursor: pointer; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-.dl-card:hover { border-color: var(--navy); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(16,27,59,0.1); }
+.dl-card { border: 2px solid var(--border); border-radius: 20px; padding: 2rem 1.5rem; text-align: center; box-shadow: var(--shadow-card); transition: all 0.25s; cursor: pointer; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.dl-card:hover { border-color: var(--navy); transform: translateY(-3px); box-shadow: var(--shadow-card-hover); }
 .dl-card.unavailable { opacity: 0.55; cursor: default; }
 .dl-card.unavailable:hover { transform: none; box-shadow: none; border-color: var(--border); }
 .dl-icon { font-size: 2.4rem; }
@@ -180,8 +183,8 @@ h1 em { font-style: normal; color: var(--gold); }
 .toggle-btn { padding: 0.6rem 1.5rem; border-radius: 8px; border: none; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.2s; background: transparent; color: var(--muted); font-family: 'Lato', sans-serif; }
 .toggle-btn.active { background: var(--navy); color: white; box-shadow: 0 2px 8px rgba(16,27,59,0.2); }
 .pricing-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 800px; margin: 0 auto; }
-.pricing-card { background: white; border-radius: 24px; padding: 2.5rem; border: 2px solid var(--border); position: relative; transition: transform 0.2s, box-shadow 0.2s; }
-.pricing-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(16,27,59,0.1); }
+.pricing-card { background: white; border-radius: 24px; padding: 2.5rem; border: 2px solid var(--border); box-shadow: var(--shadow-card); position: relative; transition: transform 0.2s, box-shadow 0.2s; }
+.pricing-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
 .pricing-card.featured { border-color: var(--navy); background: linear-gradient(150deg, var(--navy) 0%, var(--sky) 100%); }
 .featured-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--navy); font-size: 0.72rem; font-weight: 900; padding: 0.3rem 1rem; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
 .pricing-plan { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.6rem; }
