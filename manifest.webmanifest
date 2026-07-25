@@ -10,12 +10,7 @@
   "icons": [
     {
       "src": "logo.ploutos.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "logo.ploutos.png",
-      "sizes": "512x512",
+      "sizes": "251x276",
       "type": "image/png"
     }
   ]
