@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex"/>
+<title>Page introuvable — Ploutos</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+<style>
+@font-face { font-family: 'Lato'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/lato-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Lato'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/lato-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Lato'; font-style: normal; font-weight: 900; font-display: swap; src: url('/fonts/lato-latin-900-normal.woff2') format('woff2'); }
+:root {
+  --navy: #101B3B;
+  --sky: #26428B;
+  --gold: #E3AF64;
+  --gold-dark: #C8943A;
+  --muted: #6B7280;
+  --bg: #f5f0e8;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--bg);
+  color: var(--navy);
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+
+/* ── NAV ── */
+nav {
+  display: flex; align-items: center;
+  padding: 0 40px; height: 64px;
+  background: rgba(245,240,232,0.95);
+  border-bottom: 1px solid rgba(227,175,100,0.18);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo .pi { height: 32px; width: 32px; object-fit: contain; }
+.nav-logo .lettrage { height: 26px; width: auto; object-fit: contain; }
+
+/* ── CONTENU ── */
+.page {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: 56px 24px;
+}
+.card {
+  width: 100%; max-width: 540px; text-align: center;
+}
+.code {
+  font-size: 96px; font-weight: 900; line-height: 1;
+  color: var(--gold); letter-spacing: -0.04em;
+  margin-bottom: 20px;
+}
+h1 {
+  font-size: 28px; font-weight: 900; color: var(--navy);
+  line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.01em;
+}
+.subtitle {
+  font-size: 16px; color: var(--muted); line-height: 1.65;
+  max-width: 420px; margin: 0 auto 36px;
+}
+.actions {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 13px 26px; border-radius: 12px;
+  font-family: 'Lato', sans-serif; font-size: 15px; font-weight: 700;
+  text-decoration: none; transition: transform 0.1s, opacity 0.2s, background 0.2s, color 0.2s;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--sky) 100%);
+  color: #fff; box-shadow: 0 6px 24px rgba(16,27,59,0.25);
+}
+.btn-primary:hover { transform: translateY(-1px); opacity: 0.95; }
+.btn-outline {
+  border: 2px solid var(--navy); color: var(--navy); background: transparent;
+}
+.btn-outline:hover { background: var(--navy); color: #fff; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  nav { padding: 0 16px; }
+  .page { padding: 40px 16px; }
+  .code { font-size: 76px; }
+  h1 { font-size: 23px; }
+  .subtitle { font-size: 15px; }
+  .actions { flex-direction: column; }
+  .btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo" aria-label="Ploutos — accueil">
+    <img src="/logo.ploutos.svg" alt="Logo Ploutos — symbole pi" class="pi" onerror="this.style.display='none'"/>
+    <img src="/lettrage.ploutos.svg" alt="Ploutos" class="lettrage"/>
+  </a>
+</nav>
+
+<div class="page">
+  <div class="card">
+    <div class="code">404</div>
+    <h1>Cette page n'existe pas ou plus</h1>
+    <p class="subtitle">Le lien est peut-être erroné, ou la page a été déplacée. Reprenez depuis l'accueil, ou lancez votre essai gratuit.</p>
+    <div class="actions">
+      <a href="/" class="btn btn-primary">Retour à l'accueil</a>
+      <a href="/inscription.html" class="btn btn-outline">Essai gratuit 30 jours</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
