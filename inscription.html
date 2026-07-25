@@ -37,6 +37,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 /* ── NAV ── */
@@ -227,10 +228,14 @@ footer a:hover { color: var(--sky); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .page { grid-template-columns: 1fr; }
+  /* minmax(0,1fr) : la colonne suit le viewport au lieu de s'etirer a la
+     largeur mini-contenu imposee par le widget Turnstile (~300px fixe). */
+  .page { grid-template-columns: minmax(0, 1fr); }
   .left { display: none; }
-  .right { padding: 32px 20px; }
-  .card { padding: 28px 24px; }
+  .right { padding: 32px 12px; }
+  .card { padding: 28px 16px; }
+  /* Nav resserree : evite que le lien retour ne colle au mot-logo a 360px. */
+  nav { padding: 0 16px; }
 }
 </style>
 </head>
