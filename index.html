@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ploutos — Le logiciel patrimonial des CGP indépendants</title>
+<meta name="description" content="Ploutos est le logiciel de gestion patrimoniale conçu pour les CGP indépendants. Calculs IR, IFI, Succession sur revenus 2025. Rapports PDF aux couleurs de votre cabinet. Essai gratuit 15 jours.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ploutos-cgp.fr">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/icon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ploutos-cgp.fr">
+<meta property="og:title" content="Ploutos — Le logiciel patrimonial des CGP indépendants">
+<meta property="og:description" content="Calculs fiscaux sur revenus 2025, rapports PDF personnalisés, gestion multi-clients. Essai gratuit 15 jours, sans carte bancaire.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #101B3B;
+  --sky: #26428B;
+  --blue: #516AC7;
+  --gold: #E3AF64;
+  --gold-dark: #C8943A;
+  --cream: #FBECD7;
+  --cream2: #F5F0E8;
+  --white: #ffffff;
+  --muted: #6B7280;
+  --border: rgba(16,27,59,0.1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Lato', sans-serif; color: var(--navy); background: var(--white); overflow-x: hidden; }
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 4rem; height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(227,175,100,0.2); transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 4px 24px rgba(16,27,59,0.1); }
+.nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo { height: 38px; width: 38px; object-fit: contain; }
+.nav-name { font-family: 'Lato', sans-serif; font-weight: 900; font-size: 1.3rem; color: var(--navy); letter-spacing: -0.02em; }
+.nav-links { display: flex; align-items: center; gap: 2.5rem; }
+.nav-links a { text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 700; transition: color 0.2s; }
+.nav-links a:hover { color: var(--navy); }
+.nav-cta { display: flex; align-items: center; gap: 1rem; }
+.btn-nav-outline { padding: 0.5rem 1.2rem; border: 2px solid var(--navy); border-radius: 8px; color: var(--navy); font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+.btn-nav-outline:hover { background: var(--navy); color: white; }
+.btn-nav-primary { padding: 0.5rem 1.4rem; background: linear-gradient(135deg, var(--navy), var(--sky)); border-radius: 8px; color: white; font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 16px rgba(16,27,59,0.2); }
+.btn-nav-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(16,27,59,0.3); }
+
+/* ── HERO ── */
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; position: relative; }
+.hero-left {
+  padding: 9rem 4rem 5rem 5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; z-index: 2;
+  background: linear-gradient(135deg, #f8f5ef 0%, #fdf9f4 60%, #f5f0e8 100%);
+}
+.hero-right {
+  background: linear-gradient(150deg, var(--navy) 0%, var(--sky) 50%, #1a3060 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; padding: 6rem 3rem;
+}
+.hero-right::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 40%, rgba(227,175,100,0.15) 0%, transparent 60%);
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(227,175,100,0.15); border: 1px solid rgba(227,175,100,0.4);
+  color: #8B6914; padding: 0.4rem 1rem; border-radius: 100px;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 1.8rem;
+  opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
+}
+.hero-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+h1 {
+  font-family: 'Lato', sans-serif; font-size: 3.4rem; line-height: 1.1;
+  font-weight: 900; color: var(--navy); letter-spacing: -0.03em; margin-bottom: 1.6rem;
+  opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+}
+h1 em { font-style: normal; color: var(--gold); }
+.hero-sub {
+  font-size: 1.05rem; line-height: 1.8; color: var(--muted);
+  max-width: 460px; margin-bottom: 2.5rem; font-weight: 400;
+  opacity: 0; animation: fadeUp 0.7s 0.3s forwards;
+}
+.hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s 0.4s forwards; }
+.btn-hero { padding: 0.95rem 2.2rem; background: linear-gradient(135deg, var(--navy) 0%, var(--sky) 100%); color: white; border-radius: 14px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.25s; box-shadow: 0 8px 32px rgba(16,27,59,0.25); }
+.btn-hero:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(16,27,59,0.35); }
+.btn-hero-ghost { padding: 0.95rem 1.8rem; color: var(--navy); font-weight: 700; font-size: 0.95rem; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; border: 2px solid rgba(16,27,59,0.2); border-radius: 14px; transition: all 0.2s; }
+.btn-hero-ghost:hover { border-color: var(--navy); background: rgba(16,27,59,0.04); }
+.hero-trust { margin-top: 2.8rem; display: flex; align-items: center; gap: 2rem; font-size: 0.8rem; color: var(--muted); font-weight: 700; opacity: 0; animation: fadeUp 0.7s 0.5s forwards; }
+.hero-trust-item { display: flex; align-items: center; gap: 0.4rem; }
+.hero-trust-item::before { content: '✓'; color: var(--gold); font-size: 0.9rem; }
+
+/* Hero card mockup */
+.hero-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 2rem; width: 100%; max-width: 460px; backdrop-filter: blur(8px); opacity: 0; animation: fadeLeft 0.8s 0.4s forwards; position: relative; z-index: 2; }
+.hero-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; }
+.hero-card-logo { width: 42px; height: 42px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.9; }
+.hero-card-title { color: white; font-weight: 900; font-size: 1.1rem; }
+.hero-card-sub { color: rgba(255,255,255,0.5); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+.kpi-box { background: rgba(255,255,255,0.08); border-radius: 14px; padding: 1rem 1.2rem; border: 1px solid rgba(255,255,255,0.1); }
+.kpi-label { color: rgba(255,255,255,0.5); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+.kpi-value { color: white; font-size: 1.5rem; font-weight: 900; }
+.kpi-value.gold { color: var(--gold); }
+.kpi-value.green { color: #4ade80; }
+.kpi-value.red { color: #f87171; }
+.hero-bar { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 0.8rem 1rem; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); }
+.hero-bar-label { color: rgba(255,255,255,0.6); font-size: 0.78rem; font-weight: 700; }
+.hero-bar-val { color: var(--gold); font-weight: 900; font-size: 0.9rem; }
+.hero-geom { position: absolute; border-radius: 50%; opacity: 0.07; }
+.hero-geom-1 { width: 300px; height: 300px; background: var(--gold); top: -80px; right: -80px; }
+.hero-geom-2 { width: 200px; height: 200px; background: white; bottom: 60px; left: -60px; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+
+/* ── SECTIONS ── */
+.section { padding: 7rem 5rem; }
+.section-label { font-size: 0.72rem; font-weight: 700; color: var(--gold-dark); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.8rem; }
+.section-title { font-family: 'Lato', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--navy); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+.section-title em { font-style: normal; color: var(--gold); }
+.section-sub { color: var(--muted); font-size: 1rem; line-height: 1.75; max-width: 520px; margin-bottom: 4rem; }
+.text-center { text-align: center; }
+.section-sub.text-center { margin-left: auto; margin-right: auto; }
+
+/* ── STATS ── */
+.stats { background: var(--navy); padding: 5rem; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1000px; margin: 0 auto; }
+.stat-item { text-align: center; padding: 2rem; border-right: 1px solid rgba(255,255,255,0.1); }
+.stat-item:last-child { border-right: none; }
+.stat-number { font-size: 3rem; font-weight: 900; color: var(--gold); letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.5rem; }
+.stat-label { color: rgba(255,255,255,0.6); font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ── FEATURES ── */
+.features-bg { background: var(--cream2); }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
+.feature-card { background: white; border-radius: 20px; padding: 2rem; border: 1px solid var(--border); transition: transform 0.25s, box-shadow 0.25s; position: relative; overflow: hidden; }
+.feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--sky)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+.feature-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(16,27,59,0.1); }
+.feature-card:hover::before { transform: scaleX(1); }
+.feature-icon { font-size: 2rem; margin-bottom: 1.2rem; }
+.feature-title { font-weight: 900; font-size: 1rem; color: var(--navy); margin-bottom: 0.6rem; }
+.feature-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; }
+.feature-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.pill { padding: 0.25rem 0.65rem; background: rgba(38,66,139,0.06); border-radius: 100px; font-size: 0.72rem; font-weight: 700; color: var(--sky); }
+
+/* ── TÉLÉCHARGEMENTS ── */
+.downloads { background: white; }
+.downloads-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem; max-width: 1200px; margin: 0 auto; }
+.dl-card { border: 2px solid var(--border); border-radius: 20px; padding: 2rem 1.5rem; text-align: center; transition: all 0.25s; cursor: pointer; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.dl-card:hover { border-color: var(--navy); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(16,27,59,0.1); }
+.dl-card.unavailable { opacity: 0.55; cursor: default; }
+.dl-card.unavailable:hover { transform: none; box-shadow: none; border-color: var(--border); }
+.dl-icon { font-size: 2.4rem; }
+.dl-platform { font-weight: 900; font-size: 1rem; color: var(--navy); }
+.dl-detail { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+.dl-badge { font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 100px; }
+.dl-badge.available { background: rgba(34,197,94,0.12); color: #16a34a; }
+.dl-badge.soon { background: rgba(227,175,100,0.15); color: var(--gold-dark); }
+.dl-badge.pwa { background: rgba(38,66,139,0.08); color: var(--sky); }
+
+/* ── PRICING ── */
+.pricing { background: var(--cream2); }
+.pricing-header { text-align: center; max-width: 600px; margin: 0 auto; }
+.pricing-toggle { display: inline-flex; background: white; border-radius: 12px; padding: 4px; margin: 0 auto 3rem; gap: 4px; box-shadow: 0 2px 12px rgba(16,27,59,0.08); }
+.toggle-btn { padding: 0.6rem 1.5rem; border-radius: 8px; border: none; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.2s; background: transparent; color: var(--muted); font-family: 'Lato', sans-serif; }
+.toggle-btn.active { background: var(--navy); color: white; box-shadow: 0 2px 8px rgba(16,27,59,0.2); }
+.pricing-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 800px; margin: 0 auto; }
+.pricing-card { background: white; border-radius: 24px; padding: 2.5rem; border: 2px solid var(--border); position: relative; transition: transform 0.2s, box-shadow 0.2s; }
+.pricing-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(16,27,59,0.1); }
+.pricing-card.featured { border-color: var(--navy); background: linear-gradient(150deg, var(--navy) 0%, var(--sky) 100%); }
+.featured-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--navy); font-size: 0.72rem; font-weight: 900; padding: 0.3rem 1rem; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+.pricing-plan { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.6rem; }
+.featured .pricing-plan { color: rgba(255,255,255,0.6); }
+.pricing-amount { display: flex; align-items: baseline; gap: 0.3rem; margin-bottom: 0.3rem; }
+.price-big { font-size: 3rem; font-weight: 900; color: var(--navy); letter-spacing: -0.03em; }
+.featured .price-big { color: white; }
+.price-period { font-size: 0.9rem; color: var(--muted); }
+.featured .price-period { color: rgba(255,255,255,0.6); }
+.price-note { font-size: 0.78rem; color: var(--gold-dark); font-weight: 700; margin-bottom: 2rem; min-height: 1.2em; }
+.featured .price-note { color: var(--gold); }
+.pricing-list { list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.7rem; }
+.pricing-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.88rem; color: var(--muted); }
+.featured .pricing-list li { color: rgba(255,255,255,0.8); }
+.pricing-list li::before { content: '✓'; color: var(--gold); font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+.btn-pricing { display: block; width: 100%; text-align: center; padding: 0.95rem; border-radius: 12px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; font-family: 'Lato', sans-serif; }
+.btn-pricing.outline { border: 2px solid var(--navy); color: var(--navy); background: transparent; }
+.btn-pricing.outline:hover { background: var(--navy); color: white; }
+.btn-pricing.white { background: white; color: var(--navy); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+.btn-pricing.white:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+/* ── FAQ ── */
+.faq { background: white; }
+.faq-grid { max-width: 720px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q { width: 100%; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 0; font-size: 0.95rem; font-weight: 700; color: var(--navy); text-align: left; font-family: 'Lato', sans-serif; transition: color 0.2s; }
+.faq-q:hover { color: var(--sky); }
+.faq-icon { font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; color: var(--gold); }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+.faq-item.open .faq-a { max-height: 250px; }
+.faq-a p { padding: 0 0 1.2rem; color: var(--muted); font-size: 0.9rem; line-height: 1.75; }
+
+/* ── À PROPOS ── */
+.about { background: var(--cream2); }
+.about-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-text .section-sub { margin-bottom: 1.5rem; }
+.about-signature { display: flex; align-items: center; gap: 1rem; margin-top: 2rem; }
+.about-avatar { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--sky)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 1.1rem; flex-shrink: 0; }
+.about-name { font-weight: 900; color: var(--navy); font-size: 0.95rem; }
+.about-role { font-size: 0.78rem; color: var(--muted); }
+.about-card { background: linear-gradient(135deg, var(--navy) 0%, var(--sky) 100%); border-radius: 24px; padding: 2.5rem; }
+.about-card-title { font-weight: 900; font-size: 1rem; color: white; margin-bottom: 1.5rem; opacity: 0.9; }
+.about-points { display: flex; flex-direction: column; gap: 1rem; }
+.about-point { display: flex; align-items: flex-start; gap: 0.8rem; }
+.about-point-icon { font-size: 1.1rem; flex-shrink: 0; }
+.about-point-text { font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+.about-point-text strong { color: white; }
+
+/* ── CTA FINAL ── */
+.cta-final { background: linear-gradient(135deg, var(--navy) 0%, var(--sky) 60%, #1a3060 100%); padding: 7rem 5rem; text-align: center; position: relative; overflow: hidden; }
+.cta-final::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(227,175,100,0.15) 0%, transparent 70%); }
+.cta-final-content { position: relative; z-index: 2; max-width: 600px; margin: 0 auto; }
+.cta-final h2 { font-size: 2.8rem; font-weight: 900; color: white; margin-bottom: 1rem; letter-spacing: -0.02em; line-height: 1.15; }
+.cta-final h2 em { font-style: normal; color: var(--gold); }
+.cta-final p { color: rgba(255,255,255,0.7); font-size: 1rem; line-height: 1.7; margin-bottom: 2.5rem; }
+.cta-final-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-cta-white { padding: 1rem 2.5rem; background: white; color: var(--navy); border-radius: 14px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.2s; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+.btn-cta-white:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+.btn-cta-gold { padding: 1rem 2rem; background: var(--gold); color: var(--navy); border-radius: 14px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; }
+.btn-cta-gold:hover { background: var(--gold-dark); transform: translateY(-1px); }
+.cta-geom { position: absolute; border-radius: 50%; }
+.cta-geom-1 { width: 400px; height: 400px; background: white; opacity: 0.03; top: -150px; right: -100px; }
+.cta-geom-2 { width: 300px; height: 300px; background: var(--gold); opacity: 0.05; bottom: -100px; left: -80px; }
+
+/* ── FOOTER ── */
+footer { background: var(--navy); color: rgba(255,255,255,0.5); padding: 3rem 5rem; font-size: 0.82rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+.footer-brand { display: flex; align-items: center; gap: 10px; }
+.footer-logo { height: 28px; width: 28px; object-fit: contain; opacity: 0.9; }
+.footer-name { color: white; font-weight: 900; font-size: 0.95rem; }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+footer a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: var(--gold); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeLeft { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+.reveal { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.hidden { opacity: 0; transform: translateY(28px); }
+.reveal.hidden.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-left { padding: 8rem 2rem 4rem; }
+  .hero-right { padding: 3rem 2rem; }
+  .features-grid { grid-template-columns: 1fr 1fr; }
+  .downloads-grid { grid-template-columns: 1fr 1fr; }
+  .section { padding: 5rem 2rem; }
+  nav { padding: 0 2rem; }
+  .nav-links { display: none; }
+  .stats { padding: 4rem 2rem; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-item:nth-child(2) { border-right: none; }
+  .stat-item:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.1); border-top: 1px solid rgba(255,255,255,0.1); }
+  .stat-item:nth-child(4) { border-right: none; border-top: 1px solid rgba(255,255,255,0.1); }
+  .pricing-cards { grid-template-columns: 1fr; max-width: 420px; }
+  .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .cta-final { padding: 5rem 2rem; }
+  footer { padding: 2rem; flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 640px) {
+  h1 { font-size: 2.4rem; }
+  .features-grid { grid-template-columns: 1fr; }
+  .downloads-grid { grid-template-columns: 1fr 1fr; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .cta-final h2 { font-size: 2rem; }
+  .section-title { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-brand">
+    <img src="logo.ploutos.svg" alt="Ploutos" class="nav-logo">
+    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQ0IiBoZWlnaHQ9IjEzMyIgdmlld0JveD0iMCAwIDY0NCAxMzMiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik00NS4zMTAxIDY1LjQ1QzQ5LjgxMDEgNjQuMDMgNTMuNTcwMSA2Mi4wNSA1Ni42MDAxIDU5LjUxQzU5LjYzMDEgNTYuOTcgNjEuOTEwMSA1My45NCA2My40NTAxIDUwLjQxQzY0Ljk5MDEgNDYuODggNjUuNzUwMSA0Mi45OSA2NS43NTAxIDM4Ljc1QzY1Ljc1MDEgMzQuNTEgNjUuMDMwMSAzMC43OCA2My41ODAxIDI3LjMzQzYyLjEzMDEgMjMuODkgNTkuOTIwMSAyMC45NCA1Ni45NjAxIDE4LjQ4QzU0LjAwMDEgMTYuMDMgNTAuMjQwMSAxNC4xMiA0NS43MDAxIDEyLjc2QzQxLjE2MDEgMTEuNCAzNS43OTAxIDEwLjcyIDI5LjYwMDEgMTAuNzJIMC4xMTAxMDdWOTkuODNIMTUuNTEwMVY2Ny41OUgyOS42MDAxQzM1LjU3MDEgNjcuNTkgNDAuODAwMSA2Ni44OCA0NS4zMDAxIDY1LjQ2TDQ1LjMxMDEgNjUuNDVaTTE1LjUyMDEgMjIuMDRIMjkuNjEwMUMzMy4xMjAxIDIyLjA0IDM2LjE4MDEgMjIuNDIgMzguNzkwMSAyMy4xOEM0MS40MDAxIDIzLjk0IDQzLjU2MDEgMjUuMDUgNDUuMjcwMSAyNi40OUM0Ni45ODAxIDI3LjkzIDQ4LjI3MDEgMjkuNjkgNDkuMTIwMSAzMS43NUM0OS45NzAxIDMzLjgxIDUwLjQwMDEgMzYuMTQgNTAuNDAwMSAzOC43NEM1MC40MDAxIDQxLjM0IDQ5Ljk2MDEgNDMuNzcgNDkuMDgwMSA0NS45MkM0OC4yMDAxIDQ4LjA3IDQ2Ljg5MDEgNDkuODkgNDUuMTYwMSA1MS40QzQzLjQzMDEgNTIuOTEgNDEuMjYwMSA1NC4wNyAzOC42NDAxIDU0LjlDMzYuMDMwMSA1NS43MyAzMy4wMTAxIDU2LjE0IDI5LjU5MDEgNTYuMTRIMTUuNTAwMVYyMi4wNEgxNS41MjAxWiIgZmlsbD0iIzEwMUIzQiIvPgo8cGF0aCBkPSJNMTM1LjI3IDg3LjY4OTlIOTUuOVYxMC43MUg4MC41Vjk5LjgxOTlIMTM1LjI3Vjg3LjY4OTlaIiBmaWxsPSIjMTAxQjNCIi8+CjxwYXRoIGQ9Ik0zMTguOTQgOTAuNTlDMzIyLjI4IDkzLjgzIDMyNi4zMyA5Ni4zNyAzMzEuMSA5OC4yMUMzMzUuODcgMTAwLjA1IDM0MS4yNCAxMDAuOTcgMzQ3LjIxIDEwMC45N0MzNTMuMTggMTAwLjk3IDM1OC41NSAxMDAuMDUgMzYzLjMyIDk4LjIxQzM2OC4wOSA5Ni4zNyAzNzIuMTQgOTMuODMgMzc1LjQ4IDkwLjU5QzM3OC44MiA4Ny4zNSAzODEuMzggODMuNDk5OSAzODMuMTYgNzkuMDM5OUMzODQuOTQgNzQuNTc5OSAzODUuODMgNjkuNzI5OSAzODUuODMgNjQuNDc5OVYxMC43MUgzNzAuNDdWNjQuNDc5OUMzNzAuNDcgNjguMDI5OSAzNjkuOTQgNzEuMjYgMzY4Ljg5IDc0LjE3QzM2Ny44NCA3Ny4wOCAzNjYuMzEgNzkuNTcgMzY0LjMxIDgxLjY0QzM2Mi4zMSA4My43MSAzNTkuODcgODUuMzIgMzU3IDg2LjQ3QzM1NC4xMiA4Ny42MyAzNTAuODYgODguMiAzNDcuMjEgODguMkMzNDMuNTYgODguMiAzNDAuMyA4Ny42MiAzMzcuNDIgODYuNDdDMzM0LjU0IDg1LjMxIDMzMi4xMSA4My42ODk5IDMzMC4xNCA4MS42MDk5QzMyOC4xNyA3OS41Mjk5IDMyNi42NSA3Ny4wMjk5IDMyNS41OSA3NC4xMTk5QzMyNC41MyA3MS4yMDk5IDMyNC4wMSA2Ny45Nzk5IDMyNC4wMSA2NC40Mjk5VjEwLjcxOTlIMzA4LjU5VjY0LjQ5QzMwOC41OSA2OS43MyAzMDkuNDggNzQuNTg5OSAzMTEuMjYgNzkuMDQ5OUMzMTMuMDQgODMuNTA5OSAzMTUuNiA4Ny4zNiAzMTguOTQgOTAuNlY5MC41OVoiIGZpbGw9IiMxMDFCM0IiLz4KPHBhdGggZD0iTTQyNy42IDk5LjkxOTlINDQyLjk2VjIyLjc4OTlINDcyLjU1VjEwLjcxSDM5Ny45NVYyMi43ODk5SDQyNy42Vjk5LjkxOTlaIiBmaWxsPSIjMTAxQjNCIi8+CjxwYXRoIGQ9Ik02NDEuNDQgNjIuOTlDNjQwLjE3IDYwLjQzIDYzOC40OSA1OC4yNiA2MzYuNCA1Ni40OUM2MzQuMzEgNTQuNzEgNjMxLjkzIDUzLjI0OTkgNjI5LjI1IDUyLjA4OTlDNjI2LjU3IDUwLjkyOTkgNjIzLjg0IDQ5LjkgNjIxLjA1IDQ4Ljk5QzYxOC4yNiA0OC4wOCA2MTUuNTMgNDcuMjIgNjEyLjg1IDQ2LjQyQzYxMC4xNyA0NS42MSA2MDcuNzkgNDQuNjc5OSA2MDUuNyA0My41OTk5QzYwMy42MSA0Mi41Mjk5IDYwMS45MyA0MS4yNCA2MDAuNjYgMzkuNzI5OUM1OTkuMzggMzguMjE5OSA1OTguNzUgMzYuMzI5OSA1OTguNzUgMzQuMDU5OUM1OTguNzUgMzIuMjc5OSA1OTkuMDkgMzAuNjQgNTk5Ljc3IDI5LjE0QzYwMC40NSAyNy42MyA2MDEuNDcgMjYuMzIgNjAyLjgzIDI1LjIxQzYwNC4xOSAyNC4xIDYwNS44NyAyMy4yMyA2MDcuODcgMjIuNjFDNjA5Ljg3IDIxLjk5IDYxMi4xOSAyMS42Nzk5IDYxNC44MiAyMS42Nzk5QzYxNy42NyAyMS42Nzk5IDYyMC4xMyAyMi4wMiA2MjIuMiAyMi43QzYyNC4yNiAyMy4zOCA2MjYuMDUgMjQuMTI5OSA2MjcuNTcgMjQuOTI5OUM2MjkuMDkgMjUuNzM5OSA2MzAuMzYgMjYuNDY5OSA2MzEuMzkgMjcuMTI5OUM2MzIuNDIgMjcuNzg5OSA2MzMuMzYgMjguMTE5OSA2MzQuMTkgMjguMTE5OUM2MzQuOTggMjguMTE5OSA2MzUuNjQgMjcuOTQ5OSA2MzYuMTcgMjcuNTg5OUM2MzYuNyAyNy4yMzk5IDYzNy4yIDI2LjY5IDYzNy42OSAyNS45NUw2NDEuNDQgMTkuMDA5OUM2MzguMTUgMTYuMDM5OSA2MzQuMjIgMTMuNzQ5OSA2MjkuNjggMTIuMTI5OUM2MjUuMTMgMTAuNTE5OSA2MjAuMTMgOS43MDk5NiA2MTQuNjkgOS43MDk5NkM2MDkuODUgOS43MDk5NiA2MDUuNTUgMTAuNDA5OSA2MDEuNzcgMTEuODE5OUM1OTcuOTkgMTMuMjE5OSA1OTQuODIgMTUuMDg5OSA1OTIuMjUgMTcuNDI5OUM1ODkuNjggMTkuNzU5OSA1ODcuNzIgMjIuNDQgNTg2LjM4IDI1LjQ1QzU4NS4wNCAyOC40NyA1ODQuMzcgMzEuNTggNTg0LjM3IDM0LjhDNTg0LjM3IDM4Ljg1IDU4NS4wMSA0Mi4yMTk5IDU4Ni4yOCA0NC45Mjk5QzU4Ny41NiA0Ny42Mzk5IDU4OS4yNCA0OS45MSA1OTEuMzIgNTEuNzRDNTkzLjQxIDUzLjU4IDU5NS43OSA1NS4wNyA1OTguNDcgNTYuMkM2MDEuMTUgNTcuMzQgNjAzLjg4IDU4LjMzIDYwNi42NCA1OS4xN0M2MDkuNDEgNjAuMDIgNjEyLjEzIDYwLjgwOTkgNjE0LjgxIDYxLjU1OTlDNjE3LjQ5IDYyLjI5OTkgNjE5Ljg3IDYzLjIwOTkgNjIxLjk2IDY0LjI4OTlDNjI0LjA0IDY1LjM2OTkgNjI1LjczIDY2LjY5OTkgNjI3IDY4LjI4OTlDNjI4LjI3IDY5Ljg3OTkgNjI4LjkxIDcxLjk0IDYyOC45MSA3NC40NUM2MjguOTEgNzguOTUgNjI3LjM4IDgyLjQ3OTkgNjI0LjMzIDg1LjAzOTlDNjIxLjI4IDg3LjU5OTkgNjE2Ljk2IDg4Ljg3OTkgNjExLjM4IDg4Ljg3OTlDNjA3Ljk1IDg4Ljg3OTkgNjA1LjAxIDg4LjQzOTkgNjAyLjU1IDg3LjU0OTlDNjAwLjA5IDg2LjY1OTkgNTk3Ljk5IDg1LjY5IDU5Ni4yNiA4NC42NEM1OTQuNTIgODMuNTkgNTkzLjA0IDgyLjYxOTkgNTkxLjgxIDgxLjcyOTlDNTkwLjU4IDgwLjgzOTkgNTg5LjQ2IDgwLjQgNTg4LjQ1IDgwLjRDNTg3LjcgODAuNCA1ODcuMDIgODAuNTcgNTg2LjQxIDgwLjlDNTg1LjggODEuMjMgNTg1LjI5IDgxLjY3OTkgNTg0Ljg5IDgyLjI1OTlMNTgwLjQxIDg5LjJDNTgyLjIxIDkwLjk3OTkgNTg0LjI2IDkyLjU5IDU4Ni41NCA5NC4wM0M1ODguODIgOTUuNDggNTkxLjI3IDk2LjcgNTkzLjg5IDk3LjcyQzU5Ni41IDk4LjczIDU5OS4yNSA5OS41MTk5IDYwMi4xMyAxMDAuMDdDNjA1LjAxIDEwMC42MyA2MDcuOTYgMTAwLjkgNjEwLjk5IDEwMC45QzYxNi4xMyAxMDAuOSA2MjAuNzEgMTAwLjE2IDYyNC43MyA5OC42Njk5QzYyOC43NSA5Ny4xNzk5IDYzMi4xMyA5NS4xNDk5IDYzNC44OCA5Mi41Njk5QzYzNy42MyA4OS45ODk5IDYzOS43MiA4Ni45NTk5IDY0MS4xOCA4My40ODk5QzY0Mi42MyA4MC4wMTk5IDY0My4zNSA3Ni4yOTk5IDY0My4zNSA3Mi4zMzk5QzY0My4zNSA2OC42Njk5IDY0Mi43MSA2NS41NSA2NDEuNDQgNjIuOTlaIiBmaWxsPSIjMTAxQjNCIi8+CjxwYXRoIGQ9Ik0yNjYuNDMgMTE4LjNDMjY2LjkgMTE3Ljg1IDI2Ny4zOCAxMTcuNCAyNjcuODMgMTE2LjkzQzI3My42NiAxMTAuOTEgMjc4LjE4IDEwMy43NCAyODEuMzkgOTUuNDFDMjg0LjYgODcuMDggMjg2LjIgNzcuOTggMjg2LjIgNjguMTFDMjg2LjIgNTguMjQgMjg0LjU5IDQ5LjE0IDI4MS4zOSA0MC44MUMyNzguMTggMzIuNDggMjczLjY2IDI1LjMgMjY3LjgzIDE5LjI1QzI2MiAxMy4yIDI1NSA4LjQ4IDI0Ni44MiA1LjA5QzIzOC42NCAxLjcgMjI5LjU2IDAgMjE5LjU2IDBDMjA5LjU2IDAgMjAwLjU3IDEuNyAxOTIuNCA1LjA5QzE4NC4yMyA4LjQ4IDE3Ny4yMSAxMy4yIDE3MS4zNCAxOS4yNUMxNjUuNDggMjUuMyAxNjAuOTQgMzIuNDggMTU3Ljc0IDQwLjgxQzE1NC41MyA0OS4xNCAxNTIuOTMgNTguMjQgMTUyLjkzIDY4LjExQzE1Mi45MyA3Ny45OCAxNTQuNTQgODcuMDggMTU3Ljc0IDk1LjQxQzE2MC45NSAxMDMuNzQgMTY1LjQ4IDExMC45MSAxNzEuMzQgMTE2LjkzQzE3MS44IDExNy40IDE3Mi4yOCAxMTcuODUgMTcyLjc1IDExOC4zSDBWMTMyLjI0SDE5OS4xOVYxMTguM0wxOTcuNTYgMTE4LjA3QzE5Mi4yMyAxMTUuNjMgMTg3LjYgMTEyLjMyIDE4My43MiAxMDguMUMxNzkuNDMgMTAzLjQzIDE3Ni4xMiA5Ny43MyAxNzMuODEgOTAuOTlDMTcxLjUgODQuMjUgMTcwLjM0IDc2LjYyIDE3MC4zNCA2OC4xMUMxNzAuMzQgNTkuNiAxNzEuNSA1Mi4wNyAxNzMuODEgNDUuMzNDMTc2LjEyIDM4LjU5IDE3OS40MyAzMi44NyAxODMuNzIgMjguMTdDMTg4LjAxIDIzLjQ3IDE5My4xOCAxOS44NiAxOTkuMjQgMTcuMzRDMjA1LjMgMTQuODIgMjEyLjA4IDEzLjU2IDIxOS41NyAxMy41NkMyMjcuMDYgMTMuNTYgMjMzLjk0IDE0LjgyIDI0MCAxNy4zNEMyNDYuMDYgMTkuODYgMjUxLjIyIDIzLjQ3IDI1NS40OCAyOC4xN0MyNTkuNzQgMzIuODcgMjYzIDM4LjU5IDI2NS4yOSA0NS4zM0MyNjcuNTcgNTIuMDcgMjY4LjcxIDU5LjY3IDI2OC43MSA2OC4xMUMyNjguNzEgNzYuNTUgMjY3LjU3IDg0LjI1IDI2NS4yOSA5MC45OUMyNjMgOTcuNzMgMjU5Ljc0IDEwMy40NCAyNTUuNDggMTA4LjFDMjUxLjUzIDExMi40MyAyNDYuNzggMTE1LjgxIDI0MS4yNyAxMTguMjdMMjQxLjA1IDExOC4zVjEzMi4yNEg2NDEuNDZWMTE4LjNIMjY2LjQ1SDI2Ni40M1oiIGZpbGw9IiMxMDFCM0IiLz4KPHBhdGggZD0iTTQ4OS40MSA4Ny45OUM0OTMuNTggOTIuMDIgNDk4LjU4IDk1LjE3IDUwNC40IDk3LjQ0QzUxMC4yMiA5OS43MSA1MTYuNjcgMTAwLjg1IDUyMy43NCAxMDAuODVDNTMwLjgxIDEwMC44NSA1MzcuMzMgOTkuNzEgNTQzLjE1IDk3LjQ0QzU0OC45NyA5NS4xNyA1NTMuOTYgOTIuMDIgNTU4LjExIDg3Ljk5QzU2Mi4yNiA4My45NiA1NjUuNDggNzkuMTYgNTY3Ljc2IDczLjU5QzU3MC4wNCA2OC4wMSA1NzEuMTkgNjEuOTIgNTcxLjE5IDU1LjMyQzU3MS4xOSA0OC43MiA1NzAuMDUgNDIuNjIgNTY3Ljc2IDM3LjA1QzU2NS40OCAzMS40OCA1NjIuMjYgMjYuNjcgNTU4LjExIDIyLjYyQzU1My45NiAxOC41NyA1NDguOTcgMTUuNDEgNTQzLjE1IDEzLjE0QzUzNy4zMyAxMC44NyA1MzAuODYgOS43Mjk5OCA1MjMuNzQgOS43Mjk5OEM1MTYuNjIgOS43Mjk5OCA1MTAuMjIgMTAuODcgNTA0LjQgMTMuMTRDNDk4LjU4IDE1LjQxIDQ5My41OCAxOC41NyA0ODkuNDEgMjIuNjJDNDg1LjI0IDI2LjY3IDQ4Mi4wMSAzMS40OCA0NzkuNzIgMzcuMDVDNDc3LjQ0IDQyLjYzIDQ3Ni4yOSA0OC43MiA0NzYuMjkgNTUuMzJDNDc2LjI5IDYxLjkyIDQ3Ny40MyA2OC4wMiA0NzkuNzIgNzMuNTlDNDgyIDc5LjE3IDQ4NS4yMyA4My45NyA0ODkuNDEgODcuOTlaTTQ5NC4yMiA0MS41QzQ5NS43MSAzNy40MSA0OTcuODUgMzMuOTQgNTAwLjYxIDMxLjA5QzUwMy4zOCAyOC4yNCA1MDYuNzEgMjYuMDUgNTEwLjYyIDI0LjUyQzUxNC41MyAyMi45OSA1MTguOSAyMi4yMyA1MjMuNzMgMjIuMjNDNTI4LjU2IDIyLjIzIDUzMyAyMi45OSA1MzYuOTEgMjQuNTJDNTQwLjgyIDI2LjA1IDU0NC4xNSAyOC4yNCA1NDYuODkgMzEuMDlDNTQ5LjY0IDMzLjk0IDU1MS43NCAzNy40MSA1NTMuMjIgNDEuNUM1NTQuNjkgNDUuNTkgNTU1LjQzIDUwLjE5IDU1NS40MyA1NS4zMUM1NTUuNDMgNjAuNDMgNTU0LjY5IDY1LjEgNTUzLjIyIDY5LjE5QzU1MS43NSA3My4yOCA1NDkuNjQgNzYuNzQgNTQ2Ljg5IDc5LjU3QzU0NC4xNSA4Mi40IDU0MC44MiA4NC41NyA1MzYuOTEgODYuMDdDNTMzIDg3LjU4IDUyOC42MSA4OC4zMyA1MjMuNzMgODguMzNDNTE4Ljg1IDg4LjMzIDUxNC41MyA4Ny41OCA1MTAuNjIgODYuMDdDNTA2LjcxIDg0LjU2IDUwMy4zNyA4Mi4zOSA1MDAuNjEgNzkuNTdDNDk3Ljg0IDc2Ljc0IDQ5NS43MSA3My4yOCA0OTQuMjIgNjkuMTlDNDkyLjczIDY1LjEgNDkxLjk4IDYwLjQ4IDQ5MS45OCA1NS4zMUM0OTEuOTggNTAuMTQgNDkyLjczIDQ1LjU4IDQ5NC4yMiA0MS41WiIgZmlsbD0iIzEwMUIzQiIvPgo8L3N2Zz4K" alt="Ploutos" style="height:28px;width:auto;object-fit:contain;"/>
+  </a>
+  <div class="nav-links">
+    <a href="#fonctionnalites">Fonctionnalités</a>
+    <a href="#telechargements">Téléchargements</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#faq">FAQ</a>
+    <a href="#about">À propos</a>
+  </div>
+  <div class="nav-cta">
+    <a href="/inscription.html?mode=login" class="btn-nav-outline">Se connecter</a>
+    <a href="/inscription.html" class="btn-nav-primary">Essai gratuit 15j</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Logiciel CGP indépendants</div>
+    <h1>La gestion patrimoniale<br><em>enfin</em> à votre image</h1>
+    <p class="hero-sub">Ploutos automatise vos calculs fiscaux sur revenus 2025, génère vos rapports PDF aux couleurs de votre cabinet et centralise tous vos dossiers clients — en quelques minutes, pas en quelques heures.</p>
+    <div class="hero-actions">
+      <a href="/inscription.html" class="btn-hero">Commencer l'essai gratuit →</a>
+      <a href="#fonctionnalites" class="btn-hero-ghost">Voir les fonctionnalités</a>
+    </div>
+    <div class="hero-trust">
+      <div class="hero-trust-item">Essai 15 jours</div>
+      <div class="hero-trust-item">Sans carte bancaire</div>
+      <div class="hero-trust-item">Données chez vous</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-geom hero-geom-1"></div>
+    <div class="hero-geom hero-geom-2"></div>
+    <div class="hero-card">
+      <div class="hero-card-header">
+        <img src="logo.ploutos.svg" alt="Ploutos" class="hero-card-logo">
+        <div>
+          <div class="hero-card-title">Cabinet Dupont Patrimoine</div>
+          <div class="hero-card-sub">Rapport · Martin Jean-Pierre · 2025</div>
+        </div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-box"><div class="kpi-label">Impôt sur le revenu</div><div class="kpi-value gold">24 850 €</div></div>
+        <div class="kpi-box"><div class="kpi-label">IFI estimé</div><div class="kpi-value">8 200 €</div></div>
+        <div class="kpi-box"><div class="kpi-label">Droits succession</div><div class="kpi-value red">186 400 €</div></div>
+        <div class="kpi-box"><div class="kpi-label">Patrimoine total</div><div class="kpi-value green">1,42 M€</div></div>
+      </div>
+      <div class="hero-bar">
+        <span class="hero-bar-label">📄 Rapport PDF généré en 1 clic</span>
+        <span class="hero-bar-val">Aux couleurs de votre cabinet</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats reveal">
+  <div class="stats-grid">
+    <div class="stat-item"><div class="stat-number">8</div><div class="stat-label">Modules patrimoniaux</div></div>
+    <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Barèmes revenus 2025</div></div>
+    <div class="stat-item"><div class="stat-number">54</div><div class="stat-label">Champs avec aide contextuelle</div></div>
+    <div class="stat-item"><div class="stat-number">15j</div><div class="stat-label">Essai gratuit — sans CB</div></div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section features-bg" id="fonctionnalites">
+  <div class="section-label text-center reveal">Ce que Ploutos fait pour vous</div>
+  <h2 class="section-title text-center reveal reveal-delay-1">Tout le cycle du conseil patrimonial</h2>
+  <p class="section-sub text-center reveal reveal-delay-2">De la collecte à l'édition des documents réglementaires, en passant par tous les calculs fiscaux sur revenus 2025.</p>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Calculs fiscaux automatisés</div>
+      <div class="feature-desc">Barèmes sur revenus 2025 toujours à jour. IR, IFI, Succession, PFU — les résultats s'affichent instantanément dès la saisie.</div>
+      <div class="feature-pills"><span class="pill">IR 2025</span><span class="pill">IFI</span><span class="pill">Succession</span><span class="pill">PFU</span></div>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-icon">📝</div>
+      <div class="feature-title">Documents PDF professionnels</div>
+      <div class="feature-desc">Rapport patrimonial 7 pages et lettre de mission réglementaire aux couleurs de votre cabinet, en un clic.</div>
+      <div class="feature-pills"><span class="pill">Logo cabinet</span><span class="pill">Signature</span><span class="pill">L521-2</span><span class="pill">ACPR 2025</span></div>
+    </div>
+    <div class="feature-card reveal reveal-delay-2">
+      <div class="feature-icon">👥</div>
+      <div class="feature-title">Gestion multi-clients</div>
+      <div class="feature-desc">Tous vos dossiers organisés, synchronisés et accessibles depuis n'importe quel appareil, en temps réel.</div>
+      <div class="feature-pills"><span class="pill">Sync cloud</span><span class="pill">Mode offline</span><span class="pill">Multi-appareils</span></div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">💡</div>
+      <div class="feature-title">Comparateur d'hypothèses</div>
+      <div class="feature-desc">Comparez plusieurs scénarios patrimoniaux côte à côte. Donation, vente, démembrement — simulez tout.</div>
+      <div class="feature-pills"><span class="pill">Scénarios</span><span class="pill">Deltas</span><span class="pill">Donations</span></div>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-icon">🎨</div>
+      <div class="feature-title">Identité visuelle complète</div>
+      <div class="feature-desc">5 couleurs personnalisables, logo, signature du conseiller. Chaque PDF reflète votre cabinet, pas l'éditeur.</div>
+      <div class="feature-pills"><span class="pill">Couleurs</span><span class="pill">Logo</span><span class="pill">ORIAS / RCP</span></div>
+    </div>
+    <div class="feature-card reveal reveal-delay-2">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">Données chez vous — RGPD</div>
+      <div class="feature-desc">Vos données clients restent stockées localement chez vous. Pas de cloud imposé, conformité RGPD native.</div>
+      <div class="feature-pills"><span class="pill">Local-first</span><span class="pill">Chiffré</span><span class="pill">RGPD</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TÉLÉCHARGEMENTS -->
+<section class="section downloads" id="telechargements">
+  <div class="section-label text-center reveal">Multi-plateforme</div>
+  <h2 class="section-title text-center reveal reveal-delay-1">Disponible sur <em>tous</em> vos appareils</h2>
+  <p class="section-sub text-center reveal reveal-delay-2">Accédez à Ploutos depuis votre bureau Windows, votre navigateur web, votre iPad ou votre smartphone Android.</p>
+  <div class="downloads-grid">
+    <a href="/inscription.html" class="dl-card reveal">
+      <div class="dl-icon">🌐</div>
+      <div class="dl-platform">Web</div>
+      <div class="dl-detail">Accès direct navigateur<br>Aucune installation</div>
+      <span class="dl-badge available">Disponible</span>
+    </a>
+    <a href="https://github.com/Ecopatrimoine/ploutos/releases/latest/download/Ploutos-Setup-1.1.4.exe" id="btn-windows" class="dl-card reveal reveal-delay-1">
+      <div class="dl-icon">🖥️</div>
+      <div class="dl-platform">Windows</div>
+      <div class="dl-detail">Application bureau native<br>Installation en 1 clic</div>
+      <span class="dl-badge available">✓ Disponible</span>
+    </a>
+    <a href="https://github.com/Ecopatrimoine/ploutos/releases/latest/download/Ploutos-1.1.4-arm64.dmg" id="btn-mac" class="dl-card reveal reveal-delay-1">
+      <div class="dl-icon">🍎</div>
+      <div class="dl-platform">macOS</div>
+      <div class="dl-detail">Apple Silicon (M1/M2/M3)<br>Installation .dmg</div>
+      <span class="dl-badge available">✓ Disponible</span>
+    </a>
+    <a href="/inscription.html" class="dl-card reveal reveal-delay-2">
+      <div class="dl-icon">📱</div>
+      <div class="dl-platform">iPad / iPhone</div>
+      <div class="dl-detail">Installez depuis Safari<br>Fonctionne hors-ligne</div>
+      <span class="dl-badge pwa">PWA installable</span>
+    </a>
+    <a href="/inscription.html" class="dl-card reveal reveal-delay-3">
+      <div class="dl-icon">🤖</div>
+      <div class="dl-platform">Android</div>
+      <div class="dl-detail">Installez depuis Chrome<br>Fonctionne hors-ligne</div>
+      <span class="dl-badge pwa">PWA installable</span>
+    </a>
+  </div>
+  <p class="text-center reveal" style="margin-top:2rem;font-size:0.82rem;color:var(--muted);">
+    La version web est accessible directement sur <a href="https://app.ploutos-cgp.fr" style="color:var(--sky);font-weight:700;">app.ploutos-cgp.fr</a> — sans installation.
+  </p>
+</section>
+
+<!-- TARIFS -->
+<section class="section pricing" id="tarifs">
+  <div class="pricing-header">
+    <div class="section-label reveal">Tarifs</div>
+    <h2 class="section-title reveal reveal-delay-1">Simple. Transparent. <em>Équitable.</em></h2>
+    <p class="section-sub reveal reveal-delay-2">Un seul plan complet avec toutes les fonctionnalités. Essai gratuit 15 jours, sans carte bancaire.</p>
+  </div>
+  <div style="display:flex;justify-content:center;">
+    <div class="pricing-toggle reveal" id="billing-toggle">
+      <button class="toggle-btn active" id="btn-monthly" onclick="setBilling('monthly')">Mensuel</button>
+      <button class="toggle-btn" id="btn-annual" onclick="setBilling('annual')">Annuel &nbsp;<span style="font-size:0.72rem;color:inherit;opacity:0.8;">−17%</span></button>
+    </div>
+  </div>
+  <div class="pricing-cards reveal reveal-delay-1">
+    <div class="pricing-card">
+      <div class="pricing-plan">Plan Solo</div>
+      <div class="pricing-amount">
+        <span class="price-big" id="price-amount">50€</span>
+        <span class="price-period" id="price-period">/mois</span>
+      </div>
+      <div class="price-note" id="price-note">&nbsp;</div>
+      <ul class="pricing-list">
+        <li>Calculs IR, IFI, Succession revenus 2025</li>
+        <li>Rapports PDF aux couleurs du cabinet</li>
+        <li>Lettre de mission réglementaire ACPR</li>
+        <li>Gestion multi-clients illimitée</li>
+        <li>Synchronisation cloud sécurisée</li>
+        <li>Mode hors-ligne 72h</li>
+        <li>Windows + Web + iPad + Android</li>
+        <li>Mises à jour incluses</li>
+      </ul>
+      <a href="/inscription.html" class="btn-pricing outline" id="btn-subscribe">Commencer l'essai gratuit</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="featured-badge">⭐ Recommandé</div>
+      <div class="pricing-plan">Plan Annuel</div>
+      <div class="pricing-amount">
+        <span class="price-big" style="color:white;">41,67€</span>
+        <span class="price-period">/mois</span>
+      </div>
+      <div class="price-note">500€/an — 2 mois offerts</div>
+      <ul class="pricing-list">
+        <li>Toutes les fonctionnalités Solo</li>
+        <li>2 mois offerts par rapport au mensuel</li>
+        <li>Tarif bloqué à vie tant que vous restez abonné</li>
+        <li>Accès prioritaire aux nouvelles fonctions</li>
+        <li>Support email dédié</li>
+        <li>Influence sur la roadmap</li>
+      </ul>
+      <a href="https://buy.stripe.com/28E7sMdgT5eg29A8sf9fW00" class="btn-pricing white">S'abonner — 500€/an →</a>
+    </div>
+  </div>
+
+  <!-- Champ code promo — cadre doré discret -->
+  <div style="display:flex;justify-content:center;margin-top:2.5rem;">
+    <div style="width:100%;max-width:440px;background:rgba(227,175,100,0.08);border:1px dashed var(--gold);border-radius:16px;padding:16px 20px;">
+      <input id="promo-input" type="text" placeholder="Code promo"
+        style="width:100%;border:1.5px solid var(--gold);border-radius:10px;padding:10px 14px;font-size:14px;font-weight:700;letter-spacing:0.05em;outline:none;color:var(--navy);background:#fff;font-family:'Lato',sans-serif;"
+        oninput="this.value=this.value.toUpperCase()"
+        onfocus="this.style.borderColor='var(--navy)'"
+        onblur="this.style.borderColor='var(--gold)'" />
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq" id="faq">
+  <div class="section-label text-center reveal">Questions fréquentes</div>
+  <h2 class="section-title text-center reveal reveal-delay-1">Tout ce que vous voulez savoir</h2>
+  <div class="faq-grid reveal reveal-delay-2">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Mes données clients sont-elles en sécurité ?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Vos données sont stockées localement sur votre appareil et synchronisées sur votre propre espace cloud chiffré. Personne d'autre que vous n'y a accès. Architecture local-first — si vous êtes hors-ligne, l'application continue de fonctionner normalement pendant 72h.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>L'essai gratuit nécessite-t-il une carte bancaire ?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Non. L'essai gratuit de 15 jours s'active dès la création de votre compte, sans carte bancaire ni engagement. À la fin de la période d'essai, vous choisissez de continuer ou non. Aucun prélèvement automatique.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Les barèmes fiscaux sont-ils à jour pour les revenus 2025 ?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Oui. Tous les barèmes (IR sur revenus 2025, IFI, Succession, PFU) sont intégrés et vérifiés. Les mises à jour sont déployées automatiquement — vous n'avez rien à faire.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>La lettre de mission est-elle conforme ACPR 2025 ?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>La lettre de mission intègre les mentions issues de L521-2, R521-2, l'arrêté du 29 octobre 2024 (RCP 2025) et la recommandation ACPR 2024-R-02 sur le profil investisseur. Elle est mise à jour à chaque évolution réglementaire.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Puis-je utiliser Ploutos sur iPad et Windows ?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Oui. Ploutos est disponible en version web (tout navigateur), en application installable sur iPad et Android (PWA), et en application bureau Windows. La synchronisation est automatique entre tous vos appareils. La version macOS arrive très prochainement.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Comment fonctionne le support ?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Le support est assuré par email à <a href="/cdn-cgi/l/email-protection#fb9894958f9a988fbb8b97948e8f9488d6989c8bd59d89" style="color:var(--sky)"><span class="__cf_email__" data-cfemail="cdaea2a3b9acaeb98dbda1a2b8b9a2bee0aeaabde3abbf">[email&#160;protected]</span></a> avec un délai de réponse de 48h ouvrées. Une aide contextuelle est disponible directement dans l'application sur chaque champ. En cas de bug bloquant, un retour est garanti sous 24h.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section class="section about" id="about">
+  <div class="about-inner">
+    <div class="about-text reveal">
+      <div class="section-label">À propos</div>
+      <h2 class="section-title">Un CGP a créé<br>l'outil qu'il <em>voulait</em></h2>
+      <p class="section-sub">Face à l'absence d'outils adaptés, accessibles et personnalisables, Ploutos est né du terrain — conçu par un CGP indépendant, pour les CGP indépendants.</p>
+      <p style="color:var(--muted);font-size:0.88rem;line-height:1.75;margin-bottom:1rem;">Après des années à jongler avec des outils trop chers, trop complexes ou trop génériques, j'ai décidé de construire exactement ce dont j'avais besoin. Un logiciel qui calcule juste, qui génère des documents professionnels, et qui s'adapte à l'identité de mon cabinet.</p>
+      <div class="about-signature">
+        <div class="about-avatar">DP</div>
+        <div>
+          <div class="about-name">David Perry</div>
+          <div class="about-role">CGP — EcoPatrimoine Conseil · Perpignan</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-card reveal reveal-delay-2">
+      <div class="about-card-title">Pourquoi Ploutos ?</div>
+      <div class="about-points">
+        <div class="about-point"><span class="about-point-icon">🎯</span><div class="about-point-text"><strong>Taillé pour les indépendants</strong> — Pas une solution enterprise scalée vers le bas, un outil pensé dès le départ pour un cabinet solo.</div></div>
+        <div class="about-point"><span class="about-point-icon">⚡</span><div class="about-point-text"><strong>Calculs fiables en temps réel</strong> — Tous les barèmes fiscaux sur revenus 2025 sont intégrés et vérifiés.</div></div>
+        <div class="about-point"><span class="about-point-icon">💎</span><div class="about-point-text"><strong>Votre image, pas la nôtre</strong> — Couleurs, logo, signature : chaque PDF reflète votre cabinet.</div></div>
+        <div class="about-point"><span class="about-point-icon">🔐</span><div class="about-point-text"><strong>Données locales, RGPD natif</strong> — Vos données clients restent chez vous, sans dépendance cloud imposée.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="cta-geom cta-geom-1"></div>
+  <div class="cta-geom cta-geom-2"></div>
+  <div class="cta-final-content reveal">
+    <h2>Prêt à gagner des <em>heures</em><br>sur chaque rendez-vous ?</h2>
+    <p>Rejoignez les premiers CGP qui utilisent Ploutos. Essai gratuit 15 jours, sans carte bancaire. Configuration en moins de 5 minutes.</p>
+    <div class="cta-final-actions">
+      <a href="/inscription.html" class="btn-cta-white">Démarrer l'essai gratuit →</a>
+      <a href="/cdn-cgi/l/email-protection#98fbf7f6ecf9fbecd8e8f4f7edecf7ebb5fbffe8b6feea" class="btn-cta-gold">Nous contacter</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img src="logo.ploutos.svg" alt="Ploutos" class="footer-logo">
+    <div>
+      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzUzIiBoZWlnaHQ9IjIyMSIgdmlld0JveD0iMCAwIDc1MyAyMjEiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik03NTIuNTUgMjAwLjAwOFYyMC44MDcxQzc1Mi41NSA5LjMxNTYyIDc0My4yMzQgMCA3MzEuNzQzIDBMMjAuODA3MSAwQzkuMzE1NjEgMCAwIDkuMzE1NjIgMCAyMC44MDcxVjIwMC4wMDhDMCAyMTEuNDk5IDkuMzE1NjEgMjIwLjgxNSAyMC44MDcxIDIyMC44MTVMNzMxLjc0MyAyMjAuODE1Qzc0My4yMzQgMjIwLjgxNSA3NTIuNTUgMjExLjQ5OSA3NTIuNTUgMjAwLjAwOFoiIGZpbGw9IiMxMDFCM0IiLz4KPHBhdGggZD0iTTg4Ljc2MyAxMDkuNzE2QzkzLjQ0NDYgMTA4LjIzOCA5Ny4zNTYzIDEwNi4xNzggMTAwLjUwOSAxMDMuNTM2QzEwMy42NjEgMTAwLjg5MyAxMDYuMDMzIDk3Ljc0MTIgMTA3LjYzNSA5NC4wNjg3QzEwOS4yMzcgOTAuMzk2MyAxMTAuMDI4IDg2LjM0OTMgMTEwLjAyOCA4MS45MzgyQzExMC4wMjggNzcuNTI3MSAxMDkuMjc5IDczLjY0NjYgMTA3Ljc3IDcwLjA1NzRDMTA2LjI2MiA2Ni40Nzg1IDEwMy45NjMgNjMuNDA5NSAxMDAuODgzIDYwLjg1MDJDOTcuODAzNyA1OC4zMDE0IDkzLjg5MTkgNTYuMzE0MyA4OS4xNjg3IDU0Ljg5OTRDODQuNDQ1NSA1My40ODQ1IDc4Ljg1ODggNTIuNzc3MSA3Mi40MTkgNTIuNzc3MUg0MS43MzlWMTQ1LjQ4M0g1Ny43NjA1VjExMS45NDJINzIuNDE5Qzc4LjYyOTkgMTExLjk0MiA4NC4wNzEgMTExLjIwMyA4OC43NTI2IDEwOS43MjZMODguNzYzIDEwOS43MTZaTTU3Ljc3MDkgNjQuNTUzOUg3Mi40Mjk0Qzc2LjA4MTEgNjQuNTUzOSA3OS4yNjQ2IDY0Ljk0OTIgODEuOTc5OSA2NS43Mzk5Qzg0LjY5NTIgNjYuNTMwNiA4Ni45NDI0IDY3LjY4NTQgODguNzIxNCA2OS4xODM1QzkwLjUwMDQgNzAuNjgxNiA5MS44NDI0IDcyLjUxMjYgOTIuNzI2NyA3NC42NTU3QzkzLjYxMSA3Ni43OTg5IDk0LjA1ODQgNzkuMjIyOSA5NC4wNTg0IDgxLjkyNzhDOTQuMDU4NCA4NC42MzI3IDkzLjYwMDYgODcuMTYwOCA5Mi42ODUxIDg5LjM5NzVDOTEuNzY5NiA5MS42MzQzIDkwLjQwNjcgOTMuNTI3NyA4OC42MDY5IDk1LjA5ODdDODYuODA3MSA5Ni42Njk2IDg0LjU0OTYgOTcuODc2NCA4MS44MjM4IDk4LjczOTlDNzkuMTA4NSA5OS42MDM0IDc1Ljk2NjYgMTAwLjAzIDcyLjQwODYgMTAwLjAzSDU3Ljc1MDFWNjQuNTUzOUg1Ny43NzA5WiIgZmlsbD0iI0Y4RjZGNyIvPgo8cGF0aCBkPSJNMTgyLjM1MyAxMzIuODYzSDE0MS4zOTRWNTIuNzc3MUgxMjUuMzczVjE0NS40NzNIMTgyLjM1M1YxMzIuODYzWiIgZmlsbD0iI0Y4RjZGNyIvPgo8cGF0aCBkPSJNMzczLjQzNSAxMzUuODgxQzM3Ni45MSAxMzkuMjUxIDM4MS4xMjMgMTQxLjg5NCAzODYuMDg1IDE0My44MDhDMzkxLjA0OCAxNDUuNzIyIDM5Ni42MzUgMTQ2LjY3OSA0MDIuODQ2IDE0Ni42NzlDNDA5LjA1NiAxNDYuNjc5IDQxNC42NDMgMTQ1LjcyMiA0MTkuNjA2IDE0My44MDhDNDI0LjU2OCAxNDEuODk0IDQyOC43ODIgMTM5LjI1MSA0MzIuMjU2IDEzNS44ODFDNDM1LjczMSAxMzIuNTEgNDM4LjM5NCAxMjguNTA0IDQ0MC4yNDYgMTIzLjg2NEM0NDIuMDk4IDExOS4yMjQgNDQzLjAyNCAxMTQuMTc5IDQ0My4wMjQgMTA4LjcxN1Y1Mi43NzcxSDQyNy4wNDRWMTA4LjcxN0M0MjcuMDQ0IDExMi40MSA0MjYuNDkzIDExNS43NyA0MjUuNCAxMTguNzk4QzQyNC4zMDggMTIxLjgyNSA0MjIuNzE2IDEyNC40MTYgNDIwLjYzNiAxMjYuNTY5QzQxOC41NTUgMTI4LjcyMyA0MTYuMDE2IDEzMC4zOTggNDEzLjAzMSAxMzEuNTk0QzQxMC4wMzQgMTMyLjgwMSA0MDYuNjQzIDEzMy4zOTQgNDAyLjg0NiAxMzMuMzk0QzM5OS4wNDggMTMzLjM5NCAzOTUuNjU3IDEzMi43OTEgMzkyLjY2MSAxMzEuNTk0QzM4OS42NjQgMTMwLjM4NyAzODcuMTM2IDEyOC43MDIgMzg1LjA4NyAxMjYuNTM4QzM4My4wMzcgMTI0LjM3NCAzODEuNDU2IDEyMS43NzMgMzgwLjM1MyAxMTguNzQ2QzM3OS4yNSAxMTUuNzE4IDM3OC43MDkgMTEyLjM1OCAzNzguNzA5IDEwOC42NjVWNTIuNzg3NUgzNjIuNjY3VjEwOC43MjdDMzYyLjY2NyAxMTQuMTc5IDM2My41OTMgMTE5LjIzNSAzNjUuNDQ1IDEyMy44NzVDMzY3LjI5NyAxMjguNTE1IDM2OS45NiAxMzIuNTIgMzczLjQzNSAxMzUuODkxVjEzNS44ODFaIiBmaWxsPSIjRjhGNkY3Ii8+CjxwYXRoIGQ9Ik00ODYuNDggMTQ1LjU3N0g1MDIuNDU5VjY1LjM0NDZINTMzLjI0M1Y1Mi43NzcxSDQ1NS42MzNWNjUuMzQ0Nkg0ODYuNDhWMTQ1LjU3N1oiIGZpbGw9IiNGOEY2RjciLz4KPHBhdGggZD0iTTcwOC45NDkgMTA3LjE2N0M3MDcuNjI3IDEwNC41MDMgNzA1Ljg4IDEwMi4yNDYgNzAzLjcwNSAxMDAuNDA0QzcwMS41MzEgOTguNTUyNiA2OTkuMDU1IDk3LjAzMzcgNjk2LjI2NyA5NS44MjY5QzY5My40NzkgOTQuNjIwMSA2OTAuNjM4IDkzLjU0ODUgNjg3LjczNiA5Mi42MDE4QzY4NC44MzMgOTEuNjU1IDY4MS45OTMgOTAuNzYwMyA2NzkuMjA1IDg5LjkyODFDNjc2LjQxNyA4OS4wODU0IDY3My45NDEgODguMTE3OCA2NzEuNzY3IDg2Ljk5NDNDNjY5LjU5MiA4NS44ODExIDY2Ny44NDQgODQuNTM5IDY2Ni41MjMgODIuOTY4MUM2NjUuMTkxIDgxLjM5NzIgNjY0LjUzNiA3OS40MzA5IDY2NC41MzYgNzcuMDY5M0M2NjQuNTM2IDc1LjIxNzUgNjY0Ljg5IDczLjUxMTMgNjY1LjU5NyA3MS45NTA4QzY2Ni4zMDUgNzAuMzc5OCA2NjcuMzY2IDY5LjAxNyA2NjguNzgxIDY3Ljg2MjJDNjcwLjE5NiA2Ni43MDc0IDY3MS45NDMgNjUuODAyMyA2NzQuMDI0IDY1LjE1NzNDNjc2LjEwNSA2NC41MTIyIDY3OC41MTggNjQuMTg5NyA2ODEuMjU1IDY0LjE4OTdDNjg0LjIyIDY0LjE4OTcgNjg2Ljc3OSA2NC41NDM0IDY4OC45MzIgNjUuMjUwOUM2OTEuMDc1IDY1Ljk1ODMgNjkyLjkzOCA2Ni43Mzg2IDY5NC41MTkgNjcuNTcwOUM2OTYuMSA2OC40MTM2IDY5Ny40MjIgNjkuMTczIDY5OC40OTMgNjkuODU5NkM2OTkuNTY1IDcwLjU0NjMgNzAwLjU0MyA3MC44ODk2IDcwMS40MDYgNzAuODg5NkM3MDIuMjI4IDcwLjg4OTYgNzAyLjkxNSA3MC43MTI3IDcwMy40NjYgNzAuMzM4MkM3MDQuMDE3IDY5Ljk3NDEgNzA0LjUzOCA2OS40MDE5IDcwNS4wNDcgNjguNjMyTDcwOC45NDkgNjEuNDEyQzcwNS41MjYgNTguMzIyMSA3MDEuNDM3IDU1LjkzOTcgNjk2LjcxNCA1NC4yNTQ0QzY5MS45ODEgNTIuNTc5NCA2ODYuNzc5IDUxLjczNjcgNjgxLjExOSA1MS43MzY3QzY3Ni4wODQgNTEuNzM2NyA2NzEuNjEgNTIuNDY0OSA2NjcuNjc4IDUzLjkzMThDNjYzLjc0NSA1NS4zODgzIDY2MC40NDcgNTcuMzMzOCA2NTcuNzc0IDU5Ljc2ODJDNjU1LjEgNjIuMTkyMiA2NTMuMDYxIDY0Ljk4MDQgNjUxLjY2NyA2OC4xMTE5QzY1MC4yNzMgNzEuMjUzNyA2NDkuNTc2IDc0LjQ4OTIgNjQ5LjU3NiA3Ny44MzkyQzY0OS41NzYgODIuMDUyNiA2NTAuMjQyIDg1LjU1ODYgNjUxLjU2MyA4OC4zNzc5QzY1Mi44OTUgOTEuMTk3MyA2NTQuNjQyIDkzLjU1ODkgNjU2LjgwNiA5NS40NjI3QzY1OC45ODEgOTcuMzc3IDY2MS40NTcgOTguOTI3MSA2NjQuMjQ1IDEwMC4xMDNDNjY3LjAzMyAxMDEuMjg5IDY2OS44NzMgMTAyLjMxOSA2NzIuNzQ0IDEwMy4xOTNDNjc1LjYyNiAxMDQuMDc3IDY3OC40NTYgMTA0Ljg5OSA2ODEuMjQ0IDEwNS42NzlDNjg0LjAzMiAxMDYuNDQ5IDY4Ni41MDggMTA3LjM5NiA2ODguNjgzIDEwOC41MTlDNjkwLjg0NyAxMDkuNjQzIDY5Mi42MDUgMTExLjAyNiA2OTMuOTI2IDExMi42ODFDNjk1LjI0NyAxMTQuMzM1IDY5NS45MTMgMTE2LjQ3OCA2OTUuOTEzIDExOS4wODlDNjk1LjkxMyAxMjMuNzcxIDY5NC4zMjEgMTI3LjQ0MyA2OTEuMTQ4IDEzMC4xMDZDNjg3Ljk3NSAxMzIuNzcgNjgzLjQ4MSAxMzQuMTAxIDY3Ny42NzYgMTM0LjEwMUM2NzQuMTA3IDEzNC4xMDEgNjcxLjA0OSAxMzMuNjQ0IDY2OC40ODkgMTMyLjcxOEM2NjUuOTMgMTMxLjc5MiA2NjMuNzQ1IDEzMC43ODMgNjYxLjk0NiAxMjkuNjlDNjYwLjEzNSAxMjguNTk4IDY1OC41OTYgMTI3LjU4OSA2NTcuMzE2IDEyNi42NjNDNjU2LjAzNiAxMjUuNzM3IDY1NC44NzEgMTI1LjI3OSA2NTMuODIgMTI1LjI3OUM2NTMuMDQgMTI1LjI3OSA2NTIuMzMzIDEyNS40NTYgNjUxLjY5OCAxMjUuNzk5QzY1MS4wNjMgMTI2LjE0MyA2NTAuNTMzIDEyNi42MTEgNjUwLjExNyAxMjcuMjE0TDY0NS40NTYgMTM0LjQzNEM2NDcuMzI5IDEzNi4yODYgNjQ5LjQ2MSAxMzcuOTYxIDY1MS44MzMgMTM5LjQ1OUM2NTQuMjA1IDE0MC45NjggNjU2Ljc1NCAxNDIuMjM3IDY1OS40OCAxNDMuMjk4QzY2Mi4xOTUgMTQ0LjM0OSA2NjUuMDU2IDE0NS4xNzEgNjY4LjA1MiAxNDUuNzQzQzY3MS4wNDkgMTQ2LjMyNiA2NzQuMTE4IDE0Ni42MDcgNjc3LjI3IDE0Ni42MDdDNjgyLjYxNyAxNDYuNjA3IDY4Ny4zODIgMTQ1LjgzNyA2OTEuNTY0IDE0NC4yODdDNjk1Ljc0NyAxNDIuNzM2IDY5OS4yNjMgMTQwLjYyNCA3MDIuMTI0IDEzNy45NEM3MDQuOTg1IDEzNS4yNTYgNzA3LjE1OSAxMzIuMTA0IDcwOC42NzggMTI4LjQ5NEM3MTAuMTg3IDEyNC44ODQgNzEwLjkzNiAxMjEuMDE0IDcxMC45MzYgMTE2Ljg5NEM3MTAuOTM2IDExMy4wNzYgNzEwLjI3IDEwOS44MyA3MDguOTQ5IDEwNy4xNjdaIiBmaWxsPSIjRjhGNkY3Ii8+CjxwYXRoIGQ9Ik0zMTguODA2IDE2NC42OThDMzE5LjI5NSAxNjQuMjMgMzE5Ljc5NCAxNjMuNzYyIDMyMC4yNjIgMTYzLjI3M0MzMjYuMzI4IDE1Ny4wMSAzMzEuMDMgMTQ5LjU1MSAzMzQuMzcgMTQwLjg4NUMzMzcuNzA5IDEzMi4yMTggMzM5LjM3NCAxMjIuNzUxIDMzOS4zNzQgMTEyLjQ4M0MzMzkuMzc0IDEwMi4yMTUgMzM3LjY5OSA5Mi43NDc1IDMzNC4zNyA4NC4wODEzQzMzMS4wMyA3NS40MTUyIDMyNi4zMjggNjcuOTQ1NCAzMjAuMjYyIDYxLjY1MTNDMzE0LjE5NyA1NS4zNTcyIDMwNi45MTUgNTAuNDQ2NyAyOTguNDA1IDQ2LjkxOTlDMjg5Ljg5NCA0My4zOTMxIDI4MC40NDggNDEuNjI0NSAyNzAuMDQ1IDQxLjYyNDVDMjU5LjY0MSA0MS42MjQ1IDI1MC4yODggNDMuMzkzMSAyNDEuNzg4IDQ2LjkxOTlDMjMzLjI4OSA1MC40NDY3IDIyNS45ODYgNTUuMzU3MiAyMTkuODc5IDYxLjY1MTNDMjEzLjc4MiA2Ny45NDU0IDIwOS4wNTkgNzUuNDE1MiAyMDUuNzMgODQuMDgxM0MyMDIuMzkgOTIuNzQ3NSAyMDAuNzI2IDEwMi4yMTUgMjAwLjcyNiAxMTIuNDgzQzIwMC43MjYgMTIyLjc1MSAyMDIuNDAxIDEzMi4yMTggMjA1LjczIDE0MC44ODVDMjA5LjA2OSAxNDkuNTUxIDIxMy43ODIgMTU3LjAxIDIxOS44NzkgMTYzLjI3M0MyMjAuMzU3IDE2My43NjIgMjIwLjg1NyAxNjQuMjMgMjIxLjM0NiAxNjQuNjk4SDQxLjYyNDVWMTc5LjIwMUgyNDguODUzVjE2NC42OThMMjQ3LjE1NyAxNjQuNDU5QzI0MS42MTIgMTYxLjkyMSAyMzYuNzk1IDE1OC40NzcgMjMyLjc1OCAxNTQuMDg3QzIyOC4yOTUgMTQ5LjIyOCAyMjQuODUyIDE0My4yOTggMjIyLjQ0OCAxMzYuMjg2QzIyMC4wNDUgMTI5LjI3NCAyMTguODM4IDEyMS4zMzYgMjE4LjgzOCAxMTIuNDgzQzIxOC44MzggMTAzLjYzIDIyMC4wNDUgOTUuNzk1NyAyMjIuNDQ4IDg4Ljc4MzdDMjI0Ljg1MiA4MS43NzE3IDIyOC4yOTUgNzUuODIwOSAyMzIuNzU4IDcwLjkzMTNDMjM3LjIyMSA2Ni4wNDE2IDI0Mi42IDYyLjI4NTkgMjQ4LjkwNSA1OS42NjQyQzI1NS4yMDkgNTcuMDQyNSAyNjIuMjYzIDU1LjczMTcgMjcwLjA1NSA1NS43MzE3QzI3Ny44NDcgNTUuNzMxNyAyODUuMDA1IDU3LjA0MjUgMjkxLjMwOSA1OS42NjQyQzI5Ny42MTQgNjIuMjg1OSAzMDIuOTgyIDY2LjA0MTYgMzA3LjQxNCA3MC45MzEzQzMxMS44NDYgNzUuODIwOSAzMTUuMjM3IDgxLjc3MTcgMzE3LjYyIDg4Ljc4MzdDMzE5Ljk5MiA5NS43OTU3IDMyMS4xNzggMTAzLjcwMiAzMjEuMTc4IDExMi40ODNDMzIxLjE3OCAxMjEuMjY0IDMxOS45OTIgMTI5LjI3NCAzMTcuNjIgMTM2LjI4NkMzMTUuMjM3IDE0My4yOTggMzExLjg0NiAxNDkuMjM5IDMwNy40MTQgMTU0LjA4N0MzMDMuMzA1IDE1OC41OTEgMjk4LjM2MyAxNjIuMTA4IDI5Mi42MzEgMTY0LjY2N0wyOTIuNDAyIDE2NC42OThWMTc5LjIwMUg3MDguOTdWMTY0LjY5OEgzMTguODI3SDMxOC44MDZaIiBmaWxsPSIjRjhGNkY3Ii8+CjxwYXRoIGQ9Ik01NTAuNzg0IDEzMy4xNzZDNTU1LjEyMiAxMzcuMzY4IDU2MC4zMjQgMTQwLjY0NSA1NjYuMzc5IDE0My4wMDdDNTcyLjQzNCAxNDUuMzY5IDU3OS4xNDQgMTQ2LjU1NSA1ODYuNDk5IDE0Ni41NTVDNTkzLjg1NCAxNDYuNTU1IDYwMC42MzggMTQ1LjM2OSA2MDYuNjkyIDE0My4wMDdDNjEyLjc0NyAxNDAuNjQ1IDYxNy45MzkgMTM3LjM2OCA2MjIuMjU2IDEzMy4xNzZDNjI2LjU3NCAxMjguOTgzIDYyOS45MjQgMTIzLjk4OSA2MzIuMjk2IDExOC4xOTVDNjM0LjY2OCAxMTIuMzg5IDYzNS44NjQgMTA2LjA1NCA2MzUuODY0IDk5LjE4NzNDNjM1Ljg2NCA5Mi4zMjA5IDYzNC42NzggODUuOTc0OCA2MzIuMjk2IDgwLjE4QzYyOS45MjQgNzQuMzg1MyA2MjYuNTc0IDY5LjM4MTIgNjIyLjI1NiA2NS4xNjc3QzYxNy45MzkgNjAuOTU0MyA2MTIuNzQ3IDU3LjY2NjggNjA2LjY5MiA1NS4zMDUyQzYwMC42MzggNTIuOTQzNiA1OTMuOTA2IDUxLjc1NzYgNTg2LjQ5OSA1MS43NTc2QzU3OS4wOTIgNTEuNzU3NiA1NzIuNDM0IDUyLjk0MzYgNTY2LjM3OSA1NS4zMDUyQzU2MC4zMjQgNTcuNjY2OCA1NTUuMTIyIDYwLjk1NDMgNTUwLjc4NCA2NS4xNjc3QzU0Ni40NDYgNjkuMzgxMiA1NDMuMDg1IDc0LjM4NTMgNTQwLjcwMyA4MC4xOEM1MzguMzMxIDg1Ljk4NTIgNTM3LjEzNCA5Mi4zMjA5IDUzNy4xMzQgOTkuMTg3M0M1MzcuMTM0IDEwNi4wNTQgNTM4LjMyIDExMi40IDU0MC43MDMgMTE4LjE5NUM1NDMuMDc1IDEyNCA1NDYuNDM1IDEyOC45OTMgNTUwLjc4NCAxMzMuMTc2Wk01NTUuNzg4IDg0Ljc5OTJDNTU3LjMzOCA4MC41NDQxIDU1OS41NjQgNzYuOTM0MSA1NjIuNDM2IDczLjk2OTFDNTY1LjMxOCA3MS4wMDQxIDU2OC43ODIgNjguNzI1NyA1NzIuODUgNjcuMTM0QzU3Ni45MTggNjUuNTQyMiA1ODEuNDY0IDY0Ljc1MTYgNTg2LjQ4OSA2NC43NTE2QzU5MS41MTQgNjQuNzUxNiA1OTYuMTMzIDY1LjU0MjIgNjAwLjIwMSA2Ny4xMzRDNjA0LjI2OCA2OC43MjU3IDYwNy43MzMgNzEuMDA0MSA2MTAuNTgzIDczLjk2OTFDNjEzLjQ0NCA3Ni45MzQxIDYxNS42MjkgODAuNTQ0MSA2MTcuMTY5IDg0Ljc5OTJDNjE4LjY5OCA4OS4wNTQyIDYxOS40NjggOTMuODM5OSA2MTkuNDY4IDk5LjE2NjVDNjE5LjQ2OCAxMDQuNDkzIDYxOC42OTggMTA5LjM1MiA2MTcuMTY5IDExMy42MDdDNjE1LjYzOSAxMTcuODYyIDYxMy40NDQgMTIxLjQ2MSA2MTAuNTgzIDEyNC40MDVDNjA3LjczMyAxMjcuMzUgNjA0LjI2OCAxMjkuNjA3IDYwMC4yMDEgMTMxLjE2OEM1OTYuMTMzIDEzMi43MzkgNTkxLjU2NiAxMzMuNTE5IDU4Ni40ODkgMTMzLjUxOUM1ODEuNDEyIDEzMy41MTkgNTc2LjkxOCAxMzIuNzM5IDU3Mi44NSAxMzEuMTY4QzU2OC43ODIgMTI5LjU5NyA1NjUuMzA3IDEyNy4zMzkgNTYyLjQzNiAxMjQuNDA1QzU1OS41NTQgMTIxLjQ2MSA1NTcuMzM4IDExNy44NjIgNTU1Ljc4OCAxMTMuNjA3QzU1NC4yMzggMTA5LjM1MiA1NTMuNDU4IDEwNC41NDUgNTUzLjQ1OCA5OS4xNjY1QzU1My40NTggOTMuNzg3OCA1NTQuMjM4IDg5LjA0MzggNTU1Ljc4OCA4NC43OTkyWiIgZmlsbD0iI0Y4RjZGNyIvPgo8L3N2Zz4K" alt="Ploutos" style="height:22px;width:auto;object-fit:contain;opacity:0.9;"/>
+      <div class="footer-copy">© 2026 EcoPatrimoine Conseil — David PERRY · Perpignan</div>
+    </div>
+  </div>
+  <div class="footer-links">
+    <a href="#fonctionnalites">Fonctionnalités</a>
+    <a href="#telechargements">Téléchargements</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#faq">FAQ</a>
+    <a href="/cgu.html">CGU</a>
+    <a href="/privacy">Politique de confidentialité</a>
+    <a href="/cdn-cgi/l/email-protection#4a2925243e2b293e0a3a26253f3e253967292d3a642c38">Contact</a>
+    <a href="/inscription.html?mode=login">Se connecter</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 20); });
+
+// Scroll reveal — éléments visibles par défaut, animation subtile au scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.remove('hidden');
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => {
+  // Seulement cacher les éléments hors viewport initial
+  const rect = el.getBoundingClientRect();
+  if (rect.top > window.innerHeight) {
+    el.classList.add('hidden');
+  }
+  observer.observe(el);
+});
+
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+function setBilling(mode) {
+  document.getElementById('btn-monthly').classList.toggle('active', mode === 'monthly');
+  document.getElementById('btn-annual').classList.toggle('active', mode === 'annual');
+  const isAnnual = mode === 'annual';
+  document.getElementById('price-amount').textContent = isAnnual ? '41,67€' : '50€';
+  document.getElementById('price-note').textContent   = isAnnual ? '500€/an — 2 mois offerts' : '';
+}
+</script>
+</body>
+</html> 

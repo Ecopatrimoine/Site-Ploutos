@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ploutos — Bienvenue ! Votre abonnement est actif</title>
+<link rel="icon" href="logo.ploutos.svg" type="image/png"/>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy: #101B3B;
+  --sky: #26428B;
+  --gold: #E3AF64;
+  --cream: #FBECD7;
+  --bg: #f5f0e8;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 64px;
+  background: rgba(245,240,232,0.95);
+  border-bottom: 1px solid rgba(227,175,100,0.18);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo img { height: 32px; }
+.nav-logo span { font-weight: 900; font-size: 18px; color: var(--navy); }
+
+.page {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 48px 24px; position: relative; overflow: hidden;
+}
+
+/* Formes décoratives */
+.page::before {
+  content: ''; position: absolute; top: -120px; left: -100px;
+  width: 480px; height: 480px; border-radius: 50%;
+  background: var(--navy); opacity: 0.05;
+}
+.page::after {
+  content: ''; position: absolute; bottom: -80px; right: -60px;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: var(--gold); opacity: 0.1;
+}
+
+.card {
+  width: 100%; max-width: 560px; text-align: center;
+  background: #fff; border-radius: 28px;
+  border: 1px solid rgba(227,175,100,0.25);
+  box-shadow: 0 24px 64px rgba(16,27,59,0.12);
+  padding: 56px 48px;
+  position: relative; z-index: 1;
+  animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.92) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.check-circle {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 28px;
+  box-shadow: 0 8px 32px rgba(22,163,74,0.3);
+  animation: scaleIn 0.4s 0.2s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.check-circle svg { width: 40px; height: 40px; }
+
+h1 {
+  font-size: 28px; font-weight: 900; color: var(--navy);
+  margin-bottom: 12px; line-height: 1.2;
+}
+h1 span { color: var(--gold); }
+
+.subtitle {
+  font-size: 15px; color: #666; line-height: 1.6; margin-bottom: 36px;
+}
+
+.details {
+  background: #f8f6f2; border-radius: 16px; padding: 24px;
+  margin-bottom: 32px; text-align: left;
+}
+.detail-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-size: 14px;
+}
+.detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+.detail-label { color: #888; }
+.detail-value { font-weight: 700; color: var(--navy); }
+.detail-value.green { color: #16a34a; }
+
+.steps {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-bottom: 36px; text-align: left;
+}
+.step {
+  display: flex; align-items: center; gap: 14px;
+  background: linear-gradient(135deg, rgba(16,27,59,0.03), rgba(227,175,100,0.06));
+  border: 1px solid rgba(227,175,100,0.2);
+  border-radius: 12px; padding: 14px 16px;
+}
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: var(--navy); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900;
+}
+.step-text { font-size: 14px; color: var(--navy); }
+.step-text strong { display: block; font-weight: 700; margin-bottom: 2px; }
+.step-text span { color: #888; font-size: 13px; }
+
+.btn-app {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 15px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--sky) 55%, #b8822e 100%);
+  color: #fff; text-decoration: none; border-radius: 14px;
+  font-size: 16px; font-weight: 700;
+  box-shadow: 0 4px 24px rgba(16,27,59,0.3);
+  transition: opacity 0.2s, transform 0.1s;
+  margin-bottom: 14px;
+}
+.btn-app:hover { opacity: 0.92; transform: translateY(-1px); }
+
+.note {
+  font-size: 12px; color: #aaa; line-height: 1.5;
+}
+.note a { color: var(--sky); text-decoration: none; }
+
+/* Confettis animés */
+.confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.c { position: absolute; width: 8px; height: 8px; border-radius: 2px; animation: fall linear infinite; }
+@keyframes fall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="logo.ploutos.svg" alt="Ploutos" onerror="this.style.display='none'"/>
+    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQ0IiBoZWlnaHQ9IjEzMyIgdmlld0JveD0iMCAwIDY0NCAxMzMiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik00NS4zMTAxIDY1LjQ1QzQ5LjgxMDEgNjQuMDMgNTMuNTcwMSA2Mi4wNSA1Ni42MDAxIDU5LjUxQzU5LjYzMDEgNTYuOTcgNjEuOTEwMSA1My45NCA2My40NTAxIDUwLjQxQzY0Ljk5MDEgNDYuODggNjUuNzUwMSA0Mi45OSA2NS43NTAxIDM4Ljc1QzY1Ljc1MDEgMzQuNTEgNjUuMDMwMSAzMC43OCA2My41ODAxIDI3LjMzQzYyLjEzMDEgMjMuODkgNTkuOTIwMSAyMC45NCA1Ni45NjAxIDE4LjQ4QzU0LjAwMDEgMTYuMDMgNTAuMjQwMSAxNC4xMiA0NS43MDAxIDEyLjc2QzQxLjE2MDEgMTEuNCAzNS43OTAxIDEwLjcyIDI5LjYwMDEgMTAuNzJIMC4xMTAxMDdWOTkuODNIMTUuNTEwMVY2Ny41OUgyOS42MDAxQzM1LjU3MDEgNjcuNTkgNDAuODAwMSA2Ni44OCA0NS4zMDAxIDY1LjQ2TDQ1LjMxMDEgNjUuNDVaTTE1LjUyMDEgMjIuMDRIMjkuNjEwMUMzMy4xMjAxIDIyLjA0IDM2LjE4MDEgMjIuNDIgMzguNzkwMSAyMy4xOEM0MS40MDAxIDIzLjk0IDQzLjU2MDEgMjUuMDUgNDUuMjcwMSAyNi40OUM0Ni45ODAxIDI3LjkzIDQ4LjI3MDEgMjkuNjkgNDkuMTIwMSAzMS43NUM0OS45NzAxIDMzLjgxIDUwLjQwMDEgMzYuMTQgNTAuNDAwMSAzOC43NEM1MC40MDAxIDQxLjM0IDQ5Ljk2MDEgNDMuNzcgNDkuMDgwMSA0NS45MkM0OC4yMDAxIDQ4LjA3IDQ2Ljg5MDEgNDkuODkgNDUuMTYwMSA1MS40QzQzLjQzMDEgNTIuOTEgNDEuMjYwMSA1NC4wNyAzOC42NDAxIDU0LjlDMzYuMDMwMSA1NS43MyAzMy4wMTAxIDU2LjE0IDI5LjU5MDEgNTYuMTRIMTUuNTAwMVYyMi4wNEgxNS41MjAxWiIgZmlsbD0iIzEwMUIzQiIvPgo8cGF0aCBkPSJNMTM1LjI3IDg3LjY4OTlIOTUuOVYxMC43MUg4MC41Vjk5LjgxOTlIMTM1LjI3Vjg3LjY4OTlaIiBmaWxsPSIjMTAxQjNCIi8+CjxwYXRoIGQ9Ik0zMTguOTQgOTAuNTlDMzIyLjI4IDkzLjgzIDMyNi4zMyA5Ni4zNyAzMzEuMSA5OC4yMUMzMzUuODcgMTAwLjA1IDM0MS4yNCAxMDAuOTcgMzQ3LjIxIDEwMC45N0MzNTMuMTggMTAwLjk3IDM1OC41NSAxMDAuMDUgMzYzLjMyIDk4LjIxQzM2OC4wOSA5Ni4zNyAzNzIuMTQgOTMuODMgMzc1LjQ4IDkwLjU5QzM3OC44MiA4Ny4zNSAzODEuMzggODMuNDk5OSAzODMuMTYgNzkuMDM5OUMzODQuOTQgNzQuNTc5OSAzODUuODMgNjkuNzI5OSAzODUuODMgNjQuNDc5OVYxMC43MUgzNzAuNDdWNjQuNDc5OUMzNzAuNDcgNjguMDI5OSAzNjkuOTQgNzEuMjYgMzY4Ljg5IDc0LjE3QzM2Ny44NCA3Ny4wOCAzNjYuMzEgNzkuNTcgMzY0LjMxIDgxLjY0QzM2Mi4zMSA4My43MSAzNTkuODcgODUuMzIgMzU3IDg2LjQ3QzM1NC4xMiA4Ny42MyAzNTAuODYgODguMiAzNDcuMjEgODguMkMzNDMuNTYgODguMiAzNDAuMyA4Ny42MiAzMzcuNDIgODYuNDdDMzM0LjU0IDg1LjMxIDMzMi4xMSA4My42ODk5IDMzMC4xNCA4MS42MDk5QzMyOC4xNyA3OS41Mjk5IDMyNi42NSA3Ny4wMjk5IDMyNS41OSA3NC4xMTk5QzMyNC41MyA3MS4yMDk5IDMyNC4wMSA2Ny45Nzk5IDMyNC4wMSA2NC40Mjk5VjEwLjcxOTlIMzA4LjU5VjY0LjQ5QzMwOC41OSA2OS43MyAzMDkuNDggNzQuNTg5OSAzMTEuMjYgNzkuMDQ5OUMzMTMuMDQgODMuNTA5OSAzMTUuNiA4Ny4zNiAzMTguOTQgOTAuNlY5MC41OVoiIGZpbGw9IiMxMDFCM0IiLz4KPHBhdGggZD0iTTQyNy42IDk5LjkxOTlINDQyLjk2VjIyLjc4OTlINDcyLjU1VjEwLjcxSDM5Ny45NVYyMi43ODk5SDQyNy42Vjk5LjkxOTlaIiBmaWxsPSIjMTAxQjNCIi8+CjxwYXRoIGQ9Ik02NDEuNDQgNjIuOTlDNjQwLjE3IDYwLjQzIDYzOC40OSA1OC4yNiA2MzYuNCA1Ni40OUM2MzQuMzEgNTQuNzEgNjMxLjkzIDUzLjI0OTkgNjI5LjI1IDUyLjA4OTlDNjI2LjU3IDUwLjkyOTkgNjIzLjg0IDQ5LjkgNjIxLjA1IDQ4Ljk5QzYxOC4yNiA0OC4wOCA2MTUuNTMgNDcuMjIgNjEyLjg1IDQ2LjQyQzYxMC4xNyA0NS42MSA2MDcuNzkgNDQuNjc5OSA2MDUuNyA0My41OTk5QzYwMy42MSA0Mi41Mjk5IDYwMS45MyA0MS4yNCA2MDAuNjYgMzkuNzI5OUM1OTkuMzggMzguMjE5OSA1OTguNzUgMzYuMzI5OSA1OTguNzUgMzQuMDU5OUM1OTguNzUgMzIuMjc5OSA1OTkuMDkgMzAuNjQgNTk5Ljc3IDI5LjE0QzYwMC40NSAyNy42MyA2MDEuNDcgMjYuMzIgNjAyLjgzIDI1LjIxQzYwNC4xOSAyNC4xIDYwNS44NyAyMy4yMyA2MDcuODcgMjIuNjFDNjA5Ljg3IDIxLjk5IDYxMi4xOSAyMS42Nzk5IDYxNC44MiAyMS42Nzk5QzYxNy42NyAyMS42Nzk5IDYyMC4xMyAyMi4wMiA2MjIuMiAyMi43QzYyNC4yNiAyMy4zOCA2MjYuMDUgMjQuMTI5OSA2MjcuNTcgMjQuOTI5OUM2MjkuMDkgMjUuNzM5OSA2MzAuMzYgMjYuNDY5OSA2MzEuMzkgMjcuMTI5OUM2MzIuNDIgMjcuNzg5OSA2MzMuMzYgMjguMTE5OSA2MzQuMTkgMjguMTE5OUM2MzQuOTggMjguMTE5OSA2MzUuNjQgMjcuOTQ5OSA2MzYuMTcgMjcuNTg5OUM2MzYuNyAyNy4yMzk5IDYzNy4yIDI2LjY5IDYzNy42OSAyNS45NUw2NDEuNDQgMTkuMDA5OUM2MzguMTUgMTYuMDM5OSA2MzQuMjIgMTMuNzQ5OSA2MjkuNjggMTIuMTI5OUM2MjUuMTMgMTAuNTE5OSA2MjAuMTMgOS43MDk5NiA2MTQuNjkgOS43MDk5NkM2MDkuODUgOS43MDk5NiA2MDUuNTUgMTAuNDA5OSA2MDEuNzcgMTEuODE5OUM1OTcuOTkgMTMuMjE5OSA1OTQuODIgMTUuMDg5OSA1OTIuMjUgMTcuNDI5OUM1ODkuNjggMTkuNzU5OSA1ODcuNzIgMjIuNDQgNTg2LjM4IDI1LjQ1QzU4NS4wNCAyOC40NyA1ODQuMzcgMzEuNTggNTg0LjM3IDM0LjhDNTg0LjM3IDM4Ljg1IDU4NS4wMSA0Mi4yMTk5IDU4Ni4yOCA0NC45Mjk5QzU4Ny41NiA0Ny42Mzk5IDU4OS4yNCA0OS45MSA1OTEuMzIgNTEuNzRDNTkzLjQxIDUzLjU4IDU5NS43OSA1NS4wNyA1OTguNDcgNTYuMkM2MDEuMTUgNTcuMzQgNjAzLjg4IDU4LjMzIDYwNi42NCA1OS4xN0M2MDkuNDEgNjAuMDIgNjEyLjEzIDYwLjgwOTkgNjE0LjgxIDYxLjU1OTlDNjE3LjQ5IDYyLjI5OTkgNjE5Ljg3IDYzLjIwOTkgNjIxLjk2IDY0LjI4OTlDNjI0LjA0IDY1LjM2OTkgNjI1LjczIDY2LjY5OTkgNjI3IDY4LjI4OTlDNjI4LjI3IDY5Ljg3OTkgNjI4LjkxIDcxLjk0IDYyOC45MSA3NC40NUM2MjguOTEgNzguOTUgNjI3LjM4IDgyLjQ3OTkgNjI0LjMzIDg1LjAzOTlDNjIxLjI4IDg3LjU5OTkgNjE2Ljk2IDg4Ljg3OTkgNjExLjM4IDg4Ljg3OTlDNjA3Ljk1IDg4Ljg3OTkgNjA1LjAxIDg4LjQzOTkgNjAyLjU1IDg3LjU0OTlDNjAwLjA5IDg2LjY1OTkgNTk3Ljk5IDg1LjY5IDU5Ni4yNiA4NC42NEM1OTQuNTIgODMuNTkgNTkzLjA0IDgyLjYxOTkgNTkxLjgxIDgxLjcyOTlDNTkwLjU4IDgwLjgzOTkgNTg5LjQ2IDgwLjQgNTg4LjQ1IDgwLjRDNTg3LjcgODAuNCA1ODcuMDIgODAuNTcgNTg2LjQxIDgwLjlDNTg1LjggODEuMjMgNTg1LjI5IDgxLjY3OTkgNTg0Ljg5IDgyLjI1OTlMNTgwLjQxIDg5LjJDNTgyLjIxIDkwLjk3OTkgNTg0LjI2IDkyLjU5IDU4Ni41NCA5NC4wM0M1ODguODIgOTUuNDggNTkxLjI3IDk2LjcgNTkzLjg5IDk3LjcyQzU5Ni41IDk4LjczIDU5OS4yNSA5OS41MTk5IDYwMi4xMyAxMDAuMDdDNjA1LjAxIDEwMC42MyA2MDcuOTYgMTAwLjkgNjEwLjk5IDEwMC45QzYxNi4xMyAxMDAuOSA2MjAuNzEgMTAwLjE2IDYyNC43MyA5OC42Njk5QzYyOC43NSA5Ny4xNzk5IDYzMi4xMyA5NS4xNDk5IDYzNC44OCA5Mi41Njk5QzYzNy42MyA4OS45ODk5IDYzOS43MiA4Ni45NTk5IDY0MS4xOCA4My40ODk5QzY0Mi42MyA4MC4wMTk5IDY0My4zNSA3Ni4yOTk5IDY0My4zNSA3Mi4zMzk5QzY0My4zNSA2OC42Njk5IDY0Mi43MSA2NS41NSA2NDEuNDQgNjIuOTlaIiBmaWxsPSIjMTAxQjNCIi8+CjxwYXRoIGQ9Ik0yNjYuNDMgMTE4LjNDMjY2LjkgMTE3Ljg1IDI2Ny4zOCAxMTcuNCAyNjcuODMgMTE2LjkzQzI3My42NiAxMTAuOTEgMjc4LjE4IDEwMy43NCAyODEuMzkgOTUuNDFDMjg0LjYgODcuMDggMjg2LjIgNzcuOTggMjg2LjIgNjguMTFDMjg2LjIgNTguMjQgMjg0LjU5IDQ5LjE0IDI4MS4zOSA0MC44MUMyNzguMTggMzIuNDggMjczLjY2IDI1LjMgMjY3LjgzIDE5LjI1QzI2MiAxMy4yIDI1NSA4LjQ4IDI0Ni44MiA1LjA5QzIzOC42NCAxLjcgMjI5LjU2IDAgMjE5LjU2IDBDMjA5LjU2IDAgMjAwLjU3IDEuNyAxOTIuNCA1LjA5QzE4NC4yMyA4LjQ4IDE3Ny4yMSAxMy4yIDE3MS4zNCAxOS4yNUMxNjUuNDggMjUuMyAxNjAuOTQgMzIuNDggMTU3Ljc0IDQwLjgxQzE1NC41MyA0OS4xNCAxNTIuOTMgNTguMjQgMTUyLjkzIDY4LjExQzE1Mi45MyA3Ny45OCAxNTQuNTQgODcuMDggMTU3Ljc0IDk1LjQxQzE2MC45NSAxMDMuNzQgMTY1LjQ4IDExMC45MSAxNzEuMzQgMTE2LjkzQzE3MS44IDExNy40IDE3Mi4yOCAxMTcuODUgMTcyLjc1IDExOC4zSDBWMTMyLjI0SDE5OS4xOVYxMTguM0wxOTcuNTYgMTE4LjA3QzE5Mi4yMyAxMTUuNjMgMTg3LjYgMTEyLjMyIDE4My43MiAxMDguMUMxNzkuNDMgMTAzLjQzIDE3Ni4xMiA5Ny43MyAxNzMuODEgOTAuOTlDMTcxLjUgODQuMjUgMTcwLjM0IDc2LjYyIDE3MC4zNCA2OC4xMUMxNzAuMzQgNTkuNiAxNzEuNSA1Mi4wNyAxNzMuODEgNDUuMzNDMTc2LjEyIDM4LjU5IDE3OS40MyAzMi44NyAxODMuNzIgMjguMTdDMTg4LjAxIDIzLjQ3IDE5My4xOCAxOS44NiAxOTkuMjQgMTcuMzRDMjA1LjMgMTQuODIgMjEyLjA4IDEzLjU2IDIxOS41NyAxMy41NkMyMjcuMDYgMTMuNTYgMjMzLjk0IDE0LjgyIDI0MCAxNy4zNEMyNDYuMDYgMTkuODYgMjUxLjIyIDIzLjQ3IDI1NS40OCAyOC4xN0MyNTkuNzQgMzIuODcgMjYzIDM4LjU5IDI2NS4yOSA0NS4zM0MyNjcuNTcgNTIuMDcgMjY4LjcxIDU5LjY3IDI2OC43MSA2OC4xMUMyNjguNzEgNzYuNTUgMjY3LjU3IDg0LjI1IDI2NS4yOSA5MC45OUMyNjMgOTcuNzMgMjU5Ljc0IDEwMy40NCAyNTUuNDggMTA4LjFDMjUxLjUzIDExMi40MyAyNDYuNzggMTE1LjgxIDI0MS4yNyAxMTguMjdMMjQxLjA1IDExOC4zVjEzMi4yNEg2NDEuNDZWMTE4LjNIMjY2LjQ1SDI2Ni40M1oiIGZpbGw9IiMxMDFCM0IiLz4KPHBhdGggZD0iTTQ4OS40MSA4Ny45OUM0OTMuNTggOTIuMDIgNDk4LjU4IDk1LjE3IDUwNC40IDk3LjQ0QzUxMC4yMiA5OS43MSA1MTYuNjcgMTAwLjg1IDUyMy43NCAxMDAuODVDNTMwLjgxIDEwMC44NSA1MzcuMzMgOTkuNzEgNTQzLjE1IDk3LjQ0QzU0OC45NyA5NS4xNyA1NTMuOTYgOTIuMDIgNTU4LjExIDg3Ljk5QzU2Mi4yNiA4My45NiA1NjUuNDggNzkuMTYgNTY3Ljc2IDczLjU5QzU3MC4wNCA2OC4wMSA1NzEuMTkgNjEuOTIgNTcxLjE5IDU1LjMyQzU3MS4xOSA0OC43MiA1NzAuMDUgNDIuNjIgNTY3Ljc2IDM3LjA1QzU2NS40OCAzMS40OCA1NjIuMjYgMjYuNjcgNTU4LjExIDIyLjYyQzU1My45NiAxOC41NyA1NDguOTcgMTUuNDEgNTQzLjE1IDEzLjE0QzUzNy4zMyAxMC44NyA1MzAuODYgOS43Mjk5OCA1MjMuNzQgOS43Mjk5OEM1MTYuNjIgOS43Mjk5OCA1MTAuMjIgMTAuODcgNTA0LjQgMTMuMTRDNDk4LjU4IDE1LjQxIDQ5My41OCAxOC41NyA0ODkuNDEgMjIuNjJDNDg1LjI0IDI2LjY3IDQ4Mi4wMSAzMS40OCA0NzkuNzIgMzcuMDVDNDc3LjQ0IDQyLjYzIDQ3Ni4yOSA0OC43MiA0NzYuMjkgNTUuMzJDNDc2LjI5IDYxLjkyIDQ3Ny40MyA2OC4wMiA0NzkuNzIgNzMuNTlDNDgyIDc5LjE3IDQ4NS4yMyA4My45NyA0ODkuNDEgODcuOTlaTTQ5NC4yMiA0MS41QzQ5NS43MSAzNy40MSA0OTcuODUgMzMuOTQgNTAwLjYxIDMxLjA5QzUwMy4zOCAyOC4yNCA1MDYuNzEgMjYuMDUgNTEwLjYyIDI0LjUyQzUxNC41MyAyMi45OSA1MTguOSAyMi4yMyA1MjMuNzMgMjIuMjNDNTI4LjU2IDIyLjIzIDUzMyAyMi45OSA1MzYuOTEgMjQuNTJDNTQwLjgyIDI2LjA1IDU0NC4xNSAyOC4yNCA1NDYuODkgMzEuMDlDNTQ5LjY0IDMzLjk0IDU1MS43NCAzNy40MSA1NTMuMjIgNDEuNUM1NTQuNjkgNDUuNTkgNTU1LjQzIDUwLjE5IDU1NS40MyA1NS4zMUM1NTUuNDMgNjAuNDMgNTU0LjY5IDY1LjEgNTUzLjIyIDY5LjE5QzU1MS43NSA3My4yOCA1NDkuNjQgNzYuNzQgNTQ2Ljg5IDc5LjU3QzU0NC4xNSA4Mi40IDU0MC44MiA4NC41NyA1MzYuOTEgODYuMDdDNTMzIDg3LjU4IDUyOC42MSA4OC4zMyA1MjMuNzMgODguMzNDNTE4Ljg1IDg4LjMzIDUxNC41MyA4Ny41OCA1MTAuNjIgODYuMDdDNTA2LjcxIDg0LjU2IDUwMy4zNyA4Mi4zOSA1MDAuNjEgNzkuNTdDNDk3Ljg0IDc2Ljc0IDQ5NS43MSA3My4yOCA0OTQuMjIgNjkuMTlDNDkyLjczIDY1LjEgNDkxLjk4IDYwLjQ4IDQ5MS45OCA1NS4zMUM0OTEuOTggNTAuMTQgNDkyLjczIDQ1LjU4IDQ5NC4yMiA0MS41WiIgZmlsbD0iIzEwMUIzQiIvPgo8L3N2Zz4K" alt="Ploutos" style="height:28px;width:auto;object-fit:contain;"/>
+  </a>
+</nav>
+
+<!-- Confettis -->
+<div class="confetti" id="confetti"></div>
+
+<div class="page">
+  <div class="card">
+
+    <div class="check-circle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+
+    <h1>Bienvenue dans<br/><span>Ploutos !</span></h1>
+    <p class="subtitle">Votre abonnement est actif. Votre accès complet est disponible dès maintenant.</p>
+
+    <div class="details">
+      <div class="detail-row">
+        <span class="detail-label">Statut</span>
+        <span class="detail-value green">✓ Abonnement actif</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Plan</span>
+        <span class="detail-value" id="plan-name">Chargement...</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Accès</span>
+        <span class="detail-value">Immédiat — tous les modules</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Confirmation</span>
+        <span class="detail-value">Envoyée par email</span>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>Accédez à l'application</strong>
+          <span>Cliquez sur le bouton ci-dessous pour démarrer</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>Configurez votre cabinet</strong>
+          <span>Logo, couleurs, ORIAS — 5 minutes chrono</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>Créez votre premier dossier client</strong>
+          <span>Et générez votre premier rapport PDF</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://app.ploutos-cgp.fr" class="btn-app" id="btn-app">
+      Accéder à Ploutos →
+    </a>
+
+    <p class="note">
+      Un email de confirmation vous a été envoyé.<br/>
+      Des questions ? <a href="/cdn-cgi/l/email-protection#80e3efeef4e1e3f4c0f0eceff5f4eff3ade3e7f0aee6f2"><span class="__cf_email__" data-cfemail="0e6d61607a6f6d7a4e7e62617b7a617d236d697e20687c">[email&#160;protected]</span></a>
+    </p>
+
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Détecter le plan depuis l'URL (Stripe passe ?plan=monthly ou ?plan=annual)
+const params = new URLSearchParams(window.location.search);
+const plan = params.get('plan');
+const planEl = document.getElementById('plan-name');
+if (plan === 'annual') {
+  planEl.textContent = 'Plan Annuel — 300€/an';
+} else {
+  planEl.textContent = 'Plan Solo — 30€/mois';
+}
+
+// Confettis
+const colors = ['#E3AF64', '#101B3B', '#26428B', '#516AC7', '#f5f0e8'];
+const container = document.getElementById('confetti');
+for (let i = 0; i < 60; i++) {
+  const c = document.createElement('div');
+  c.className = 'c';
+  c.style.cssText = `
+    left: ${Math.random() * 100}%;
+    background: ${colors[Math.floor(Math.random() * colors.length)]};
+    animation-duration: ${2.5 + Math.random() * 3}s;
+    animation-delay: ${Math.random() * 2}s;
+    width: ${6 + Math.random() * 8}px;
+    height: ${6 + Math.random() * 

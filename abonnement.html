@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ploutos — Choisir mon abonnement</title>
+<link rel="icon" href="logo.ploutos.svg" type="image/png"/>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy: #101B3B;
+  --sky: #26428B;
+  --gold: #E3AF64;
+  --cream: #FBECD7;
+  --bg: #f5f0e8;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--bg); min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 64px;
+  background: rgba(245,240,232,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(227,175,100,0.18);
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo img { height: 32px; }
+.nav-logo span { font-weight: 900; font-size: 18px; color: var(--navy); }
+.nav-back { font-size: 13px; color: var(--sky); font-weight: 700; text-decoration: none; }
+.nav-back:hover { opacity: 0.7; }
+
+.page { flex: 1; padding: 56px 24px 80px; max-width: 900px; margin: 0 auto; width: 100%; }
+
+/* Header */
+.header { text-align: center; margin-bottom: 48px; }
+.header-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(227,175,100,0.15); border: 1px solid rgba(227,175,100,0.3);
+  border-radius: 20px; padding: 6px 16px; margin-bottom: 20px;
+  font-size: 12px; font-weight: 700; color: #b8822e;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.header h1 { font-size: 36px; font-weight: 900; color: var(--navy); margin-bottom: 12px; }
+.header h1 span { color: var(--gold); }
+.header p { font-size: 16px; color: #666; max-width: 480px; margin: 0 auto; }
+
+/* Toggle billing */
+.billing-toggle {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  margin-bottom: 40px;
+}
+.toggle-label { font-size: 14px; font-weight: 700; color: #888; }
+.toggle-label.active { color: var(--navy); }
+.toggle {
+  width: 52px; height: 28px; background: var(--navy); border-radius: 14px;
+  position: relative; cursor: pointer; transition: background 0.2s;
+  border: none; flex-shrink: 0;
+}
+.toggle::after {
+  content: ''; position: absolute; top: 3px; left: 3px;
+  width: 22px; height: 22px; border-radius: 50%; background: #fff;
+  transition: transform 0.2s;
+}
+.toggle.annual::after { transform: translateX(24px); }
+.badge-save {
+  background: #16a34a; color: #fff;
+  font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 8px;
+}
+
+/* Cards */
+.plans { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 48px; }
+
+.plan-card {
+  background: #fff; border-radius: 24px;
+  border: 2px solid rgba(227,175,100,0.2);
+  padding: 36px 32px;
+  position: relative; transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(16,27,59,0.06);
+}
+.plan-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(16,27,59,0.12); }
+.plan-card.featured {
+  border-color: var(--gold);
+  box-shadow: 0 8px 40px rgba(227,175,100,0.25);
+}
+.plan-card.featured:hover { box-shadow: 0 16px 56px rgba(227,175,100,0.3); }
+
+.featured-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--gold), #b8822e);
+  color: #fff; font-size: 12px; font-weight: 700;
+  padding: 4px 16px; border-radius: 10px; white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(184,130,46,0.4);
+}
+
+.plan-name { font-size: 13px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+.plan-price { margin-bottom: 8px; }
+.plan-price .amount { font-size: 52px; font-weight: 900; color: var(--navy); line-height: 1; }
+.plan-price .currency { font-size: 22px; font-weight: 700; color: var(--navy); vertical-align: top; margin-top: 10px; display: inline-block; }
+.plan-price .period { font-size: 14px; color: #888; }
+.plan-note { font-size: 13px; color: #888; margin-bottom: 28px; min-height: 20px; }
+.plan-note strong { color: #16a34a; }
+
+.features { list-style: none; margin-bottom: 32px; display: flex; flex-direction: column; gap: 10px; }
+.features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--navy); }
+.features li::before { content: '✓'; color: var(--gold); font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+.features li.bonus { font-weight: 700; }
+.features li.bonus::before { color: #16a34a; }
+
+.btn-plan {
+  display: block; width: 100%; padding: 14px;
+  text-align: center; text-decoration: none;
+  border-radius: 12px; font-size: 15px; font-weight: 700;
+  transition: opacity 0.2s, transform 0.1s; cursor: pointer; border: none;
+  font-family: 'Lato', sans-serif;
+}
+.btn-plan:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-plan.primary {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--sky) 55%, #b8822e 100%);
+  color: #fff; box-shadow: 0 4px 20px rgba(16,27,59,0.3);
+}
+.btn-plan.outline {
+  background: transparent; color: var(--navy);
+  border: 2px solid rgba(16,27,59,0.2);
+}
+.btn-plan.outline:hover { border-color: var(--navy); }
+
+/* Garanties */
+.guarantees {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-bottom: 40px;
+}
+.guarantee {
+  background: #fff; border-radius: 16px; padding: 20px;
+  border: 1px solid rgba(227,175,100,0.2);
+  text-align: center;
+}
+.guarantee .icon { font-size: 24px; margin-bottom: 8px; }
+.guarantee strong { display: block; font-size: 14px; color: var(--navy); margin-bottom: 4px; }
+.guarantee span { font-size: 12px; color: #888; }
+
+/* FAQ rapide */
+.faq-mini { background: #fff; border-radius: 20px; padding: 32px; border: 1px solid rgba(227,175,100,0.2); }
+.faq-mini h3 { font-size: 16px; font-weight: 900; color: var(--navy); margin-bottom: 20px; }
+.faq-item { padding: 14px 0; border-bottom: 1px solid #f0ece4; }
+.faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+.faq-q { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.faq-a { font-size: 13px; color: #666; line-height: 1.5; }
+
+@media (max-width: 680px) {
+  .plans { grid-template-columns: 1fr; }
+  .guarantees { grid-template-columns: 1fr; }
+  .header h1 { font-size: 28px; }
+  .page { padding: 40px 16px 60px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="logo.ploutos.svg" alt="Ploutos" onerror="this.style.display='none'"/>
+    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQ0IiBoZWlnaHQ9IjEzMyIgdmlld0JveD0iMCAwIDY0NCAxMzMiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik00NS4zMTAxIDY1LjQ1QzQ5LjgxMDEgNjQuMDMgNTMuNTcwMSA2Mi4wNSA1Ni42MDAxIDU5LjUxQzU5LjYzMDEgNTYuOTcgNjEuOTEwMSA1My45NCA2My40NTAxIDUwLjQxQzY0Ljk5MDEgNDYuODggNjUuNzUwMSA0Mi45OSA2NS43NTAxIDM4Ljc1QzY1Ljc1MDEgMzQuNTEgNjUuMDMwMSAzMC43OCA2My41ODAxIDI3LjMzQzYyLjEzMDEgMjMuODkgNTkuOTIwMSAyMC45NCA1Ni45NjAxIDE4LjQ4QzU0LjAwMDEgMTYuMDMgNTAuMjQwMSAxNC4xMiA0NS43MDAxIDEyLjc2QzQxLjE2MDEgMTEuNCAzNS43OTAxIDEwLjcyIDI5LjYwMDEgMTAuNzJIMC4xMTAxMDdWOTkuODNIMTUuNTEwMVY2Ny41OUgyOS42MDAxQzM1LjU3MDEgNjcuNTkgNDAuODAwMSA2Ni44OCA0NS4zMDAxIDY1LjQ2TDQ1LjMxMDEgNjUuNDVaTTE1LjUyMDEgMjIuMDRIMjkuNjEwMUMzMy4xMjAxIDIyLjA0IDM2LjE4MDEgMjIuNDIgMzguNzkwMSAyMy4xOEM0MS40MDAxIDIzLjk0IDQzLjU2MDEgMjUuMDUgNDUuMjcwMSAyNi40OUM0Ni45ODAxIDI3LjkzIDQ4LjI3MDEgMjkuNjkgNDkuMTIwMSAzMS43NUM0OS45NzAxIDMzLjgxIDUwLjQwMDEgMzYuMTQgNTAuNDAwMSAzOC43NEM1MC40MDAxIDQxLjM0IDQ5Ljk2MDEgNDMuNzcgNDkuMDgwMSA0NS45MkM0OC4yMDAxIDQ4LjA3IDQ2Ljg5MDEgNDkuODkgNDUuMTYwMSA1MS40QzQzLjQzMDEgNTIuOTEgNDEuMjYwMSA1NC4wNyAzOC42NDAxIDU0LjlDMzYuMDMwMSA1NS43MyAzMy4wMTAxIDU2LjE0IDI5LjU5MDEgNTYuMTRIMTUuNTAwMVYyMi4wNEgxNS41MjAxWiIgZmlsbD0iIzEwMUIzQiIvPgo8cGF0aCBkPSJNMTM1LjI3IDg3LjY4OTlIOTUuOVYxMC43MUg4MC41Vjk5LjgxOTlIMTM1LjI3Vjg3LjY4OTlaIiBmaWxsPSIjMTAxQjNCIi8+CjxwYXRoIGQ9Ik0zMTguOTQgOTAuNTlDMzIyLjI4IDkzLjgzIDMyNi4zMyA5Ni4zNyAzMzEuMSA5OC4yMUMzMzUuODcgMTAwLjA1IDM0MS4yNCAxMDAuOTcgMzQ3LjIxIDEwMC45N0MzNTMuMTggMTAwLjk3IDM1OC41NSAxMDAuMDUgMzYzLjMyIDk4LjIxQzM2OC4wOSA5Ni4zNyAzNzIuMTQgOTMuODMgMzc1LjQ4IDkwLjU5QzM3OC44MiA4Ny4zNSAzODEuMzggODMuNDk5OSAzODMuMTYgNzkuMDM5OUMzODQuOTQgNzQuNTc5OSAzODUuODMgNjkuNzI5OSAzODUuODMgNjQuNDc5OVYxMC43MUgzNzAuNDdWNjQuNDc5OUMzNzAuNDcgNjguMDI5OSAzNjkuOTQgNzEuMjYgMzY4Ljg5IDc0LjE3QzM2Ny44NCA3Ny4wOCAzNjYuMzEgNzkuNTcgMzY0LjMxIDgxLjY0QzM2Mi4zMSA4My43MSAzNTkuODcgODUuMzIgMzU3IDg2LjQ3QzM1NC4xMiA4Ny42MyAzNTAuODYgODguMiAzNDcuMjEgODguMkMzNDMuNTYgODguMiAzNDAuMyA4Ny42MiAzMzcuNDIgODYuNDdDMzM0LjU0IDg1LjMxIDMzMi4xMSA4My42ODk5IDMzMC4xNCA4MS42MDk5QzMyOC4xNyA3OS41Mjk5IDMyNi42NSA3Ny4wMjk5IDMyNS41OSA3NC4xMTk5QzMyNC41MyA3MS4yMDk5IDMyNC4wMSA2Ny45Nzk5IDMyNC4wMSA2NC40Mjk5VjEwLjcxOTlIMzA4LjU5VjY0LjQ5QzMwOC41OSA2OS43MyAzMDkuNDggNzQuNTg5OSAzMTEuMjYgNzkuMDQ5OUMzMTMuMDQgODMuNTA5OSAzMTUuNiA4Ny4zNiAzMTguOTQgOTAuNlY5MC41OVoiIGZpbGw9IiMxMDFCM0IiLz4KPHBhdGggZD0iTTQyNy42IDk5LjkxOTlINDQyLjk2VjIyLjc4OTlINDcyLjU1VjEwLjcxSDM5Ny45NVYyMi43ODk5SDQyNy42Vjk5LjkxOTlaIiBmaWxsPSIjMTAxQjNCIi8+CjxwYXRoIGQ9Ik02NDEuNDQgNjIuOTlDNjQwLjE3IDYwLjQzIDYzOC40OSA1OC4yNiA2MzYuNCA1Ni40OUM2MzQuMzEgNTQuNzEgNjMxLjkzIDUzLjI0OTkgNjI5LjI1IDUyLjA4OTlDNjI2LjU3IDUwLjkyOTkgNjIzLjg0IDQ5LjkgNjIxLjA1IDQ4Ljk5QzYxOC4yNiA0OC4wOCA2MTUuNTMgNDcuMjIgNjEyLjg1IDQ2LjQyQzYxMC4xNyA0NS42MSA2MDcuNzkgNDQuNjc5OSA2MDUuNyA0My41OTk5QzYwMy42MSA0Mi41Mjk5IDYwMS45MyA0MS4yNCA2MDAuNjYgMzkuNzI5OUM1OTkuMzggMzguMjE5OSA1OTguNzUgMzYuMzI5OSA1OTguNzUgMzQuMDU5OUM1OTguNzUgMzIuMjc5OSA1OTkuMDkgMzAuNjQgNTk5Ljc3IDI5LjE0QzYwMC40NSAyNy42MyA2MDEuNDcgMjYuMzIgNjAyLjgzIDI1LjIxQzYwNC4xOSAyNC4xIDYwNS44NyAyMy4yMyA2MDcuODcgMjIuNjFDNjA5Ljg3IDIxLjk5IDYxMi4xOSAyMS42Nzk5IDYxNC44MiAyMS42Nzk5QzYxNy42NyAyMS42Nzk5IDYyMC4xMyAyMi4wMiA2MjIuMiAyMi43QzYyNC4yNiAyMy4zOCA2MjYuMDUgMjQuMTI5OSA2MjcuNTcgMjQuOTI5OUM2MjkuMDkgMjUuNzM5OSA2MzAuMzYgMjYuNDY5OSA2MzEuMzkgMjcuMTI5OUM2MzIuNDIgMjcuNzg5OSA2MzMuMzYgMjguMTE5OSA2MzQuMTkgMjguMTE5OUM2MzQuOTggMjguMTE5OSA2MzUuNjQgMjcuOTQ5OSA2MzYuMTcgMjcuNTg5OUM2MzYuNyAyNy4yMzk5IDYzNy4yIDI2LjY5IDYzNy42OSAyNS45NUw2NDEuNDQgMTkuMDA5OUM2MzguMTUgMTYuMDM5OSA2MzQuMjIgMTMuNzQ5OSA2MjkuNjggMTIuMTI5OUM2MjUuMTMgMTAuNTE5OSA2MjAuMTMgOS43MDk5NiA2MTQuNjkgOS43MDk5NkM2MDkuODUgOS43MDk5NiA2MDUuNTUgMTAuNDA5OSA2MDEuNzcgMTEuODE5OUM1OTcuOTkgMTMuMjE5OSA1OTQuODIgMTUuMDg5OSA1OTIuMjUgMTcuNDI5OUM1ODkuNjggMTkuNzU5OSA1ODcuNzIgMjIuNDQgNTg2LjM4IDI1LjQ1QzU4NS4wNCAyOC40NyA1ODQuMzcgMzEuNTggNTg0LjM3IDM0LjhDNTg0LjM3IDM4Ljg1IDU4NS4wMSA0Mi4yMTk5IDU4Ni4yOCA0NC45Mjk5QzU4Ny41NiA0Ny42Mzk5IDU4OS4yNCA0OS45MSA1OTEuMzIgNTEuNzRDNTkzLjQxIDUzLjU4IDU5NS43OSA1NS4wNyA1OTguNDcgNTYuMkM2MDEuMTUgNTcuMzQgNjAzLjg4IDU4LjMzIDYwNi42NCA1OS4xN0M2MDkuNDEgNjAuMDIgNjEyLjEzIDYwLjgwOTkgNjE0LjgxIDYxLjU1OTlDNjE3LjQ5IDYyLjI5OTkgNjE5Ljg3IDYzLjIwOTkgNjIxLjk2IDY0LjI4OTlDNjI0LjA0IDY1LjM2OTkgNjI1LjczIDY2LjY5OTkgNjI3IDY4LjI4OTlDNjI4LjI3IDY5Ljg3OTkgNjI4LjkxIDcxLjk0IDYyOC45MSA3NC40NUM2MjguOTEgNzguOTUgNjI3LjM4IDgyLjQ3OTkgNjI0LjMzIDg1LjAzOTlDNjIxLjI4IDg3LjU5OTkgNjE2Ljk2IDg4Ljg3OTkgNjExLjM4IDg4Ljg3OTlDNjA3Ljk1IDg4Ljg3OTkgNjA1LjAxIDg4LjQzOTkgNjAyLjU1IDg3LjU0OTlDNjAwLjA5IDg2LjY1OTkgNTk3Ljk5IDg1LjY5IDU5Ni4yNiA4NC42NEM1OTQuNTIgODMuNTkgNTkzLjA0IDgyLjYxOTkgNTkxLjgxIDgxLjcyOTlDNTkwLjU4IDgwLjgzOTkgNTg5LjQ2IDgwLjQgNTg4LjQ1IDgwLjRDNTg3LjcgODAuNCA1ODcuMDIgODAuNTcgNTg2LjQxIDgwLjlDNTg1LjggODEuMjMgNTg1LjI5IDgxLjY3OTkgNTg0Ljg5IDgyLjI1OTlMNTgwLjQxIDg5LjJDNTgyLjIxIDkwLjk3OTkgNTg0LjI2IDkyLjU5IDU4Ni41NCA5NC4wM0M1ODguODIgOTUuNDggNTkxLjI3IDk2LjcgNTkzLjg5IDk3LjcyQzU5Ni41IDk4LjczIDU5OS4yNSA5OS41MTk5IDYwMi4xMyAxMDAuMDdDNjA1LjAxIDEwMC42MyA2MDcuOTYgMTAwLjkgNjEwLjk5IDEwMC45QzYxNi4xMyAxMDAuOSA2MjAuNzEgMTAwLjE2IDYyNC43MyA5OC42Njk5QzYyOC43NSA5Ny4xNzk5IDYzMi4xMyA5NS4xNDk5IDYzNC44OCA5Mi41Njk5QzYzNy42MyA4OS45ODk5IDYzOS43MiA4Ni45NTk5IDY0MS4xOCA4My40ODk5QzY0Mi42MyA4MC4wMTk5IDY0My4zNSA3Ni4yOTk5IDY0My4zNSA3Mi4zMzk5QzY0My4zNSA2OC42Njk5IDY0Mi43MSA2NS41NSA2NDEuNDQgNjIuOTlaIiBmaWxsPSIjMTAxQjNCIi8+CjxwYXRoIGQ9Ik0yNjYuNDMgMTE4LjNDMjY2LjkgMTE3Ljg1IDI2Ny4zOCAxMTcuNCAyNjcuODMgMTE2LjkzQzI3My42NiAxMTAuOTEgMjc4LjE4IDEwMy43NCAyODEuMzkgOTUuNDFDMjg0LjYgODcuMDggMjg2LjIgNzcuOTggMjg2LjIgNjguMTFDMjg2LjIgNTguMjQgMjg0LjU5IDQ5LjE0IDI4MS4zOSA0MC44MUMyNzguMTggMzIuNDggMjczLjY2IDI1LjMgMjY3LjgzIDE5LjI1QzI2MiAxMy4yIDI1NSA4LjQ4IDI0Ni44MiA1LjA5QzIzOC42NCAxLjcgMjI5LjU2IDAgMjE5LjU2IDBDMjA5LjU2IDAgMjAwLjU3IDEuNyAxOTIuNCA1LjA5QzE4NC4yMyA4LjQ4IDE3Ny4yMSAxMy4yIDE3MS4zNCAxOS4yNUMxNjUuNDggMjUuMyAxNjAuOTQgMzIuNDggMTU3Ljc0IDQwLjgxQzE1NC41MyA0OS4xNCAxNTIuOTMgNTguMjQgMTUyLjkzIDY4LjExQzE1Mi45MyA3Ny45OCAxNTQuNTQgODcuMDggMTU3Ljc0IDk1LjQxQzE2MC45NSAxMDMuNzQgMTY1LjQ4IDExMC45MSAxNzEuMzQgMTE2LjkzQzE3MS44IDExNy40IDE3Mi4yOCAxMTcuODUgMTcyLjc1IDExOC4zSDBWMTMyLjI0SDE5OS4xOVYxMTguM0wxOTcuNTYgMTE4LjA3QzE5Mi4yMyAxMTUuNjMgMTg3LjYgMTEyLjMyIDE4My43MiAxMDguMUMxNzkuNDMgMTAzLjQzIDE3Ni4xMiA5Ny43MyAxNzMuODEgOTAuOTlDMTcxLjUgODQuMjUgMTcwLjM0IDc2LjYyIDE3MC4zNCA2OC4xMUMxNzAuMzQgNTkuNiAxNzEuNSA1Mi4wNyAxNzMuODEgNDUuMzNDMTc2LjEyIDM4LjU5IDE3OS40MyAzMi44NyAxODMuNzIgMjguMTdDMTg4LjAxIDIzLjQ3IDE5My4xOCAxOS44NiAxOTkuMjQgMTcuMzRDMjA1LjMgMTQuODIgMjEyLjA4IDEzLjU2IDIxOS41NyAxMy41NkMyMjcuMDYgMTMuNTYgMjMzLjk0IDE0LjgyIDI0MCAxNy4zNEMyNDYuMDYgMTkuODYgMjUxLjIyIDIzLjQ3IDI1NS40OCAyOC4xN0MyNTkuNzQgMzIuODcgMjYzIDM4LjU5IDI2NS4yOSA0NS4zM0MyNjcuNTcgNTIuMDcgMjY4LjcxIDU5LjY3IDI2OC43MSA2OC4xMUMyNjguNzEgNzYuNTUgMjY3LjU3IDg0LjI1IDI2NS4yOSA5MC45OUMyNjMgOTcuNzMgMjU5Ljc0IDEwMy40NCAyNTUuNDggMTA4LjFDMjUxLjUzIDExMi40MyAyNDYuNzggMTE1LjgxIDI0MS4yNyAxMTguMjdMMjQxLjA1IDExOC4zVjEzMi4yNEg2NDEuNDZWMTE4LjNIMjY2LjQ1SDI2Ni40M1oiIGZpbGw9IiMxMDFCM0IiLz4KPHBhdGggZD0iTTQ4OS40MSA4Ny45OUM0OTMuNTggOTIuMDIgNDk4LjU4IDk1LjE3IDUwNC40IDk3LjQ0QzUxMC4yMiA5OS43MSA1MTYuNjcgMTAwLjg1IDUyMy43NCAxMDAuODVDNTMwLjgxIDEwMC44NSA1MzcuMzMgOTkuNzEgNTQzLjE1IDk3LjQ0QzU0OC45NyA5NS4xNyA1NTMuOTYgOTIuMDIgNTU4LjExIDg3Ljk5QzU2Mi4yNiA4My45NiA1NjUuNDggNzkuMTYgNTY3Ljc2IDczLjU5QzU3MC4wNCA2OC4wMSA1NzEuMTkgNjEuOTIgNTcxLjE5IDU1LjMyQzU3MS4xOSA0OC43MiA1NzAuMDUgNDIuNjIgNTY3Ljc2IDM3LjA1QzU2NS40OCAzMS40OCA1NjIuMjYgMjYuNjcgNTU4LjExIDIyLjYyQzU1My45NiAxOC41NyA1NDguOTcgMTUuNDEgNTQzLjE1IDEzLjE0QzUzNy4zMyAxMC44NyA1MzAuODYgOS43Mjk5OCA1MjMuNzQgOS43Mjk5OEM1MTYuNjIgOS43Mjk5OCA1MTAuMjIgMTAuODcgNTA0LjQgMTMuMTRDNDk4LjU4IDE1LjQxIDQ5My41OCAxOC41NyA0ODkuNDEgMjIuNjJDNDg1LjI0IDI2LjY3IDQ4Mi4wMSAzMS40OCA0NzkuNzIgMzcuMDVDNDc3LjQ0IDQyLjYzIDQ3Ni4yOSA0OC43MiA0NzYuMjkgNTUuMzJDNDc2LjI5IDYxLjkyIDQ3Ny40MyA2OC4wMiA0NzkuNzIgNzMuNTlDNDgyIDc5LjE3IDQ4NS4yMyA4My45NyA0ODkuNDEgODcuOTlaTTQ5NC4yMiA0MS41QzQ5NS43MSAzNy40MSA0OTcuODUgMzMuOTQgNTAwLjYxIDMxLjA5QzUwMy4zOCAyOC4yNCA1MDYuNzEgMjYuMDUgNTEwLjYyIDI0LjUyQzUxNC41MyAyMi45OSA1MTguOSAyMi4yMyA1MjMuNzMgMjIuMjNDNTI4LjU2IDIyLjIzIDUzMyAyMi45OSA1MzYuOTEgMjQuNTJDNTQwLjgyIDI2LjA1IDU0NC4xNSAyOC4yNCA1NDYuODkgMzEuMDlDNTQ5LjY0IDMzLjk0IDU1MS43NCAzNy40MSA1NTMuMjIgNDEuNUM1NTQuNjkgNDUuNTkgNTU1LjQzIDUwLjE5IDU1NS40MyA1NS4zMUM1NTUuNDMgNjAuNDMgNTU0LjY5IDY1LjEgNTUzLjIyIDY5LjE5QzU1MS43NSA3My4yOCA1NDkuNjQgNzYuNzQgNTQ2Ljg5IDc5LjU3QzU0NC4xNSA4Mi40IDU0MC44MiA4NC41NyA1MzYuOTEgODYuMDdDNTMzIDg3LjU4IDUyOC42MSA4OC4zMyA1MjMuNzMgODguMzNDNTE4Ljg1IDg4LjMzIDUxNC41MyA4Ny41OCA1MTAuNjIgODYuMDdDNTA2LjcxIDg0LjU2IDUwMy4zNyA4Mi4zOSA1MDAuNjEgNzkuNTdDNDk3Ljg0IDc2Ljc0IDQ5NS43MSA3My4yOCA0OTQuMjIgNjkuMTlDNDkyLjczIDY1LjEgNDkxLjk4IDYwLjQ4IDQ5MS45OCA1NS4zMUM0OTEuOTggNTAuMTQgNDkyLjczIDQ1LjU4IDQ5NC4yMiA0MS41WiIgZmlsbD0iIzEwMUIzQiIvPgo8L3N2Zz4K" alt="Ploutos" style="height:28px;width:auto;object-fit:contain;"/>
+  </a>
+  <a href="/" class="nav-back">← Retour</a>
+</nav>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-badge">✦ Tarifs</div>
+    <h1>Simple. Transparent.<br/><span>Équitable.</span></h1>
+    <p>Toutes les fonctionnalités incluses. Choisissez juste la fréquence de facturation.</p>
+  </div>
+
+  <!-- Toggle -->
+  <div class="billing-toggle">
+    <span class="toggle-label active" id="label-monthly">Mensuel</span>
+    <button class="toggle" id="toggle-btn" onclick="toggleBilling()"></button>
+    <span class="toggle-label" id="label-annual">Annuel</span>
+    <span class="badge-save" id="badge-save" style="display:none">−17%</span>
+  </div>
+
+  <!-- Plans -->
+  <div class="plans">
+
+    <!-- Plan Solo -->
+    <div class="plan-card">
+      <div class="plan-name">Plan Solo</div>
+      <div class="plan-price">
+        <span class="currency">€</span><span class="amount" id="price-monthly">30</span>
+        <span class="period">/mois</span>
+      </div>
+      <div class="plan-note" id="note-monthly">&nbsp;</div>
+      <ul class="features">
+        <li>Calculs IR, IFI, Succession — revenus 2025</li>
+        <li>Rapports PDF aux couleurs du cabinet</li>
+        <li>Lettre de mission réglementaire ACPR</li>
+        <li>Gestion multi-clients illimitée</li>
+        <li>Synchronisation cloud sécurisée</li>
+        <li>Mode hors-ligne 72h</li>
+        <li>Windows + Web + iPad + Android</li>
+        <li>Mises à jour incluses</li>
+      </ul>
+      <a href="https://buy.stripe.com/aFaeVe90DdKM5lMeQD9fW01" class="btn-plan primary" id="btn-monthly">
+        S'abonner — 30€/mois →
+      </a>
+    </div>
+
+    <!-- Plan Annuel -->
+    <div class="plan-card featured">
+      <div class="featured-badge">⭐ Recommandé</div>
+      <div class="plan-name">Plan Annuel</div>
+      <div class="plan-price">
+        <span class="currency">€</span><span class="amount">25</span>
+        <span class="period">/mois</span>
+      </div>
+      <div class="plan-note"><strong>300€/an — 2 mois offerts</strong></div>
+      <ul class="features">
+        <li>Toutes les fonctionnalités Solo</li>
+        <li class="bonus">2 mois offerts vs mensuel</li>
+        <li class="bonus">Tarif bloqué à vie tant que vous restez abonné</li>
+        <li class="bonus">Accès prioritaire aux nouvelles fonctions</li>
+        <li class="bonus">Support email dédié</li>
+        <li class="bonus">Influence sur la roadmap</li>
+      </ul>
+      <a href="https://buy.stripe.com/28E7sMdgT5eg29A8sf9fW00" class="btn-plan primary">
+        S'abonner — 300€/an →
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Garanties -->
+  <div class="guarantees">
+    <div class="guarantee">
+      <div class="icon">🛡️</div>
+      <strong>Sans carte bancaire</strong>
+      <span>L'essai gratuit s'active sans CB ni engagement</span>
+    </div>
+    <div class="guarantee">
+      <div class="icon">🔄</div>
+      <strong>Résiliation à tout moment</strong>
+      <span>Aucun engagement, annulation en un clic</span>
+    </div>
+    <div class="guarantee">
+      <div class="icon">🔒</div>
+      <strong>Paiement sécurisé Stripe</strong>
+      <span>Vos données bancaires ne transitent pas par nos serveurs</span>
+    </div>
+  </div>
+
+  <!-- FAQ rapide -->
+  <div class="faq-mini">
+    <h3>Questions fréquentes</h3>
+    <div class="faq-item">
+      <div class="faq-q">L'essai gratuit nécessite-t-il une carte bancaire ?</div>
+      <div class="faq-a">Non. L'essai de 15 jours s'active à l'inscription, sans CB ni engagement. À la fin, vous choisissez librement de continuer.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Que se passe-t-il si j'annule ?</div>
+      <div class="faq-a">Vous conservez l'accès jusqu'à la fin de la période payée. Vos données restent sur votre appareil — elles vous appartiennent.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Puis-je passer du mensuel à l'annuel ?</div>
+      <div class="faq-a">Oui, à tout moment. Le passage à l'annuel est proratisé — vous ne payez que la différence.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">C'est quoi le "tarif bloqué à vie" ?</div>
+      <div class="faq-a">Les premiers abonnés annuels conservent leur tarif de 300€/an même si le prix augmente. C'est notre engagement envers les early adopters.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let isAnnual = false;
+
+function toggleBilling() {
+  isAnnual = !isAnnual;
+  const toggle = document.getElementById('toggle-btn');
+  const labelM = document.getElementById('label-monthly');
+  const labelA = document.getElementById('label-annual');
+  const badge = document.getElementById('badge-save');
+  const price = document.getElementById('price-monthly');
+  const note = document.getElementById('note-monthly');
+  const btn = document.getElementById('btn-monthly');
+
+  toggle.classList.toggle('annual', isAnnual);
+  labelM.classList.toggle('active', !isAnnual);
+  labelA.classList.toggle('active', isAnnual);
+  badge.style.display = isAnnual ? 'inline-block' : 'none';
+
+  if (isAnnual) {
+    price.textContent = '25';
+    note.innerHTML = '<strong style="color:#16a34a">300€/an — 2 mois offerts</strong>';
+    btn.href = 'https://buy.stripe.com/28E7sMdgT5eg29A8sf9fW00';
+    btn.textContent = "S'abonner — 300€/an →";
+    btn.className = 'btn-plan primary';
+  } else {
+    price.textContent = '30';
+    note.innerHTML = '&nbsp;';
+    btn.href = 'https://buy.stripe.com/aFaeVe90DdKM5lMeQD9fW01';
+    btn.textContent = "S'abonner — 30€/mois →";
+    btn.className = 'btn-plan primary';
+  }
+}
+
+// Détecter si on arrive avec ?plan=annual
+const params = new URLSearchParams(window.location.search);
+if (params.get('plan') === 'annual') toggleBilling();
+</script>
+</body>
+</html>
