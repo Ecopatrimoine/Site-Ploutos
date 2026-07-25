@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex"/>
+<title>Ploutos — Message bien reçu</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+<style>
+@font-face { font-family: 'Lato'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/lato-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Lato'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/lato-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Lato'; font-style: normal; font-weight: 900; font-display: swap; src: url('/fonts/lato-latin-900-normal.woff2') format('woff2'); }
+:root {
+  --navy: #101B3B;
+  --sky: #26428B;
+  --gold: #E3AF64;
+  --bg: #f5f0e8;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+nav {
+  display: flex; align-items: center;
+  padding: 0 40px; height: 64px;
+  background: rgba(245,240,232,0.95);
+  border-bottom: 1px solid rgba(227,175,100,0.18);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo .pi { height: 32px; width: 32px; object-fit: contain; }
+.nav-logo .lettrage { height: 26px; width: auto; object-fit: contain; }
+
+.page {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 48px 24px; position: relative; overflow: hidden;
+}
+.page::before {
+  content: ''; position: absolute; top: -120px; left: -100px;
+  width: 480px; height: 480px; border-radius: 50%;
+  background: var(--navy); opacity: 0.05;
+}
+.page::after {
+  content: ''; position: absolute; bottom: -80px; right: -60px;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: var(--gold); opacity: 0.1;
+}
+
+.card {
+  width: 100%; max-width: 520px; text-align: center;
+  background: #fff; border-radius: 28px;
+  border: 1px solid rgba(227,175,100,0.25);
+  box-shadow: 0 24px 64px rgba(16,27,59,0.12);
+  padding: 56px 48px;
+  position: relative; z-index: 1;
+  animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.92) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.check-circle {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 28px;
+  box-shadow: 0 8px 32px rgba(22,163,74,0.3);
+  animation: scaleIn 0.4s 0.2s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.check-circle svg { width: 40px; height: 40px; }
+
+h1 {
+  font-size: 28px; font-weight: 900; color: var(--navy);
+  margin-bottom: 12px; line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 15px; color: #666; line-height: 1.6; margin-bottom: 36px;
+}
+
+.btn-app {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 15px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--sky) 55%, #b8822e 100%);
+  color: #fff; text-decoration: none; border-radius: 14px;
+  font-size: 16px; font-weight: 700;
+  box-shadow: 0 4px 24px rgba(16,27,59,0.3);
+  transition: opacity 0.2s, transform 0.1s;
+}
+.btn-app:hover { opacity: 0.92; transform: translateY(-1px); }
+
+@media (max-width: 640px) {
+  nav { padding: 0 16px; }
+  .page { padding: 32px 16px; }
+  .card { padding: 40px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo" aria-label="Ploutos — accueil">
+    <img src="/logo.ploutos.svg" alt="Logo Ploutos — symbole pi" class="pi" onerror="this.style.display='none'"/>
+    <img src="/lettrage.ploutos.svg" alt="Ploutos" class="lettrage"/>
+  </a>
+</nav>
+
+<div class="page">
+  <div class="card">
+
+    <div class="check-circle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+
+    <h1>Message bien reçu</h1>
+    <p class="subtitle">Nous revenons vers vous sous 48&nbsp;h ouvrées.</p>
+
+    <a href="/" class="btn-app">Retour à l'accueil →</a>
+
+  </div>
+</div>
+
+<!-- Cloudflare Web Analytics -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "5574cb125dd74fd7a6ee048961837a6a"}'></script>
+<!-- End Cloudflare Web Analytics -->
+</body>
+</html>
