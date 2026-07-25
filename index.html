@@ -209,6 +209,8 @@ h1 em { font-style: normal; color: var(--gold); }
 .btn-pricing.outline:hover { background: var(--navy); color: white; }
 .btn-pricing.white { background: white; color: var(--navy); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
 .btn-pricing.white:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.btn-pricing.solid { background: linear-gradient(135deg, var(--navy), var(--sky)); color: white; box-shadow: 0 4px 16px rgba(16,27,59,0.2); }
+.btn-pricing.solid:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(16,27,59,0.3); }
 
 /* ── FAQ ── */
 .faq { background: white; }
@@ -274,11 +276,27 @@ footer a:hover { color: var(--gold); }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 
+/* ── CONTACT ── */
+.contact-section { background: white; }
+.contact-inner { max-width: 620px; margin: 0 auto; }
+.contact-form { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1rem; text-align: left; }
+.hp-field { display: none; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+.field span { font-size: 0.8rem; font-weight: 700; color: var(--navy); }
+.contact-form input, .contact-form textarea { width: 100%; padding: 0.8rem 1rem; border-radius: 10px; border: 1.5px solid var(--border); background: white; font-family: 'Lato', sans-serif; font-size: 0.95rem; color: var(--navy); transition: border-color 0.2s, box-shadow 0.2s; }
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--sky); box-shadow: 0 0 0 3px rgba(38,66,139,0.08); }
+.contact-form textarea { resize: vertical; min-height: 120px; }
+.btn-contact { align-self: flex-start; padding: 0.85rem 2.2rem; background: linear-gradient(135deg, var(--navy), var(--sky)); color: white; border: none; border-radius: 12px; font-family: 'Lato', sans-serif; font-size: 0.95rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(16,27,59,0.2); transition: transform 0.1s, box-shadow 0.2s; }
+.btn-contact:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(16,27,59,0.3); }
+.contact-rgpd { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+.contact-rgpd a { color: var(--sky); font-weight: 700; }
+
 /* ── RESPONSIVE ── */
-/* Les liens de section disparaissent avant que la nav complete (liens + 3 CTA)
-   ne devienne trop serree : en dessous d'environ 1064px de contenu elle
+/* Les liens de section disparaissent avant que la nav complete (6 liens + 3 CTA)
+   ne devienne trop serree : en dessous d'environ 1140px de contenu elle
    deborderait et le CTA primaire serait rogne par overflow-x:hidden. */
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .nav-links { display: none; }
 }
 @media (max-width: 1024px) {
@@ -318,6 +336,8 @@ footer a:hover { color: var(--gold); }
   .stats { padding: 3.5rem 1.5rem; }
   .stat-item { padding: 1.5rem 0.5rem; }
   .stat-number { font-size: 2.2rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .btn-contact { align-self: stretch; }
 }
 </style>
 <script type="application/ld+json">
@@ -414,7 +434,7 @@ footer a:hover { color: var(--gold); }
 
 <!-- NAVBAR -->
 <nav id="navbar">
-  <a href="#" class="nav-brand">
+  <a href="/" class="nav-brand" aria-label="Ploutos — accueil">
     <img src="logo.ploutos.svg" alt="Logo Ploutos — symbole pi" class="nav-logo">
     <img src="lettrage.ploutos.svg" alt="Lettrage Ploutos" style="height:28px;width:auto;object-fit:contain;"/>
   </a>
@@ -424,6 +444,7 @@ footer a:hover { color: var(--gold); }
     <a href="#tarifs">Tarifs</a>
     <a href="#faq">FAQ</a>
     <a href="#about">À propos</a>
+    <a href="#contact">Contact</a>
   </div>
   <div class="nav-cta">
     <a href="https://app.ploutos-cgp.fr" class="btn-nav-outline">Se connecter</a>
@@ -634,7 +655,7 @@ footer a:hover { color: var(--gold); }
         <li>Windows + Web + iPad + Android</li>
         <li>Mises à jour incluses</li>
       </ul>
-      <a href="/inscription.html" class="btn-pricing outline">Commencer l'essai gratuit</a>
+      <a href="https://buy.stripe.com/aFaeVe90DdKM5lMeQD9fW01" class="btn-pricing solid">S'abonner — 50 €/mois →</a>
     </div>
     <div class="pricing-card featured">
       <div class="featured-badge"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="vertical-align:-2px;margin-right:5px"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /> <path d="M20 2v4" /> <path d="M22 4h-4" /> <circle cx="4" cy="20" r="2" /></svg>Recommandé</div>
@@ -655,6 +676,7 @@ footer a:hover { color: var(--gold); }
       <a href="https://buy.stripe.com/28E7sMdgT5eg29A8sf9fW00" class="btn-pricing white">S'abonner — 500€/an →</a>
     </div>
   </div>
+  <p class="text-center" style="margin-top:2rem;font-size:0.92rem;"><a href="/inscription" style="color:var(--sky);font-weight:700;text-decoration:none;">Essai gratuit 30 jours disponible — sans carte bancaire</a></p>
   <p class="text-center reveal" style="margin-top:2.5rem;color:var(--muted);font-size:0.95rem;">Une question avant de vous lancer ? <a href="https://cal.com/david-perry-ecopatrimoine-conseil-ftutid/demo-ploutos" target="_blank" rel="noopener" style="color:var(--sky);font-weight:700;">Réservez 30 minutes de démo →</a></p>
 </section>
 
@@ -716,6 +738,26 @@ footer a:hover { color: var(--gold); }
         <div class="about-point"><span class="about-point-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="color:#E3AF64;display:block"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /> <path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg></span><div class="about-point-text"><strong>Local-first + cloud européen</strong> — vos dossiers vivent sur votre appareil (72 h hors-ligne) et se synchronisent chiffrés sur un cloud hébergé en UE.</div></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-label text-center reveal">Contact</div>
+    <h2 class="section-title text-center reveal reveal-delay-1">Une question ?</h2>
+    <p class="section-sub text-center reveal reveal-delay-2">Une interrogation avant de vous lancer, un besoin particulier ? Écrivez-nous, nous répondons sous 48&nbsp;h ouvrées.</p>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/merci-contact" class="contact-form reveal reveal-delay-2">
+      <input type="hidden" name="form-name" value="contact" />
+      <p class="hp-field"><label>Ne rien remplir&nbsp;: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+      <div class="form-row">
+        <label class="field"><span>Nom</span><input type="text" name="name" required /></label>
+        <label class="field"><span>Email professionnel</span><input type="email" name="email" required /></label>
+      </div>
+      <label class="field"><span>Message</span><textarea name="message" rows="5" required></textarea></label>
+      <button type="submit" class="btn-contact">Envoyer</button>
+      <p class="contact-rgpd">Les informations transmises servent uniquement à répondre à votre demande — voir notre <a href="/politique-confidentialite">politique de confidentialité</a>.</p>
+    </form>
   </div>
 </section>
 
