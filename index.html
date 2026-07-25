@@ -174,9 +174,6 @@ h1 em { font-style: normal; color: var(--gold); }
 /* ── PRICING ── */
 .pricing { background: var(--cream2); }
 .pricing-header { text-align: center; max-width: 600px; margin: 0 auto; }
-.pricing-toggle { display: inline-flex; background: white; border-radius: 12px; padding: 4px; margin: 0 auto 3rem; gap: 4px; box-shadow: 0 2px 12px rgba(16,27,59,0.08); }
-.toggle-btn { padding: 0.6rem 1.5rem; border-radius: 8px; border: none; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.2s; background: transparent; color: var(--muted); font-family: 'Lato', sans-serif; }
-.toggle-btn.active { background: var(--navy); color: white; box-shadow: 0 2px 8px rgba(16,27,59,0.2); }
 .pricing-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 800px; margin: 0 auto; }
 .pricing-card { background: white; border-radius: 24px; padding: 2.5rem; border: 2px solid var(--border); box-shadow: var(--shadow-card); position: relative; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
 .pricing-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
@@ -585,20 +582,14 @@ footer a:hover { color: var(--gold); }
     <h2 class="section-title reveal reveal-delay-1">Simple. Transparent. <em>Équitable.</em></h2>
     <p class="section-sub reveal reveal-delay-2">Un seul plan complet avec toutes les fonctionnalités. Essai gratuit 30 jours, sans carte bancaire.</p>
   </div>
-  <div style="display:flex;justify-content:center;">
-    <div class="pricing-toggle reveal" id="billing-toggle">
-      <button class="toggle-btn active" id="btn-monthly" onclick="setBilling('monthly')">Mensuel</button>
-      <button class="toggle-btn" id="btn-annual" onclick="setBilling('annual')">Annuel &nbsp;<span style="font-size:0.72rem;color:inherit;opacity:0.8;">−17%</span></button>
-    </div>
-  </div>
   <div class="pricing-cards reveal reveal-delay-1">
     <div class="pricing-card">
-      <div class="pricing-plan">Plan Solo</div>
+      <div class="pricing-plan">Plan Solo — Mensuel</div>
       <div class="pricing-amount">
-        <span class="price-big" id="price-amount">50€</span>
-        <span class="price-period" id="price-period">/mois</span>
+        <span class="price-big">50€</span>
+        <span class="price-period">/mois</span>
       </div>
-      <div class="price-note" id="price-note">&nbsp;</div>
+      <div class="price-note">&nbsp;</div>
       <ul class="pricing-list">
         <li>Calculs IR, IFI, Succession — barèmes 2026</li>
         <li>Rapports PDF aux couleurs du cabinet</li>
@@ -609,16 +600,16 @@ footer a:hover { color: var(--gold); }
         <li>Windows + Web + iPad + Android</li>
         <li>Mises à jour incluses</li>
       </ul>
-      <a href="/inscription.html" class="btn-pricing outline" id="btn-subscribe">Commencer l'essai gratuit</a>
+      <a href="/inscription.html" class="btn-pricing outline">Commencer l'essai gratuit</a>
     </div>
     <div class="pricing-card featured">
       <div class="featured-badge"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="vertical-align:-2px;margin-right:5px"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /> <path d="M20 2v4" /> <path d="M22 4h-4" /> <circle cx="4" cy="20" r="2" /></svg>Recommandé</div>
-      <div class="pricing-plan">Plan Annuel</div>
+      <div class="pricing-plan">Plan Solo — Annuel</div>
       <div class="pricing-amount">
-        <span class="price-big" style="color:white;">41,67€</span>
-        <span class="price-period">/mois</span>
+        <span class="price-big" style="color:white;">500€</span>
+        <span class="price-period">/an</span>
       </div>
-      <div class="price-note">500€/an — 2 mois offerts</div>
+      <div class="price-note">soit 41,67€/mois — 2 mois offerts</div>
       <ul class="pricing-list">
         <li>Toutes les fonctionnalités Solo</li>
         <li>2 mois offerts par rapport au mensuel</li>
@@ -758,14 +749,6 @@ function toggleFaq(btn) {
   const wasOpen = item.classList.contains('open');
   document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
   if (!wasOpen) item.classList.add('open');
-}
-
-function setBilling(mode) {
-  document.getElementById('btn-monthly').classList.toggle('active', mode === 'monthly');
-  document.getElementById('btn-annual').classList.toggle('active', mode === 'annual');
-  const isAnnual = mode === 'annual';
-  document.getElementById('price-amount').textContent = isAnnual ? '41,67€' : '50€';
-  document.getElementById('price-note').textContent   = isAnnual ? '500€/an — 2 mois offerts' : '';
 }
 
 // Telechargement Windows : enrichissement progressif vers le dernier .exe publie.
