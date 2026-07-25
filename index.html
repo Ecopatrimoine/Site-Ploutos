@@ -111,22 +111,8 @@ h1 em { font-style: normal; color: var(--gold); }
 .hero-trust-item { display: flex; align-items: center; gap: 0.4rem; }
 .hero-trust-item::before { content: '✓'; color: var(--gold); font-size: 0.9rem; }
 
-/* Hero card mockup */
-.hero-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 2rem; width: 100%; max-width: 460px; backdrop-filter: blur(8px); opacity: 0; animation: fadeLeft 0.8s 0.4s forwards; position: relative; z-index: 2; }
-.hero-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; }
-.hero-card-logo { width: 42px; height: 42px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.9; }
-.hero-card-title { color: white; font-weight: 900; font-size: 1.1rem; }
-.hero-card-sub { color: rgba(255,255,255,0.5); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
-.kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
-.kpi-box { background: rgba(255,255,255,0.08); border-radius: 14px; padding: 1rem 1.2rem; border: 1px solid rgba(255,255,255,0.1); }
-.kpi-label { color: rgba(255,255,255,0.5); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
-.kpi-value { color: white; font-size: 1.5rem; font-weight: 900; }
-.kpi-value.gold { color: var(--gold); }
-.kpi-value.green { color: #4ade80; }
-.kpi-value.red { color: #f87171; }
-.hero-bar { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 0.8rem 1rem; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); }
-.hero-bar-label { color: rgba(255,255,255,0.6); font-size: 0.78rem; font-weight: 700; }
-.hero-bar-val { color: var(--gold); font-weight: 900; font-size: 0.9rem; }
+/* Hero screenshot */
+.hero-shot { width: 100%; max-width: 460px; height: auto; border-radius: 12px; border: 1px solid #E5E0D5; border-top: 3px solid var(--gold); box-shadow: var(--shadow-card); position: relative; z-index: 2; display: block; opacity: 0; animation: fadeLeft 0.8s 0.4s forwards; }
 .hero-geom { position: absolute; border-radius: 50%; opacity: 0.07; }
 .hero-geom-1 { width: 300px; height: 300px; background: var(--gold); top: -80px; right: -80px; }
 .hero-geom-2 { width: 200px; height: 200px; background: white; bottom: 60px; left: -60px; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
@@ -429,25 +415,7 @@ footer a:hover { color: var(--gold); }
   <div class="hero-right">
     <div class="hero-geom hero-geom-1"></div>
     <div class="hero-geom hero-geom-2"></div>
-    <div class="hero-card">
-      <div class="hero-card-header">
-        <img src="logo.ploutos.svg" alt="Logo Ploutos — symbole pi" class="hero-card-logo">
-        <div>
-          <div class="hero-card-title">Cabinet Dupont Patrimoine</div>
-          <div class="hero-card-sub">Rapport · Martin Jean-Pierre · 2025</div>
-        </div>
-      </div>
-      <div class="kpi-grid">
-        <div class="kpi-box"><div class="kpi-label">Impôt sur le revenu</div><div class="kpi-value gold">24 850 €</div></div>
-        <div class="kpi-box"><div class="kpi-label">IFI estimé</div><div class="kpi-value">8 200 €</div></div>
-        <div class="kpi-box"><div class="kpi-label">Droits succession</div><div class="kpi-value red">186 400 €</div></div>
-        <div class="kpi-box"><div class="kpi-label">Patrimoine total</div><div class="kpi-value green">1,42 M€</div></div>
-      </div>
-      <div class="hero-bar">
-        <span class="hero-bar-label"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="vertical-align:-3px;margin-right:6px"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></svg>Rapport PDF généré en 1 clic</span>
-        <span class="hero-bar-val">Aux couleurs de votre cabinet</span>
-      </div>
-    </div>
+    <img src="/img/capture-ir.png" class="hero-shot" width="1238" height="1139" alt="Écran Ploutos — calcul d'impôt sur le revenu avec barème par tranches">
   </div>
 </section>
 
