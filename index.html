@@ -275,6 +275,12 @@ footer a:hover { color: var(--gold); }
 .reveal-delay-3 { transition-delay: 0.3s; }
 
 /* ── RESPONSIVE ── */
+/* Les liens de section disparaissent avant que la nav complete (liens + 3 CTA)
+   ne devienne trop serree : en dessous d'environ 1064px de contenu elle
+   deborderait et le CTA primaire serait rogne par overflow-x:hidden. */
+@media (max-width: 1100px) {
+  .nav-links { display: none; }
+}
 @media (max-width: 1024px) {
   .hero { grid-template-columns: 1fr; min-height: auto; }
   .hero-left { padding: 8rem 2rem 4rem; }
@@ -287,7 +293,6 @@ footer a:hover { color: var(--gold); }
   .proof-row { grid-template-columns: 1fr; gap: 2rem; }
   .section { padding: 5rem 2rem; }
   nav { padding: 0 2rem; }
-  .nav-links { display: none; }
   .stats { padding: 4rem 2rem; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .stat-item:nth-child(2) { border-right: none; }
@@ -305,6 +310,14 @@ footer a:hover { color: var(--gold); }
   .hero-actions { flex-direction: column; align-items: flex-start; }
   .cta-final h2 { font-size: 2rem; }
   .section-title { font-size: 2rem; }
+  /* Nav mobile : marque + CTA primaire seul. Se connecter et demo restent
+     accessibles ailleurs (footer / sections), la barre ne deborde plus. */
+  nav { padding: 0 1.25rem; }
+  .nav-cta .btn-nav-outline { display: none; }
+  /* Stats : le grand chiffre en 3rem forcait des colonnes trop larges a 360px. */
+  .stats { padding: 3.5rem 1.5rem; }
+  .stat-item { padding: 1.5rem 0.5rem; }
+  .stat-number { font-size: 2.2rem; }
 }
 </style>
 <script type="application/ld+json">
