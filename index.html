@@ -419,18 +419,18 @@ footer a:hover { color: var(--gold); }
       <div class="dl-detail">Accès direct navigateur<br>Aucune installation</div>
       <span class="dl-badge available">Disponible</span>
     </a>
-    <a href="https://github.com/Ecopatrimoine/ploutos/releases/latest/download/Ploutos-Setup-1.1.4.exe" id="btn-windows" class="dl-card reveal reveal-delay-1">
+    <a href="https://github.com/Ecopatrimoine/ploutos/releases/latest" id="btn-windows" class="dl-card reveal reveal-delay-1">
       <div class="dl-icon">🖥️</div>
       <div class="dl-platform">Windows</div>
       <div class="dl-detail">Application bureau native<br>Installation en 1 clic</div>
       <span class="dl-badge available">✓ Disponible</span>
     </a>
-    <a href="https://github.com/Ecopatrimoine/ploutos/releases/latest/download/Ploutos-1.1.4-arm64.dmg" id="btn-mac" class="dl-card reveal reveal-delay-1">
+    <div class="dl-card unavailable reveal reveal-delay-1">
       <div class="dl-icon">🍎</div>
       <div class="dl-platform">macOS</div>
       <div class="dl-detail">Apple Silicon (M1/M2/M3)<br>Installation .dmg</div>
-      <span class="dl-badge available">✓ Disponible</span>
-    </a>
+      <span class="dl-badge soon">Bientôt disponible</span>
+    </div>
     <a href="/inscription.html" class="dl-card reveal reveal-delay-2">
       <div class="dl-icon">📱</div>
       <div class="dl-platform">iPad / iPhone</div>
@@ -634,6 +634,28 @@ function setBilling(mode) {
   const isAnnual = mode === 'annual';
   document.getElementById('price-amount').textContent = isAnnual ? '41,67€' : '50€';
   document.getElementById('price-note').textContent   = isAnnual ? '500€/an — 2 mois offerts' : '';
+}
+
+// Telechargement Windows : enrichissement progressif vers le dernier .exe publie.
+// En cas d'echec (reseau, reponse invalide, aucun asset .exe), on laisse le lien
+// natif faire son travail en ouvrant la page releases (btn-windows.href).
+const btnWindows = document.getElementById('btn-windows');
+if (btnWindows) {
+  btnWindows.addEventListener('click', (e) => {
+    e.preventDefault();
+    const fallback = () => { window.location.href = btnWindows.href; };
+    fetch('https://api.github.com/repos/Ecopatrimoine/ploutos/releases/latest')
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(data => {
+        const exe = (data.assets || []).find(a => /\.exe$/i.test(a.name));
+        if (exe && exe.browser_download_url) {
+          window.location.href = exe.browser_download_url;
+        } else {
+          fallback();
+        }
+      })
+      .catch(fallback);
+  });
 }
 </script>
 </body>
