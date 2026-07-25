@@ -147,6 +147,15 @@ h1 em { font-style: normal; color: var(--gold); }
 .feature-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .pill { padding: 0.25rem 0.65rem; background: rgba(38,66,139,0.06); border-radius: 100px; font-size: 0.72rem; font-weight: 700; color: var(--sky); }
 
+/* ── LE LOGICIEL EN VRAI ── */
+.proof { background: white; }
+.proof-rows { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 5rem; }
+.proof-row { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.proof-row.reverse .proof-text { order: 2; }
+.proof-title { font-family: 'Lato', sans-serif; font-size: 1.6rem; font-weight: 900; color: var(--navy); line-height: 1.2; margin-bottom: 1rem; }
+.proof-text p { color: var(--muted); font-size: 1rem; line-height: 1.75; }
+.proof-shot { width: 100%; height: auto; border-radius: 12px; border: 1px solid #E5E0D5; border-top: 3px solid var(--gold); box-shadow: var(--shadow-card); display: block; }
+
 /* ── TÉLÉCHARGEMENTS ── */
 .downloads { background: white; }
 .downloads-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem; max-width: 1200px; margin: 0 auto; }
@@ -263,6 +272,9 @@ footer a:hover { color: var(--gold); }
   .hero-right { padding: 3rem 2rem; }
   .features-grid { grid-template-columns: 1fr 1fr; }
   .downloads-grid { grid-template-columns: 1fr 1fr; }
+  .proof-rows { gap: 3.5rem; }
+  .proof-row { grid-template-columns: 1fr; gap: 2rem; }
+  .proof-row.reverse .proof-text { order: 0; }
   .section { padding: 5rem 2rem; }
   nav { padding: 0 2rem; }
   .nav-links { display: none; }
@@ -471,6 +483,55 @@ footer a:hover { color: var(--gold); }
       <div class="feature-desc">Local-first : vos dossiers vivent sur votre appareil et restent pleinement utilisables 72 h hors-ligne. La synchronisation passe par un cloud chiffré en transit et au repos, hébergé en Union européenne (Irlande).</div>
       <div class="feature-pills"><span class="pill">Local-first</span><span class="pill">Chiffré</span><span class="pill">RGPD</span></div>
     </div>
+  </div>
+</section>
+
+<!-- LE LOGICIEL EN VRAI -->
+<section class="section proof" id="apercu">
+  <div class="section-label text-center reveal">Le logiciel, en vrai</div>
+  <h2 class="section-title text-center reveal reveal-delay-1">Chaque écran, une décision de plus</h2>
+  <div class="proof-rows">
+
+    <div class="proof-row reveal">
+      <div class="proof-text">
+        <h3 class="proof-title">La prévoyance, enfin calculée</h3>
+        <p>Arrêt de travail, invalidité : Ploutos projette les revenus réels de vos clients — régime obligatoire, conventions collectives, statuts TNS — et montre qui verse quoi, jusqu'à quand.</p>
+      </div>
+      <img src="/img/capture-prevoyance.png" class="proof-shot" width="1238" height="1185" loading="lazy" alt="Écran Ploutos — projection de prévoyance : arrêt de travail et invalidité">
+    </div>
+
+    <div class="proof-row reverse reveal">
+      <div class="proof-text">
+        <h3 class="proof-title">Qui reçoit quoi — après fiscalité</h3>
+        <p>Succession et assurance-vie réunies : transmis brut, fiscalité totale, net reçu par bénéficiaire, réserve et quotité — tout est chiffré et visuel.</p>
+      </div>
+      <img src="/img/capture-succession.png" class="proof-shot" width="1238" height="934" loading="lazy" alt="Écran Ploutos — succession et assurance-vie, net reçu par bénéficiaire">
+    </div>
+
+    <div class="proof-row reveal">
+      <div class="proof-text">
+        <h3 class="proof-title">Simulez, comparez, décidez</h3>
+        <p>Donation, vente, démembrement : chaque hypothèse est chiffrée jusqu'aux frais de notaire et au rappel fiscal, comparée côte à côte à la situation actuelle.</p>
+      </div>
+      <img src="/img/capture-hypotheses.png" class="proof-shot" width="1234" height="1182" loading="lazy" alt="Écran Ploutos — comparateur d'hypothèses patrimoniales côte à côte">
+    </div>
+
+    <div class="proof-row reverse reveal">
+      <div class="proof-text">
+        <h3 class="proof-title">Auditez une couverture collective en deux minutes</h3>
+        <p>Catégories objectives, ANI, forfait social : Ploutos détecte les écarts de conformité d'une entreprise et propose les actions correctives.</p>
+      </div>
+      <img src="/img/capture-prevoyance-coll.png" class="proof-shot" width="1244" height="1205" loading="lazy" alt="Écran Ploutos — audit d'une prévoyance collective d'entreprise">
+    </div>
+
+    <div class="proof-row reveal">
+      <div class="proof-text">
+        <h3 class="proof-title">Vos documents réglementaires en un clic</h3>
+        <p>Lettre de mission conforme, rapport patrimonial complet : un panier multi-documents, un seul PDF final, aux couleurs de votre cabinet.</p>
+      </div>
+      <img src="/img/capture-lettre-mission.png" class="proof-shot" width="1240" height="1119" loading="lazy" alt="Écran Ploutos — génération de la lettre de mission et du rapport patrimonial">
+    </div>
+
   </div>
 </section>
 
