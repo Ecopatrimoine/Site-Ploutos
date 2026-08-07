@@ -1,0 +1,17 @@
+# Deploiement Netlify du site vitrine ploutos-cgp.fr
+#
+# Le site est statique : aucun bundler, la racine du depot est publiee telle
+# quelle. La seule etape de build sert a retirer docs/ de la copie publiee.
+#
+# docs/ contient les brouillons juridiques annotes (CGU, DPA, politique de
+# confidentialite) : mentions [CAPITAL SOCIAL A CONFIRMER], [GERANT], notes
+# de fiabilite. Ils doivent rester versionnes dans git pour la tracabilite,
+# mais ne jamais etre servis. La suppression a lieu dans le conteneur de
+# build uniquement : le depot n'est pas modifie.
+#
+# Garde-fou complementaire : la regle /docs/* de _redirects, qui renvoie une
+# 404 de marque si un fichier venait malgre tout a etre publie.
+
+[build]
+  command = "rm -rf docs"
+  publish = "."
