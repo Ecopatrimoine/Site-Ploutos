@@ -170,17 +170,14 @@ h1 em { font-style: normal; color: var(--gold); }
 
 /* ── TÉLÉCHARGEMENTS ── */
 .downloads { background: white; }
-.downloads-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem; max-width: 1200px; margin: 0 auto; }
+.downloads-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; max-width: 1200px; margin: 0 auto; }
 .dl-card { border: 2px solid var(--border); border-radius: 20px; padding: 2rem 1.5rem; text-align: center; box-shadow: var(--shadow-card); transition: all 0.25s; cursor: pointer; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 .dl-card:hover { border-color: var(--navy); transform: translateY(-3px); box-shadow: var(--shadow-card-hover); }
-.dl-card.unavailable { opacity: 0.55; cursor: default; }
-.dl-card.unavailable:hover { transform: none; box-shadow: none; border-color: var(--border); }
 .dl-icon { font-size: 2.4rem; }
 .dl-platform { font-weight: 900; font-size: 1rem; color: var(--navy); }
 .dl-detail { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
 .dl-badge { font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 100px; }
 .dl-badge.available { background: rgba(34,197,94,0.12); color: #16a34a; }
-.dl-badge.soon { background: rgba(227,175,100,0.15); color: var(--gold-dark); }
 .dl-badge.pwa { background: rgba(38,66,139,0.08); color: var(--sky); }
 
 /* ── PRICING ── */
@@ -413,7 +410,7 @@ footer a:hover { color: var(--gold); }
           "name": "Puis-je utiliser Ploutos sur iPad et Windows ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Oui. Ploutos est disponible en version web (tout navigateur), en application installable sur iPad et Android (PWA), et en application bureau Windows. La synchronisation est automatique entre tous vos appareils. La version macOS arrive très prochainement."
+            "text": "Oui. Ploutos est disponible en version web (tout navigateur), en application installable sur iPad et Android (PWA), et en application bureau Windows. La synchronisation est automatique entre tous vos appareils."
           }
         },
         {
@@ -421,7 +418,7 @@ footer a:hover { color: var(--gold); }
           "name": "Comment fonctionne le support ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Le support est assuré par email à contact@ecopatrimoine-conseil.com avec un délai de réponse de 48h ouvrées. Une aide contextuelle est disponible directement dans l'application sur chaque champ. En cas de bug bloquant, un retour est garanti sous 24h."
+            "text": "Le support est assuré par email à contact@ecopatrimoine-conseil.com, avec une réponse sous 48 h ouvrées. Une aide contextuelle est disponible directement dans l'application sur chaque champ."
           }
         }
       ]
@@ -606,12 +603,6 @@ footer a:hover { color: var(--gold); }
       <div class="dl-detail">Application bureau native<br>Installation en 1 clic</div>
       <span class="dl-badge available">✓ Disponible</span>
     </a>
-    <div class="dl-card unavailable reveal reveal-delay-1">
-      <div class="dl-icon"><svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="color:#101B3B;display:block"><path d="M18 5a2 2 0 0 1 2 2v8.526a2 2 0 0 0 .212.897l1.068 2.127a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45l1.068-2.127A2 2 0 0 0 4 15.526V7a2 2 0 0 1 2-2z" /> <path d="M20.054 15.987H3.946" /></svg></div>
-      <div class="dl-platform">macOS</div>
-      <div class="dl-detail">Apple Silicon (M1/M2/M3)<br>Installation .dmg</div>
-      <span class="dl-badge soon">Bientôt disponible</span>
-    </div>
     <a href="/inscription.html" class="dl-card reveal reveal-delay-2">
       <div class="dl-icon"><svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="color:#101B3B;display:block"><rect width="16" height="20" x="4" y="2" rx="2" ry="2" /> <line x1="12" x2="12.01" y1="18" y2="18" /></svg></div>
       <div class="dl-platform">iPad / iPhone</div>
@@ -703,11 +694,11 @@ footer a:hover { color: var(--gold); }
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)"><span>Puis-je utiliser Ploutos sur iPad et Windows ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a"><p>Oui. Ploutos est disponible en version web (tout navigateur), en application installable sur iPad et Android (PWA), et en application bureau Windows. La synchronisation est automatique entre tous vos appareils. La version macOS arrive très prochainement.</p></div>
+      <div class="faq-a"><p>Oui. Ploutos est disponible en version web (tout navigateur), en application installable sur iPad et Android (PWA), et en application bureau Windows. La synchronisation est automatique entre tous vos appareils.</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)"><span>Comment fonctionne le support ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a"><p>Le support est assuré par email à <a href="mailto:contact@ecopatrimoine-conseil.com" style="color:var(--sky)">contact@ecopatrimoine-conseil.com</a> avec un délai de réponse de 48h ouvrées. Une aide contextuelle est disponible directement dans l'application sur chaque champ. En cas de bug bloquant, un retour est garanti sous 24h.</p></div>
+      <div class="faq-a"><p>Le support est assuré par email à <a href="mailto:contact@ecopatrimoine-conseil.com" style="color:var(--sky)">contact@ecopatrimoine-conseil.com</a>, avec une réponse sous 48&nbsp;h ouvrées. Une aide contextuelle est disponible directement dans l'application sur chaque champ.</p></div>
     </div>
   </div>
 </section>
