@@ -600,7 +600,7 @@ footer a:hover { color: var(--gold); }
       <div class="dl-detail">Accès direct navigateur<br>Aucune installation</div>
       <span class="dl-badge available">Disponible</span>
     </a>
-    <a href="https://github.com/Ecopatrimoine/ploutos/releases/latest" id="btn-windows" class="dl-card reveal reveal-delay-1">
+    <a href="https://github.com/Ecopatrimoine/ploutos-releases/releases/latest" id="btn-windows" class="dl-card reveal reveal-delay-1">
       <div class="dl-icon"><svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="color:#101B3B;display:block"><rect width="20" height="14" x="2" y="3" rx="2" /> <line x1="8" x2="16" y1="21" y2="21" /> <line x1="12" x2="12" y1="17" y2="21" /></svg></div>
       <div class="dl-platform">Windows</div>
       <div class="dl-detail">Application bureau native<br>Installation en 1 clic</div>
@@ -837,7 +837,7 @@ if (btnWindows) {
   btnWindows.addEventListener('click', (e) => {
     e.preventDefault();
     const fallback = () => { window.location.href = btnWindows.href; };
-    fetch('https://api.github.com/repos/Ecopatrimoine/ploutos/releases/latest')
+    fetch('https://api.github.com/repos/Ecopatrimoine/ploutos-releases/releases/latest')
       .then(r => r.ok ? r.json() : Promise.reject())
       .then(data => {
         const exe = (data.assets || []).find(a => /\.exe$/i.test(a.name));
