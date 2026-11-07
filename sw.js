@@ -1,8 +1,13 @@
-const CACHE_NAME = 'ploutos-landing-v1';
+const CACHE_NAME = 'ploutos-landing-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/logo.ploutos.png',
+  '/logo.ploutos.clair.svg',
+  '/lettrage.ploutos.trait.svg',
+  '/inscription.html',
+  '/inscription.js',
+  '/ploutos-carte.css',
   '/manifest.webmanifest'
 ];
 
