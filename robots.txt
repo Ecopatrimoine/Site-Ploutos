@@ -1,4 +1,19 @@
 User-agent: *
 Allow: /
 
+# Robots des moteurs de recherche et des moteurs a intelligence artificielle : acces explicitement autorise.
+# Chaque nom est celui que son editeur documente pour robots.txt (verifie le 11/11/2026, voir
+# docs/maquettes/S1_CONFRONTATION_REFERENCEMENT.md). Aucun Bingbot : le groupe * ci-dessus le couvre.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://ploutos-cgp.fr/sitemap.xml
