@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ploutos-landing-v2';
+const CACHE_NAME = 'ploutos-landing-v3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -8,6 +8,8 @@ const STATIC_ASSETS = [
   '/inscription.html',
   '/inscription.js',
   '/ploutos-carte.css',
+  '/ploutos-doc.css',
+  '/ploutos-doc.js',
   '/manifest.webmanifest'
 ];
 
