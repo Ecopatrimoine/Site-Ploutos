@@ -1,7 +1,9 @@
 /privacy       /politique-confidentialite   301
 /privacy.html  /politique-confidentialite   301
 
-# Brouillons juridiques : jamais servis. netlify.toml les retire deja de la
-# copie publiee ; cette regle est le garde-fou si un fichier y echappait.
+# Brouillons juridiques et scripts de verification : jamais servis. netlify.toml
+# retire docs/ et scripts/ de la copie publiee ; ces regles sont le garde-fou si
+# un fichier y echappait.
 # Le "!" force la regle a primer sur un fichier existant.
 /docs/*        /404.html                    404!
+/scripts/*     /404.html                    404!
