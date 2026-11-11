@@ -4,7 +4,8 @@
 //  1. donnees structurees : chaque bloc application/ld+json se lit par JSON.parse ; structure attendue par page ;
 //     la FAQPage est identique au texte visible ; rien d'absent de la page (captures, offres, fonctions, liens) ;
 //     aucune note, aucun avis, aucun nombre d'utilisateurs ; offres hors taxes (valueAddedTaxIncluded false, « HT »
-//     affiche) ; audience = la phrase des cibles affichee ; titre et description de l'accueil repris par og: et twitter:
+//     affiche) ; audience = la phrase des cibles affichee ; titre et description de l'accueil repris par og: et twitter: ;
+//     chaque terme significatif de la description de SoftwareApplication et de la meta description figure dans le texte affiche
 //  2. indexation : une seule canonique par page indexable, vers elle-meme ; noindex sur les pages techniques ;
 //     balises de partage completes, dimensions reelles de og-image.png
 //  3. sitemap.xml : identique a ce que regenere scripts/sitemap.mjs ; pages indexables seules ; ni changefreq ni priority
@@ -74,7 +75,10 @@ const DIFFERENCES = {
     ['B6 bouton annuel : « S\'abonner — 500 € HT/an → »', 'class="btn-pricing white">S\'abonner — 500€/an →</a>', 'class="btn-pricing white">S\'abonner — 500 € HT/an →</a>'],
     ['C1 paragraphe des cibles : insertion apres le premier paragraphe de « A propos »',
       '      <p style="color:var(--muted);font-size:0.88rem;line-height:1.75;margin-bottom:1rem;">Né du constat',
-      '      <p class="about-cibles">' + CIBLES + '</p>\n      <p style="color:var(--muted);font-size:0.88rem;line-height:1.75;margin-bottom:1rem;">Né du constat']
+      '      <p class="about-cibles">' + CIBLES + '</p>\n      <p style="color:var(--muted);font-size:0.88rem;line-height:1.75;margin-bottom:1rem;">Né du constat'],
+    ['C2 introduction de la section Fonctionnalites : « au bilan patrimonial et »',
+      "De la collecte à l'édition des documents réglementaires, en passant par tous les calculs fiscaux sur les barèmes 2026.",
+      "De la collecte au bilan patrimonial et à l'édition des documents réglementaires, en passant par tous les calculs fiscaux sur les barèmes 2026."]
   ],
   'cgu.html': [
     ['A3 article 3 : liste des utilisateurs vises',
@@ -185,8 +189,7 @@ const types = (f) => (graphe[f][0]?.['@graph'] || []).map((n) => n['@type']);
   ok(pCibles && txt(pCibles[1]) === CIBLES && vis.includes(CIBLES), 'paragraphe des cibles affiche, mot pour mot (section « A propos »)');
   ok(sw.audience?.['@type'] === 'Audience' && typeof sw.audience.audienceType === 'string' && norm(sw.audience.audienceType) === CIBLES && vis.includes(norm(sw.audience.audienceType)),
     'SoftwareApplication.audience : un noeud Audience dont audienceType = la phrase des cibles affichee');
-  // description : reprend les cibles (texte arrete par David). Le controle porte sur le texte exact ; il ne verifie PAS que
-  // chaque mot figure dans le texte affiche (constate le 11/11/2026 : « bilan » n'y figure pas, seulement dans les meta).
+  // description : reprend les cibles (texte arrete par David). Egalite avec le texte exact ; les termes sont controles plus bas.
   ok(sw.description === SW_DESCRIPTION, 'SoftwareApplication.description = le texte arrete (CGP, CIF, courtiers et agents d\'assurance : bilan, succession, prevoyance, documents reglementaires)');
 
   // titre, description et balises de partage (S1-bis)
@@ -197,6 +200,17 @@ const types = (f) => (graphe[f][0]?.['@graph'] || []).map((n) => n['@type']);
   for (const [cle, attendu] of [['og:title', ACCUEIL_TITRE], ['twitter:title', ACCUEIL_TITRE], ['og:description', ACCUEIL_DESCRIPTION], ['twitter:description', ACCUEIL_DESCRIPTION]]) {
     const v = meta(html, cle);
     ok(v.length === 1 && norm(v[0]) === attendu, `index.html : ${cle} aligne sur ${cle.endsWith('title') ? 'le titre' : 'la description'}`);
+  }
+
+  // chaque terme significatif de la description de SoftwareApplication et de la meta description figure dans le texte affiche
+  // de la page (mot entier, casse ignoree, accents respectes) : un terme annonce dans les donnees structurees ou les balises de
+  // partage doit etre ecrit sur la page. Termes = mots (lettres, chiffres) hors mots vides grammaticaux.
+  const MOTS_VIDES = new Set(['de', 'du', 'des', 'la', 'le', 'les', 'l', 'd', 'et', 'ou', 'pour', 'à', 'au', 'aux', 'un', 'une', 'en', 'sur', 'par', 'dans', 'avec', 'sans']);
+  const motsDe = (s) => (norm(s).toLowerCase().match(/[\p{L}\p{N}]+/gu) || []);
+  const affiches = new Set(motsDe(vis));
+  for (const [nom, phrase] of [['SoftwareApplication.description', sw.description || ''], ['meta description', desc[0] || '']]) {
+    const termes = [...new Set(motsDe(phrase).filter((m) => !MOTS_VIDES.has(m)))], absents = termes.filter((t) => !affiches.has(t));
+    ok(termes.length > 0 && !absents.length, `${nom} : chaque terme significatif figure dans le texte affiche, casse ignoree (${termes.length} termes ; absents : ${absents.join(', ') || 'aucun'})`);
   }
 }
 for (const f of ['cgu.html', 'dpa.html', 'politique-confidentialite.html']) {
