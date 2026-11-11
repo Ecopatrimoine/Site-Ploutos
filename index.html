@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ploutos — Le logiciel patrimonial des CGP indépendants</title>
-<meta name="description" content="Ploutos est le logiciel de gestion patrimoniale conçu pour les CGP indépendants. Calculs IR, IFI, Succession, barèmes fiscaux 2026. Rapports PDF aux couleurs de votre cabinet. Essai gratuit 30 jours.">
+<title>Ploutos — Logiciel patrimonial pour CGP, CIF et courtiers</title>
+<meta name="description" content="Logiciel de gestion de patrimoine pour CGP, CIF, courtiers et agents d'assurance : bilan, succession, prévoyance, documents. Essai gratuit 30 jours.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://ploutos-cgp.fr/">
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -13,16 +13,16 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ploutos-cgp.fr/">
-<meta property="og:title" content="Ploutos — Le logiciel patrimonial des CGP indépendants">
-<meta property="og:description" content="Barèmes fiscaux 2026, rapports PDF personnalisés, gestion multi-clients. Essai gratuit 30 jours, sans carte bancaire.">
+<meta property="og:title" content="Ploutos — Logiciel patrimonial pour CGP, CIF et courtiers">
+<meta property="og:description" content="Logiciel de gestion de patrimoine pour CGP, CIF, courtiers et agents d'assurance : bilan, succession, prévoyance, documents. Essai gratuit 30 jours.">
 <meta property="og:image" content="https://ploutos-cgp.fr/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Ploutos">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ploutos — Le logiciel patrimonial des CGP indépendants">
-<meta name="twitter:description" content="Barèmes fiscaux 2026, rapports PDF personnalisés, gestion multi-clients. Essai gratuit 30 jours, sans carte bancaire.">
+<meta name="twitter:title" content="Ploutos — Logiciel patrimonial pour CGP, CIF et courtiers">
+<meta name="twitter:description" content="Logiciel de gestion de patrimoine pour CGP, CIF, courtiers et agents d'assurance : bilan, succession, prévoyance, documents. Essai gratuit 30 jours.">
 <meta name="twitter:image" content="https://ploutos-cgp.fr/og-image.png">
 <link rel="preload" as="font" type="font/woff2" href="/fonts/lato-latin-400-normal.woff2" crossorigin>
 <style>
@@ -201,6 +201,7 @@ h1 em { font-style: normal; color: var(--gold); }
 .featured .price-period { color: rgba(255,255,255,0.6); }
 .price-note { font-size: 0.78rem; color: var(--gold-dark); font-weight: 700; margin-bottom: 2rem; min-height: 1.2em; }
 .featured .price-note { color: var(--gold); }
+.price-tax-note { text-align: center; margin-top: 1.5rem; font-size: 0.92rem; color: #4D5D74; }
 .pricing-list { list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.7rem; }
 .pricing-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.88rem; color: var(--muted); }
 .featured .pricing-list li { color: rgba(255,255,255,0.8); }
@@ -229,6 +230,7 @@ h1 em { font-style: normal; color: var(--gold); }
 .about { background: var(--cream2); }
 .about-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
 .about-text .section-sub { margin-bottom: 1.5rem; }
+.about-text .about-cibles { color: var(--muted); font-size: 0.88rem; line-height: 1.75; margin-bottom: 1rem; }
 .about-signature { display: flex; align-items: center; gap: 1rem; margin-top: 2rem; }
 .about-avatar { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--sky)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 1.1rem; flex-shrink: 0; }
 .about-avatar img { width: 26px; height: 26px; object-fit: contain; }
@@ -390,6 +392,10 @@ footer a:hover { color: var(--gold); }
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Web, Windows, iPadOS, Android",
       "description": "Logiciel de gestion patrimoniale pour CGP indépendants : calculs IR, IFI, succession, prévoyance, rapports PDF personnalisés.",
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Ploutos s'adresse aux conseillers en gestion de patrimoine (CGP), aux conseillers en investissements financiers (CIF), aux courtiers et agents d'assurance, aux sociétés d'assurance et aux agents immobiliers."
+      },
       "image": "https://ploutos-cgp.fr/og-image.png",
       "screenshot": [
         {
@@ -462,6 +468,7 @@ footer a:hover { color: var(--gold); }
             "@type": "UnitPriceSpecification",
             "price": "50",
             "priceCurrency": "EUR",
+            "valueAddedTaxIncluded": false,
             "unitCode": "MON"
           }
         },
@@ -475,6 +482,7 @@ footer a:hover { color: var(--gold); }
             "@type": "UnitPriceSpecification",
             "price": "500",
             "priceCurrency": "EUR",
+            "valueAddedTaxIncluded": false,
             "unitCode": "ANN"
           }
         }
@@ -742,8 +750,8 @@ footer a:hover { color: var(--gold); }
     <div class="pricing-card">
       <div class="pricing-plan">Plan Solo — Mensuel</div>
       <div class="pricing-amount">
-        <span class="price-big">50€</span>
-        <span class="price-period">/mois</span>
+        <span class="price-big">50&nbsp;€</span>
+        <span class="price-period">HT /mois</span>
       </div>
       <div class="price-note">&nbsp;</div>
       <ul class="pricing-list">
@@ -756,16 +764,16 @@ footer a:hover { color: var(--gold); }
         <li>Windows + Web + iPad + Android</li>
         <li>Mises à jour incluses</li>
       </ul>
-      <a href="https://buy.stripe.com/aFaeVe90DdKM5lMeQD9fW01" class="btn-pricing solid">S'abonner — 50 €/mois →</a>
+      <a href="https://buy.stripe.com/aFaeVe90DdKM5lMeQD9fW01" class="btn-pricing solid">S'abonner — 50 € HT/mois →</a>
     </div>
     <div class="pricing-card featured">
       <div class="featured-badge"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="vertical-align:-2px;margin-right:5px"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /> <path d="M20 2v4" /> <path d="M22 4h-4" /> <circle cx="4" cy="20" r="2" /></svg>Recommandé</div>
       <div class="pricing-plan">Plan Solo — Annuel</div>
       <div class="pricing-amount">
-        <span class="price-big" style="color:white;">500€</span>
-        <span class="price-period">/an</span>
+        <span class="price-big" style="color:white;">500&nbsp;€</span>
+        <span class="price-period">HT /an</span>
       </div>
-      <div class="price-note">soit 41,67€/mois — 2 mois offerts</div>
+      <div class="price-note">soit 41,67&nbsp;€ HT/mois — 2 mois offerts</div>
       <ul class="pricing-list">
         <li>Toutes les fonctionnalités Solo</li>
         <li>2 mois offerts par rapport au mensuel</li>
@@ -774,9 +782,10 @@ footer a:hover { color: var(--gold); }
         <li>Support email dédié</li>
         <li>Influence sur la roadmap</li>
       </ul>
-      <a href="https://buy.stripe.com/28E7sMdgT5eg29A8sf9fW00" class="btn-pricing white">S'abonner — 500€/an →</a>
+      <a href="https://buy.stripe.com/28E7sMdgT5eg29A8sf9fW00" class="btn-pricing white">S'abonner — 500 € HT/an →</a>
     </div>
   </div>
+  <p class="price-tax-note">Prix hors taxes. TVA non applicable, art. 293 B du CGI.</p>
   <p class="text-center" style="margin-top:2rem;font-size:0.92rem;"><a href="/inscription" style="color:var(--sky);font-weight:700;text-decoration:none;">Essai gratuit 30 jours disponible — sans carte bancaire</a></p>
   <p class="text-center reveal" style="margin-top:2.5rem;color:var(--muted);font-size:0.95rem;">Une question avant de vous lancer ? <a href="https://cal.com/david-perry-ecopatrimoine-conseil-ftutid/demo-ploutos" target="_blank" rel="noopener" style="color:var(--sky);font-weight:700;">Réservez 30 minutes de démo →</a></p>
 </section>
@@ -820,6 +829,7 @@ footer a:hover { color: var(--gold); }
       <div class="section-label">À propos</div>
       <h2 class="section-title">Un CGP a créé<br>l'outil qu'il <em>voulait</em></h2>
       <p class="section-sub">Face à l'absence d'outils adaptés, accessibles et personnalisables, Ploutos est né du terrain — conçu par un CGP en exercice, pour les CGP indépendants.</p>
+      <p class="about-cibles">Ploutos s'adresse aux conseillers en gestion de patrimoine (CGP), aux conseillers en investissements financiers (CIF), aux courtiers et agents d'assurance, aux sociétés d'assurance et aux agents immobiliers.</p>
       <p style="color:var(--muted);font-size:0.88rem;line-height:1.75;margin-bottom:1rem;">Né du constat que les outils existants étaient trop chers, trop complexes ou trop génériques, Ploutos fait ce qu'un cabinet indépendant attend vraiment : des calculs justes, des documents professionnels, et une adaptation complète à l'identité de votre cabinet.</p>
       <div class="about-signature">
         <div class="about-avatar"><img src="logo.ploutos.clair.svg" alt=""></div>
