@@ -1,8 +1,8 @@
 /* Ploutos - script des pages reglementaires (R1, 11/11/2026).
-   Trois fonctions, rien d'autre : repere de lecture du sommaire, fil de progression sous la barre, bouton
-   « Imprimer ou enregistrer en PDF ». Les onglets, le sommaire et les id des titres sont dans le HTML :
-   sans ce script, la page reste entierement lisible et navigable (le bouton d'impression, inutile sans
-   script, n'apparait qu'avec lui). */
+   Quatre fonctions, rien d'autre : repere de lecture du sommaire, fil de progression sous la barre, bouton
+   « Imprimer ou enregistrer en PDF », indice de defilement des tableaux (R1-bis). Les onglets, le sommaire
+   et les id des titres sont dans le HTML : sans ce script, la page reste entierement lisible et navigable
+   (le bouton d'impression, inutile sans script, n'apparait qu'avec lui ; les tableaux defilent sans fondu). */
 (function () {
   'use strict';
 
@@ -33,6 +33,19 @@
       titres.forEach(function (t) { if (t) io.observe(t); });
     }
   }
+
+  // Tableaux : data-suite tant qu'il reste du contenu a droite du cadre (la feuille de style en fait un fondu)
+  Array.prototype.forEach.call(document.querySelectorAll('.table-wrap'), function (cadre) {
+    function suite() {
+      if (cadre.scrollWidth - cadre.clientWidth - cadre.scrollLeft > 1) cadre.setAttribute('data-suite', '');
+      else cadre.removeAttribute('data-suite');
+    }
+    cadre.addEventListener('scroll', suite, { passive: true });
+    window.addEventListener('resize', suite);
+    window.addEventListener('load', suite);
+    if (window.ResizeObserver) new ResizeObserver(suite).observe(cadre);
+    suite();
+  });
 
   // Fil de progression et detection du bas de page
   var fil = document.getElementById('prog');
