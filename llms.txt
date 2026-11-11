@@ -1,10 +1,10 @@
 # Ploutos
 
-> Ploutos est un logiciel de gestion de patrimoine pour les conseillers en gestion de patrimoine (CGP) indépendants. Il couvre le parcours complet du conseil : collecte des informations du client, bilan patrimonial, scénarios, documents réglementaires. Il est édité par EcoPatrimoine Conseil (Perpignan, France) et conçu par un CGP en exercice.
+> Ploutos est un logiciel de gestion de patrimoine pour les conseillers en gestion de patrimoine (CGP), les conseillers en investissements financiers (CIF), les courtiers et agents d'assurance, les sociétés d'assurance et les agents immobiliers. Il couvre le parcours complet du conseil : collecte des informations du client, bilan patrimonial, scénarios, documents réglementaires. Il est édité par EcoPatrimoine Conseil (Perpignan, France) et conçu par un CGP en exercice.
 
 ## L'essentiel
-- Public : CGP indépendants, cabinets de conseil en gestion de patrimoine.
-- Prix : 50 € par mois ou 500 € par an, un seul plan tout compris. Essai gratuit de 30 jours, sans carte bancaire.
+- Public : CGP indépendants et cabinets de conseil en gestion de patrimoine, CIF, courtiers en assurance, agents d'assurance, sociétés d'assurance, agents immobiliers.
+- Prix : 50 € HT par mois ou 500 € HT par an, un seul plan tout compris (TVA non applicable, art. 293 B du CGI). Essai gratuit de 30 jours, sans carte bancaire.
 - Fonctions : collecte patrimoniale guidée ; bilan (patrimoine, succession et assurance-vie, prévoyance, impôt sur le revenu et IFI, projection) ; scénarios comparés à la situation actuelle (donation, démembrement, vente, versement) ; prévoyance (régimes obligatoires, conventions collectives, indépendants, audit d'une prévoyance collective d'entreprise) ; documents réglementaires (entrée en relation, lettre de mission, recueil, document de conseil) aux couleurs du cabinet.
 - Appareils : application Windows, navigateur web, iPad et iPhone, Android. Utilisable 72 heures hors ligne.
 - Données : enregistrées d'abord sur l'appareil du conseiller, synchronisation chiffrée, hébergement en Union européenne (Irlande). Export des dossiers au format JSON.
