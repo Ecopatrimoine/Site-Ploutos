@@ -16,165 +16,111 @@
 <meta name="twitter:description" content="CGU du logiciel Ploutos : abonnement, essai gratuit 30 jours, responsabilité, données.">
 <meta name="twitter:image" content="https://ploutos-cgp.fr/og-image.png">
 <link rel="icon" href="/favicon.ico">
-<style>
-  @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 300; font-display: swap; src: url('/fonts/source-serif-4-latin-300-normal.woff2') format('woff2'); }
-  @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/source-serif-4-latin-400-normal.woff2') format('woff2'); }
-  @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/source-serif-4-latin-600-normal.woff2') format('woff2'); }
-  @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 300; font-display: swap; src: url('/fonts/source-serif-4-latin-300-italic.woff2') format('woff2'); }
-  :root {
-    --navy: #101B3B;
-    --sky: #26428B;
-    --gold: #E3AF64;
-    --cream: #FBECD7;
-    --text: #1a1a2e;
-    --muted: #64748b;
-    --border: rgba(16,27,59,0.12);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-weight: 300;
-    color: var(--text);
-    background: #faf9f7;
-    line-height: 1.8;
-  }
-  header {
-    background: var(--navy);
-    padding: 20px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  header img { height: 36px; }
-  header a {
-    color: rgba(255,255,255,0.6);
-    text-decoration: none;
-    font-size: 13px;
-    font-family: 'Source Serif 4', serif;
-    transition: color .2s;
-  }
-  header a:hover { color: var(--gold); }
-  .hero {
-    background: var(--navy);
-    padding: 48px 40px 56px;
-    text-align: center;
-    border-bottom: 3px solid var(--gold);
-  }
-  .hero h1 {
-    font-family: 'Source Serif 4', serif;
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 8px;
-  }
-  .hero p {
-    color: rgba(255,255,255,0.55);
-    font-size: 0.9rem;
-    font-weight: 300;
-  }
-  .container {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 56px 24px 80px;
-  }
-  h2 {
-    font-family: 'Source Serif 4', serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin: 40px 0 12px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-  }
-  h2:first-child { margin-top: 0; }
-  p { margin-bottom: 14px; color: #2d3748; }
-  ul { margin: 0 0 14px 20px; }
-  li { margin-bottom: 6px; color: #2d3748; }
-  strong { font-weight: 600; color: var(--navy); }
-  a { color: var(--sky); }
-  .notice {
-    background: var(--cream);
-    border-left: 3px solid var(--gold);
-    padding: 14px 18px;
-    border-radius: 0 8px 8px 0;
-    margin: 20px 0;
-    font-size: 0.9rem;
-  }
-  footer {
-    background: var(--navy);
-    padding: 24px 40px;
-    text-align: center;
-    color: rgba(255,255,255,0.4);
-    font-size: 12px;
-  }
-  footer a { color: var(--gold); text-decoration: none; }
-  a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
-</style>
+<link rel="stylesheet" href="/ploutos-carte.css">
+<link rel="stylesheet" href="/ploutos-doc.css">
+<script src="/ploutos-doc.js" defer></script>
 </head>
 <body>
 
-<header>
-  <a href="/" aria-label="Ploutos — accueil" style="display:inline-flex;align-items:center"><img src="/lettrage.ploutos.blanc.svg" alt="Lettrage Ploutos" onerror="this.style.color='#E3AF64';this.outerHTML='<span style=\'color:#E3AF64;font-size:20px;font-weight:600\'>Ploutos</span>'"></a>
-  <a href="/">← Retour</a>
+<header class="nav">
+  <div class="in">
+    <a class="tuile" href="/" aria-label="Ploutos — accueil"><svg viewBox="0 0 251 276" aria-hidden="true" focusable="false"><path d="M156.49 101.35C147.25 99.59 138.95 100.52 129.64 100.85C127.62 126.59 125.91 168.55 117.35 190.91C115.21 196.5 110.97 200.45 106.31 201.24C100 202.31 93.71 200.96 90.46 195.25C83.15 182.41 104.56 171.58 112.13 142.31C115.65 128.7 117.22 115.39 118.12 101.28C86.03 95.32 88.57 121.45 79.03 117.72C84.03 100.33 91.91 82.57 112.46 82.52L202.9 82.3L202.7 100.42L173.57 100.86L170.3 150.67C169.78 158.52 169.86 166.5 172.13 174.02C174.03 180.32 180.46 182.34 186.3 181.87C197.54 180.96 198.67 166.72 198.89 167.63C198.28 165.12 209.5 163.02 197.17 188.31C192.74 197.39 184.21 201.84 174.3 201.7C159.99 201.51 150.37 191 150.64 176.4C151.09 151.65 154.51 127.87 156.51 101.36L156.49 101.35Z"/><path d="M114.99 262.98C84.04 257.1 56.76 240.19 37.68 214.86C17.34 187.87 8.73 154.57 13.43 121.1C18.13 87.63 35.59 58 62.58 37.65C88.31 18.26 119.77 9.54 151.65 12.84C153.21 13 154.78 13.18 156.34 13.4C189.81 18.1 219.44 35.56 239.79 62.55L247.72 56.58C225.04 26.49 192.31 8.43 157.73 3.57C156.17 3.35 154.61 3.17 153.04 3C119.86 -0.5 85.34 8.07 56.6 29.72C-3.59 75.08 -15.61 160.64 29.74 220.83C51.07 249.14 81.31 266.78 113.61 272.82L114.98 262.98H114.99Z"/><circle class="dot" cx="206.7" cy="26.8" r="20"/></svg><div><b>PLOUTOS</b><span>by EcoPatrimoine Conseil</span></div></a>
+    <nav class="liens" aria-label="Navigation principale"><a href="/#fonctionnalites">Fonctionnalités</a><a href="/#tarifs">Tarifs</a><a href="/#faq">FAQ</a><a href="/#contact">Contact</a></nav>
+    <div class="cta"><a class="dc-btn dc-btn--ligne" href="https://app.ploutos-cgp.fr">Se connecter</a><a class="dc-btn dc-btn--or" href="/inscription.html">Essai gratuit 30 j</a></div>
+  </div>
+  <span class="prog" id="prog" aria-hidden="true"></span>
 </header>
 
-<div class="hero">
-  <h1>Conditions Générales d'Utilisation</h1>
-  <p>Version en vigueur au 1er septembre 2026 · EcoPatrimoine Conseil</p>
-</div>
+<main>
+  <header class="haut">
+    <div class="wrap">
+      <span class="eb">Document contractuel</span>
+      <h1>Conditions Générales d'Utilisation</h1>
+      <p class="ver">Version en vigueur au 1er septembre 2026 · EcoPatrimoine Conseil</p>
+      <nav class="tabs" aria-label="Documents"><a href="/cgu" aria-current="page">CGU</a><a href="/dpa">Traitement des données</a><a href="/politique-confidentialite">Confidentialité</a></nav>
+    </div>
+  </header>
 
-<div class="container">
+  <div class="wrap">
+    <div class="cols">
+      <div class="som">
+        <nav aria-label="Sommaire">
+          <span class="eb">Sommaire</span>
+          <ol>
+            <li><a href="#article-1">Éditeur du service</a></li>
+            <li><a href="#article-2">Objet</a></li>
+            <li><a href="#article-3">Service réservé aux professionnels</a></li>
+            <li><a href="#article-4">Compte et accès</a></li>
+            <li><a href="#article-5">Essai gratuit</a></li>
+            <li><a href="#article-6">Abonnement, prix et paiement</a></li>
+            <li><a href="#article-7">Disponibilité, maintenance et support</a></li>
+            <li><a href="#article-8">Nature du Service et responsabilité</a></li>
+            <li><a href="#article-9">Propriété intellectuelle</a></li>
+            <li><a href="#article-10">Données personnelles</a></li>
+            <li><a href="#article-11">Évolution du Service et des CGU</a></li>
+            <li><a href="#article-12">Droit applicable et juridiction</a></li>
+          </ol>
+        </nav>
+        <button class="imp" type="button" hidden>Imprimer ou enregistrer en PDF</button>
+      </div>
+
+      <article class="feuille">
+
 
   <div class="notice">
     Les présentes Conditions Générales d'Utilisation régissent l'accès au logiciel Ploutos. Toute création de compte emporte acceptation pleine et entière des présentes.
   </div>
 
-  <h2>Article 1 — Éditeur du service</h2>
+  <h2 id="article-1"><span class="no">Article 1</span> Éditeur du service</h2>
   <p>Le logiciel Ploutos (ci-après « le Service »), accessible sur ploutos-cgp.fr et app.ploutos-cgp.fr ainsi que via ses applications de bureau et mobiles, est édité par :</p>
   <p><strong>EcoPatrimoine Conseil</strong>, SARL au capital de 1 000 €, immatriculée au RCS de Perpignan sous le n° 909 388 373, dont le siège social est situé 6 rue Mirabeau, 66000 Perpignan (ci-après « l'Éditeur »).<br>
   Contact : contact@ecopatrimoine-conseil.com.<br>
   Directeur de la publication : David Perry.<br>
   Hébergement : Netlify, Inc., 512 2nd Street, San Francisco, CA 94107, États-Unis (site) ; Supabase (données applicatives — infrastructure localisée en Union européenne, Irlande).</p>
 
-  <h2>Article 2 — Objet</h2>
+  <h2 id="article-2"><span class="no">Article 2</span> Objet</h2>
   <p>Les présentes CGU définissent les conditions d'accès et d'utilisation du Service, un logiciel d'aide à l'analyse patrimoniale destiné aux professionnels du conseil en gestion de patrimoine : calculs fiscaux et sociaux, simulations, comparaison d'hypothèses et génération de documents. Toute création de compte emporte acceptation pleine et entière des présentes.</p>
 
-  <h2>Article 3 — Service réservé aux professionnels</h2>
+  <h2 id="article-3"><span class="no">Article 3</span> Service réservé aux professionnels</h2>
   <p>Le Service est exclusivement destiné à des utilisateurs professionnels agissant dans le cadre de leur activité (conseillers en gestion de patrimoine, courtiers, experts-comptables, professions du chiffre et du droit et assimilés). En créant un compte, l'utilisateur déclare agir à des fins entrant dans le cadre de son activité professionnelle. Les dispositions du Code de la consommation propres aux consommateurs, notamment le droit de rétractation, ne sont pas applicables.</p>
 
-  <h2>Article 4 — Compte et accès</h2>
+  <h2 id="article-4"><span class="no">Article 4</span> Compte et accès</h2>
   <p>La création d'un compte requiert une adresse email professionnelle valide, confirmée avant tout accès. L'utilisateur est responsable de la confidentialité de ses identifiants et de toute activité réalisée depuis son compte. L'Éditeur peut suspendre un compte en cas de violation des présentes, d'usage frauduleux ou de risque pour la sécurité du Service, après information de l'utilisateur sauf urgence.</p>
 
-  <h2>Article 5 — Essai gratuit</h2>
+  <h2 id="article-5"><span class="no">Article 5</span> Essai gratuit</h2>
   <p>Tout nouveau compte bénéficie d'un essai gratuit de trente (30) jours, sans carte bancaire et sans engagement. Au terme de l'essai, l'accès aux fonctionnalités est suspendu jusqu'à souscription d'un abonnement ; les données du compte sont conservées dans les conditions de l'article 10.</p>
 
-  <h2>Article 6 — Abonnement, prix et paiement</h2>
+  <h2 id="article-6"><span class="no">Article 6</span> Abonnement, prix et paiement</h2>
   <p>Le Service est proposé par abonnement mensuel ou annuel, aux prix affichés sur ploutos-cgp.fr au jour de la souscription, exprimés toutes taxes comprises. Le paiement est opéré par l'intermédiaire du prestataire Stripe ; l'Éditeur ne collecte ni ne conserve aucune donnée de carte bancaire. L'abonnement est reconduit tacitement par période équivalente ; il peut être résilié à tout moment depuis l'espace de facturation, la résiliation prenant effet au terme de la période en cours, sans remboursement prorata temporis. L'Éditeur peut faire évoluer ses tarifs ; toute évolution est notifiée au moins trente (30) jours avant application et ne s'applique qu'aux périodes de facturation suivantes. Lorsque l'abonnement souscrit porte la mention « tarif bloqué », le prix est maintenu tant que l'abonnement reste actif sans interruption.</p>
 
-  <h2>Article 7 — Disponibilité, maintenance et support</h2>
+  <h2 id="article-7"><span class="no">Article 7</span> Disponibilité, maintenance et support</h2>
   <p>L'Éditeur s'efforce d'assurer une disponibilité continue du Service, sans obligation de résultat. Des interruptions pour maintenance peuvent survenir ; les opérations planifiées sont, dans la mesure du possible, réalisées en dehors des heures ouvrées. L'architecture locale-first permet la poursuite du travail hors connexion pendant 72 heures. Le support est assuré par email à contact@ecopatrimoine-conseil.com, avec une réponse sous 48 heures ouvrées, ramenée à 24 heures en cas d'anomalie bloquante.</p>
 
-  <h2>Article 8 — Nature du Service et responsabilité</h2>
+  <h2 id="article-8"><span class="no">Article 8</span> Nature du Service et responsabilité</h2>
   <p>Le Service est un outil d'aide au conseil. Les calculs, simulations et documents produits sont établis à partir des données saisies par l'utilisateur et des barèmes et règles intégrés au Service, mis à jour avec diligence. Ils sont fournis à titre indicatif et ne constituent ni un conseil juridique, fiscal ou financier, ni une recommandation personnalisée au sens de la réglementation. <strong>L'utilisateur professionnel demeure seul responsable des analyses, recommandations et conseils qu'il délivre à ses propres clients</strong>, ainsi que du contrôle de la vraisemblance des résultats avant toute utilisation. Les documents réglementaires générés par le Service (lettre de mission, document d'entrée en relation, fiches d'information) sont établis à partir des déclarations renseignées par l'utilisateur sur sa propre situation (statut, niveau de conseil délivré, liens avec des entreprises d'assurance, mode de rémunération) ; l'utilisateur est seul responsable de l'exactitude et de l'actualité de ces déclarations et de la conformité des documents qu'il remet à ses clients. Certaines fonctionnalités optionnelles, clairement signalées, font appel à un service tiers d'intelligence artificielle pour proposer des données extraites de documents importés ; ces propositions sont soumises à la relecture et à la validation de l'utilisateur avant tout enregistrement, dans les conditions décrites dans la <a href="/politique-confidentialite">Politique de confidentialité</a>. La responsabilité de l'Éditeur, toutes causes confondues, est limitée aux dommages directs prouvés et plafonnée au montant des sommes effectivement versées par l'utilisateur au titre des douze (12) derniers mois. L'Éditeur ne saurait être tenu des dommages indirects (perte de clientèle, perte de chance, préjudice d'image).</p>
 
-  <h2>Article 9 — Propriété intellectuelle</h2>
+  <h2 id="article-9"><span class="no">Article 9</span> Propriété intellectuelle</h2>
   <p>Le Service, sa structure, son code, ses interfaces, ses marques et logos sont la propriété exclusive de l'Éditeur. L'abonnement confère un droit d'utilisation personnel, non exclusif et non cessible, limité à la durée de l'abonnement et aux besoins propres du cabinet de l'utilisateur. Les données saisies par l'utilisateur et les documents qu'il génère demeurent sa propriété.</p>
 
-  <h2>Article 10 — Données personnelles</h2>
+  <h2 id="article-10"><span class="no">Article 10</span> Données personnelles</h2>
   <p>Les traitements de données réalisés dans le cadre du Service sont décrits dans la <a href="/politique-confidentialite">Politique de confidentialité</a>, accessible sur ploutos-cgp.fr. S'agissant des données des clients de l'utilisateur saisies dans le Service, l'utilisateur agit en qualité de responsable de traitement et l'Éditeur en qualité de sous-traitant au sens de l'article 28 du RGPD ; leurs obligations respectives sont définies à l'<a href="/dpa">Annexe « Accord de traitement des données »</a>, qui fait partie intégrante des présentes. À la clôture du compte, l'utilisateur peut exporter ses données ; elles sont ensuite supprimées dans un délai de 90 jours, sauf obligation légale de conservation.</p>
 
-  <h2>Article 11 — Évolution du Service et des CGU</h2>
+  <h2 id="article-11"><span class="no">Article 11</span> Évolution du Service et des CGU</h2>
   <p>Le Service évolue en continu ; les fonctionnalités peuvent être enrichies ou modifiées sans dégrader les fonctions essentielles souscrites. L'Éditeur peut modifier les présentes CGU ; toute modification substantielle est notifiée au moins trente (30) jours avant son entrée en vigueur. La poursuite de l'utilisation vaut acceptation.</p>
 
-  <h2>Article 12 — Droit applicable et juridiction</h2>
+  <h2 id="article-12"><span class="no">Article 12</span> Droit applicable et juridiction</h2>
   <p>Les présentes sont soumises au droit français. À défaut de résolution amiable, tout litige relève de la compétence exclusive des tribunaux de Perpignan, y compris en référé, nonobstant pluralité de défendeurs ou appel en garantie.</p>
 
-</div>
+      </article>
+    </div>
+  </div>
+</main>
 
 <footer>
-  <p>© Ploutos 2026 — EcoPatrimoine Conseil · <a href="/cgu">CGU</a> · <a href="/dpa">DPA</a> · <a href="/politique-confidentialite">Politique de confidentialité</a> · <a href="/">Accueil</a></p>
-  <p>Contact : <a href="mailto:contact@ecopatrimoine-conseil.com">contact@ecopatrimoine-conseil.com</a></p>
+  <div class="wrap">
+    <p>© Ploutos 2026 — EcoPatrimoine Conseil · <a href="/cgu">CGU</a> · <a href="/dpa">DPA</a> · <a href="/politique-confidentialite">Politique de confidentialité</a> · <a href="/">Accueil</a></p>
+    <p>Contact : <a href="mailto:contact@ecopatrimoine-conseil.com">contact@ecopatrimoine-conseil.com</a></p>
+  </div>
 </footer>
 
 <!-- Cloudflare Web Analytics -->
