@@ -17,7 +17,9 @@
 //  9. mention de franchise en base de TVA : presente partout (accueil, llms.txt, article 6 des CGU) ou nulle part ; un etat
 //     mixte fait echouer la gate ; docs/SORTIE_FRANCHISE_TVA.md cite chacune des trois mentions
 // 10. date de version provisoire des CGU (attribut data-version-provisoire, dateModified provisoire, « [date de mise en
-//     ligne] ») : AVERTISSEMENT en mode normal ; ECHEC avec --release (a lancer a la mise en ligne, une fois la date posee)
+//     ligne] ») : AVERTISSEMENT en mode normal ; ECHEC avec --release (a lancer a la mise en ligne, une fois la date posee).
+//     Date posee = ligne « Version en vigueur au 12 novembre 2026 · EcoPatrimoine Conseil » (sans l'attribut) et dateModified
+//     2026-11-12 ; les controles 1 et 6 l'admettent (voir DATE_PLANCHER), --release est alors entierement vert.
 import { execFileSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -30,6 +32,12 @@ const BASE_CONFIG = '3c23f09'; // dernier commit avant le lot S1 : reference des
 const RELEASE = process.argv.includes('--release');
 const DATE_PROVISOIRE = '9999-12-31';
 const VERSION_PROVISOIRE = 'Version en vigueur au [date de mise en ligne] · EcoPatrimoine Conseil';
+// Ligne de version des CGU : deux etats admis. PROVISOIRE (VERSION_PROVISOIRE, attribut data-version-provisoire, dateModified
+// DATE_PROVISOIRE) ou DATEE : « Version en vigueur au 12 novembre 2026 · EcoPatrimoine Conseil » (jour, « 1er » pour le premier,
+// mois en toutes lettres, annee), sans l'attribut, avec dateModified = cette date. Date de calendrier reelle, jamais anterieure
+// a DATE_PLANCHER (jour du lot S1-bis : la version qui porte l'article 6 hors taxes ne peut pas etre plus ancienne).
+const DATE_PLANCHER = '2026-11-11';
+const SW_DESCRIPTION = "Logiciel de gestion de patrimoine pour CGP, CIF, courtiers et agents d'assurance : bilan, succession, prévoyance, documents réglementaires.";
 const ACCUEIL_TITRE = 'Ploutos — Logiciel patrimonial pour CGP, CIF et courtiers';
 const ACCUEIL_DESCRIPTION = "Logiciel de gestion de patrimoine pour CGP, CIF, courtiers et agents d'assurance : bilan, succession, prévoyance, documents. Essai gratuit 30 jours.";
 const CIBLES = "Ploutos s'adresse aux conseillers en gestion de patrimoine (CGP), aux conseillers en investissements financiers (CIF), aux courtiers et agents d'assurance, aux sociétés d'assurance et aux agents immobiliers.";
@@ -41,6 +49,17 @@ const MARQUEURS_FRANCHISE = { // la formulation differe volontairement d'un fich
 const FICHE_SORTIE = 'docs/SORTIE_FRANCHISE_TVA.md';
 // Differences admises du corps de chaque page par rapport a BASE : [nom, fragment de depart, fragment d'arrivee].
 // Declarees une a une ; le fragment de depart doit exister EXACTEMENT UNE FOIS dans BASE. Toute autre difference echoue.
+// Un 4e element facultatif, la « variante », est une fonction (corps courant) -> fragment d'arrivee admis ou null : elle
+// permet une seconde forme d'arrivee, lue dans le fichier courant et validee (ici, la ligne de version datee).
+function ligneVersionDatee(corps) {
+  const mois = Object.keys(MOIS).join('|');
+  const m = corps.match(new RegExp(`<p class="ver">Version en vigueur au (1er|[2-9]|[12]\\d|3[01]) (${mois}) (\\d{4}) · EcoPatrimoine Conseil</p>`));
+  if (!m) return null;
+  const j = m[1] === '1er' ? 1 : Number(m[1]), mm = Number(MOIS[m[2]]), an = Number(m[3]);
+  const d = new Date(Date.UTC(an, mm - 1, j));
+  if (d.getUTCFullYear() !== an || d.getUTCMonth() !== mm - 1 || d.getUTCDate() !== j) return null; // 31 fevrier, etc.
+  return d.toISOString().slice(0, 10) >= DATE_PLANCHER ? m[0] : null;
+}
 const DIFFERENCES = {
   'index.html': [
     ['B1 prix mensuel : « 50 € HT /mois » (montant)', '<span class="price-big">50€</span>', '<span class="price-big">50&nbsp;€</span>'],
@@ -64,9 +83,10 @@ const DIFFERENCES = {
     ['A6 article 6 : prix hors taxes, franchise en base de TVA',
       'exprimés toutes taxes comprises.',
       "exprimés hors taxes. À la date des présentes, l'Éditeur bénéficie de la franchise en base de TVA : la TVA n'est pas applicable (article 293 B du Code général des impôts). Si l'Éditeur devient redevable de la TVA, celle-ci s'ajoute aux prix au taux en vigueur, y compris pour les abonnements en cours et pour ceux portant la mention «&nbsp;tarif bloqué&nbsp;», dont le prix hors taxes reste maintenu. L'application de la TVA ne constitue pas une évolution tarifaire au sens du présent article."],
-    ['A7 ligne de version : date de mise en ligne provisoire',
+    ['A7 ligne de version : date de mise en ligne, provisoire ou posee (« 12 novembre 2026 », au plus tot le ' + DATE_PLANCHER + ')',
       '<p class="ver">Version en vigueur au 1er septembre 2026 · EcoPatrimoine Conseil</p>',
-      '<p class="ver" data-version-provisoire>' + VERSION_PROVISOIRE + '</p>']
+      '<p class="ver" data-version-provisoire>' + VERSION_PROVISOIRE + '</p>',
+      ligneVersionDatee]
   ]
 };
 const PAGES_NOINDEX = ['merci.html', 'merci-contact.html', '404.html', 'maintenance.html'];
@@ -165,6 +185,9 @@ const types = (f) => (graphe[f][0]?.['@graph'] || []).map((n) => n['@type']);
   ok(pCibles && txt(pCibles[1]) === CIBLES && vis.includes(CIBLES), 'paragraphe des cibles affiche, mot pour mot (section « A propos »)');
   ok(sw.audience?.['@type'] === 'Audience' && typeof sw.audience.audienceType === 'string' && norm(sw.audience.audienceType) === CIBLES && vis.includes(norm(sw.audience.audienceType)),
     'SoftwareApplication.audience : un noeud Audience dont audienceType = la phrase des cibles affichee');
+  // description : reprend les cibles (texte arrete par David). Le controle porte sur le texte exact ; il ne verifie PAS que
+  // chaque mot figure dans le texte affiche (constate le 11/11/2026 : « bilan » n'y figure pas, seulement dans les meta).
+  ok(sw.description === SW_DESCRIPTION, 'SoftwareApplication.description = le texte arrete (CGP, CIF, courtiers et agents d\'assurance : bilan, succession, prevoyance, documents reglementaires)');
 
   // titre, description et balises de partage (S1-bis)
   const titreHtml = txt((html.match(/<title>([\s\S]*?)<\/title>/) || [, ''])[1]);
@@ -187,7 +210,8 @@ for (const f of ['cgu.html', 'dpa.html', 'politique-confidentialite.html']) {
   ok(wp.name === h1, `${f} : WebPage.name = titre affiche « ${h1} »`);
   ok(wp.description === norm(meta(html, 'description')[0]), `${f} : WebPage.description = meta description`);
   if (provisoire) ok(wp.dateModified === DATE_PROVISOIRE && ver === VERSION_PROVISOIRE, `${f} : version provisoire coherente : attribut data-version-provisoire, ligne « ${ver} », dateModified ${wp.dateModified} (provisoire attendue : ${DATE_PROVISOIRE})`);
-  else ok(wp.dateModified === date && wp.dateModified !== DATE_PROVISOIRE, `${f} : dateModified ${wp.dateModified} = date de version affichee (${date})`);
+  else ok(wp.dateModified === date && wp.dateModified !== DATE_PROVISOIRE && (f !== 'cgu.html' || date >= DATE_PLANCHER),
+    `${f} : dateModified ${wp.dateModified} = date de version affichee (${date})` + (f === 'cgu.html' ? `, au plus tot le ${DATE_PLANCHER}` : ''));
   // espaces insecables a l'interieur des guillemets du texte juridique (la gate de texte normalise les espaces et ne les voit pas)
   const feuille = (html.match(/<article class="feuille">([\s\S]*?)<\/article>/) || [, ''])[1];
   const guillemets = (feuille.match(/[«»]/g) || []).length, mauvais = [...feuille.matchAll(/«(?!&nbsp;| )|(?<!&nbsp;| )»/g)].length;
@@ -264,10 +288,12 @@ for (const f of PAGES_INDEXABLES) {
   const liste = DIFFERENCES[f] || [];
   const a = corpsDe(depart(f)), b = corpsDe(lire(f));
   let attendu = a, applicables = true;
-  for (const [nom, de, vers] of liste) {
+  for (const [nom, de, vers, variante] of liste) {
     const n = a.split(de).length - 1;
     ok(n === 1, `${f} : difference declaree « ${nom} » : fragment de depart present une seule fois dans ${BASE} (${n})`);
-    if (n === 1) attendu = attendu.replace(de, () => vers); else applicables = false;
+    // arrivee : celle de base, ou la forme admise par la variante, lue dans le fichier courant (null : on attend celle de base)
+    const arrivee = (variante && !b.includes(vers) && variante(b)) || vers;
+    if (n === 1) attendu = attendu.replace(de, () => arrivee); else applicables = false;
   }
   const egal = applicables && attendu === b;
   ok(egal, `${f} : du <body au dernier octet, identique a ${BASE}` + (liste.length ? ` + ${liste.length} difference(s) declaree(s), aucune autre` : ', aucune difference'));
