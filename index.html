@@ -16,6 +16,10 @@
 <meta property="og:title" content="Ploutos — Le logiciel patrimonial des CGP indépendants">
 <meta property="og:description" content="Barèmes fiscaux 2026, rapports PDF personnalisés, gestion multi-clients. Essai gratuit 30 jours, sans carte bancaire.">
 <meta property="og:image" content="https://ploutos-cgp.fr/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Ploutos">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ploutos — Le logiciel patrimonial des CGP indépendants">
 <meta name="twitter:description" content="Barèmes fiscaux 2026, rapports PDF personnalisés, gestion multi-clients. Essai gratuit 30 jours, sans carte bancaire.">
@@ -347,28 +351,132 @@ footer a:hover { color: var(--gold); }
       "@type": "Organization",
       "@id": "https://ploutos-cgp.fr/#organization",
       "name": "EcoPatrimoine Conseil",
-      "url": "https://ploutos-cgp.fr",
-      "logo": "https://ploutos-cgp.fr/logo.ploutos.png"
+      "legalName": "EcoPatrimoine Conseil",
+      "url": "https://ploutos-cgp.fr/",
+      "logo": "https://ploutos-cgp.fr/logo.ploutos.png",
+      "email": "contact@ecopatrimoine-conseil.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "6 rue Mirabeau",
+        "postalCode": "66000",
+        "addressLocality": "Perpignan",
+        "addressCountry": "FR"
+      },
+      "identifier": {
+        "@type": "PropertyValue",
+        "name": "RCS Perpignan",
+        "value": "909 388 373"
+      },
+      "sameAs": [
+        "https://www.ecopatrimoine-conseil.com",
+        "https://www.youtube.com/@ecopatrimoineconseil"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://ploutos-cgp.fr/#website",
+      "name": "Ploutos",
+      "url": "https://ploutos-cgp.fr/",
+      "inLanguage": "fr",
+      "publisher": {
+        "@id": "https://ploutos-cgp.fr/#organization"
+      }
     },
     {
       "@type": "SoftwareApplication",
+      "@id": "https://ploutos-cgp.fr/#software",
       "name": "Ploutos",
+      "url": "https://ploutos-cgp.fr/",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Web, Windows, iPadOS, Android",
       "description": "Logiciel de gestion patrimoniale pour CGP indépendants : calculs IR, IFI, succession, prévoyance, rapports PDF personnalisés.",
-      "publisher": { "@id": "https://ploutos-cgp.fr/#organization" },
+      "image": "https://ploutos-cgp.fr/og-image.png",
+      "screenshot": [
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://ploutos-cgp.fr/img/capture-ir.png",
+          "caption": "Écran Ploutos — calcul d'impôt sur le revenu avec barème par tranches",
+          "width": 1238,
+          "height": 1139
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://ploutos-cgp.fr/img/capture-prevoyance.png",
+          "caption": "Écran Ploutos — projection de prévoyance : arrêt de travail et invalidité",
+          "width": 1238,
+          "height": 1185
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://ploutos-cgp.fr/img/capture-succession.png",
+          "caption": "Écran Ploutos — succession et assurance-vie, net reçu par bénéficiaire",
+          "width": 1238,
+          "height": 934
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://ploutos-cgp.fr/img/capture-hypotheses.png",
+          "caption": "Écran Ploutos — comparateur d'hypothèses patrimoniales côte à côte",
+          "width": 1234,
+          "height": 1182
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://ploutos-cgp.fr/img/capture-prevoyance-coll.png",
+          "caption": "Écran Ploutos — audit d'une prévoyance collective d'entreprise",
+          "width": 1244,
+          "height": 1205
+        },
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://ploutos-cgp.fr/img/capture-lettre-mission.png",
+          "caption": "Écran Ploutos — génération de la lettre de mission et du rapport patrimonial",
+          "width": 1240,
+          "height": 1119
+        }
+      ],
+      "featureList": [
+        "Calculs IR, IFI, Succession — barèmes 2026",
+        "Comparateur d'hypothèses",
+        "Rapports PDF aux couleurs du cabinet",
+        "Lettre de mission réglementaire ACPR",
+        "Gestion multi-clients illimitée",
+        "Synchronisation cloud sécurisée",
+        "Mode hors-ligne 72h",
+        "Identité visuelle complète",
+        "Windows + Web + iPad + Android",
+        "Mises à jour incluses"
+      ],
+      "inLanguage": "fr",
+      "publisher": {
+        "@id": "https://ploutos-cgp.fr/#organization"
+      },
       "offers": [
         {
           "@type": "Offer",
-          "name": "Abonnement mensuel",
+          "name": "Plan Solo — Mensuel",
+          "url": "https://buy.stripe.com/aFaeVe90DdKM5lMeQD9fW01",
           "price": "50",
-          "priceCurrency": "EUR"
+          "priceCurrency": "EUR",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "50",
+            "priceCurrency": "EUR",
+            "unitCode": "MON"
+          }
         },
         {
           "@type": "Offer",
-          "name": "Abonnement annuel",
+          "name": "Plan Solo — Annuel",
+          "url": "https://buy.stripe.com/28E7sMdgT5eg29A8sf9fW00",
           "price": "500",
-          "priceCurrency": "EUR"
+          "priceCurrency": "EUR",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "500",
+            "priceCurrency": "EUR",
+            "unitCode": "ANN"
+          }
         }
       ]
     },
