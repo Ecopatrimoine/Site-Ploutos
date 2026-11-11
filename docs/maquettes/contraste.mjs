@@ -6,6 +6,9 @@
 //   item Roadmap « bordures de champ 1.4.11 ».
 // Un fond peut etre un jeton ou une composition { mix: [jeton de dessus, opacite, fond] } (imbricable) : c'est
 // ainsi que sont testes les onglets (blanc lin a 8 % / 16 % sur l'encre) et les degrades de la tete (au pire point).
+// Accueil (lot S1-bis) : la ligne « Prix hors taxes. TVA non applicable, art. 293 B du CGI. » sous les cartes de la
+// section Tarifs. Sa couleur est lue dans la regle .price-tax-note de index.html, son fond dans la regle .pricing
+// (un var(--x) est resolu dans le :root de index.html). Regle ou valeur introuvable : « JETON ABSENT », la gate echoue.
 import { readFileSync } from 'node:fs';
 
 const lire = (f) => readFileSync(new URL(f, import.meta.url), 'utf8');
@@ -13,6 +16,20 @@ const tok = {};
 for (const css of [lire('../../ploutos-carte.css'), lire('../../ploutos-doc.css')]) {
   for (const m of css.matchAll(/--([a-z0-9-]+):\s*(#[0-9A-Fa-f]{6})\s*;/g)) tok[m[1]] = m[2];
 }
+
+const accueil = lire('../../index.html');
+const echapper = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const regleAccueil = (sel) => (accueil.match(new RegExp('(?:^|\\n)' + echapper(sel) + '\\s*\\{([^}]*)\\}')) || [])[1];
+const proprieteAccueil = (corps, nom) => (((corps || '').match(new RegExp('(?:^|[;\\s{])' + nom + '\\s*:\\s*([^;]+)')) || [])[1] || '').trim();
+const valeurAccueil = (v) => {
+  const m = v.match(/^var\(--([a-z0-9-]+)\)$/);
+  if (!m) return /^#[0-9A-Fa-f]{6}$/.test(v) ? v : null;
+  return (accueil.match(new RegExp('--' + m[1] + ':\\s*(#[0-9A-Fa-f]{6})\\s*;')) || [])[1] || null;
+};
+const accueilTexte = valeurAccueil(proprieteAccueil(regleAccueil('.price-tax-note'), 'color'));
+const accueilFond = valeurAccueil(proprieteAccueil(regleAccueil('.pricing'), 'background'));
+if (accueilTexte) tok['accueil-ligne-sous-les-cartes'] = accueilTexte;
+if (accueilFond) tok['accueil-section-tarifs'] = accueilFond;
 
 const rgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 const hex = (c) => '#' + c.map((v) => Math.round(v).toString(16).padStart(2, '0')).join('').toUpperCase();
@@ -84,7 +101,10 @@ const COUPLES = [
   ['R1 onglet inactif survol : gris clair sur lin 16 % / encre', 'doc-onglet-texte', { mix: ['pl-lin', 0.16, 'doc-ink'] }],
   ['R1 onglet inactif sur le degrade bleu (pire point) : gris clair sur lin 8 %', 'doc-onglet-texte', { mix: ['pl-lin', 0.08, { mix: ['doc-halo-bleu', 0.32, 'doc-ink'] }] }],
   ['R1 onglet inactif survol sur le degrade bleu (pire point) : lin 16 %', 'doc-onglet-texte', { mix: ['pl-lin', 0.16, { mix: ['doc-halo-bleu', 0.32, 'doc-ink'] }] }],
-  ['R1 onglet actif : navy sur fond de page', 'pl-navy', 'doc-parch']
+  ['R1 onglet actif : navy sur fond de page', 'pl-navy', 'doc-parch'],
+
+  // index.html (S1-bis)
+  ['S1-bis accueil, ligne « Prix hors taxes... » sous les cartes : couleur de .price-tax-note sur le fond de la section Tarifs', 'accueil-ligne-sous-les-cartes', 'accueil-section-tarifs']
 ];
 const EXCEPTIONS = [['placeholder : subtle sur carte (exception declaree)', 'pl-text-subtle', 'pl-card']];
 
