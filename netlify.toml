@@ -1,7 +1,8 @@
 # Deploiement Netlify du site vitrine ploutos-cgp.fr
 #
 # Le site est statique : aucun bundler, la racine du depot est publiee telle
-# quelle. La seule etape de build sert a retirer docs/ de la copie publiee.
+# quelle. La seule etape de build sert a retirer docs/ et scripts/ de la copie
+# publiee.
 #
 # docs/ contient les brouillons juridiques annotes (CGU, DPA, politique de
 # confidentialite) : mentions [CAPITAL SOCIAL A CONFIRMER], [GERANT], notes
@@ -9,9 +10,15 @@
 # mais ne jamais etre servis. La suppression a lieu dans le conteneur de
 # build uniquement : le depot n'est pas modifie.
 #
-# Garde-fou complementaire : la regle /docs/* de _redirects, qui renvoie une
-# 404 de marque si un fichier venait malgre tout a etre publie.
+# scripts/ contient les outils de generation et de verification du
+# referencement (plan du site, controles SEO) : versionnes, jamais servis. Le
+# plan du site est genere en local puis commite : Netlify n'execute pas ces
+# scripts.
+#
+# Garde-fou complementaire : les regles /docs/* et /scripts/* de _redirects,
+# qui renvoient une 404 de marque si un fichier venait malgre tout a etre
+# publie.
 
 [build]
-  command = "rm -rf docs"
+  command = "rm -rf docs scripts"
   publish = "."
