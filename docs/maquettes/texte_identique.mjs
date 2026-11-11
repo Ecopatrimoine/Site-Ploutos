@@ -21,6 +21,25 @@ const BASE = '1bf967e'; // tete de S1, avant le lot S1-bis
 const PAGES = ['cgu.html', 'dpa.html', 'politique-confidentialite.html'];
 const RACINE = fileURLToPath(new URL('../../', import.meta.url));
 
+// Ligne de version des CGU : deux etats admis (retouche du lot S1-bis).
+//  - la ligne PROVISOIRE « Version en vigueur au [date de mise en ligne] · EcoPatrimoine Conseil » ;
+//  - la ligne DATEE « Version en vigueur au 12 novembre 2026 · EcoPatrimoine Conseil » : jour (« 1er » pour le premier),
+//    mois en toutes lettres, annee ; date de calendrier reelle, jamais anterieure a DATE_PLANCHER (jour du lot S1-bis :
+//    la version qui porte l'article 6 hors taxes ne peut pas etre plus ancienne). Tout autre format echoue.
+// (scripts/verif-seo.mjs applique la meme regle a la ligne <p class="ver"> du <body et a dateModified.)
+const DATE_PLANCHER = '2026-11-11';
+const MOIS = { janvier: 1, février: 2, mars: 3, avril: 4, mai: 5, juin: 6, juillet: 7, août: 8, septembre: 9, octobre: 10, novembre: 11, décembre: 12 };
+const LIGNE_DATEE = new RegExp(`^Version en vigueur au (1er|[2-9]|[12]\\d|3[01]) (${Object.keys(MOIS).join('|')}) (\\d{4}) · EcoPatrimoine Conseil$`);
+// la ligne apres, si c'est une ligne datee valide ; sinon null
+function ligneDatee(v) {
+  const m = v.match(LIGNE_DATEE);
+  if (!m) return null;
+  const j = m[1] === '1er' ? 1 : Number(m[1]), mois = MOIS[m[2]], an = Number(m[3]);
+  const d = new Date(Date.UTC(an, mois - 1, j));
+  if (d.getUTCFullYear() !== an || d.getUTCMonth() !== mois - 1 || d.getUTCDate() !== j) return null; // 31 fevrier, etc.
+  return d.toISOString().slice(0, 10) >= DATE_PLANCHER ? v : null;
+}
+
 // Differences declarees. « ou » : 'corps' (texte de l'article) ou 'version' (ligne de version).
 // Lot S1-bis : trois substitutions dans les CGU, aucune dans le DPA ni dans la politique de confidentialite.
 const DIFFERENCES = {
@@ -38,10 +57,11 @@ const DIFFERENCES = {
       vers: 'exprimés hors taxes. À la date des présentes, l\'Éditeur bénéficie de la franchise en base de TVA : la TVA n\'est pas applicable (article 293 B du Code général des impôts). Si l\'Éditeur devient redevable de la TVA, celle-ci s\'ajoute aux prix au taux en vigueur, y compris pour les abonnements en cours et pour ceux portant la mention « tarif bloqué », dont le prix hors taxes reste maintenu. L\'application de la TVA ne constitue pas une évolution tarifaire au sens du présent article.'
     },
     {
-      nom: 'ligne de version : date de mise en ligne provisoire',
+      nom: 'ligne de version : date de mise en ligne, provisoire ou posee (« 12 novembre 2026 », au plus tot le ' + DATE_PLANCHER + ')',
       ou: 'version',
       de: 'Version en vigueur au 1er septembre 2026 · EcoPatrimoine Conseil',
-      vers: 'Version en vigueur au [date de mise en ligne] · EcoPatrimoine Conseil'
+      vers: 'Version en vigueur au [date de mise en ligne] · EcoPatrimoine Conseil',
+      variante: ligneDatee
     }
   ],
   'dpa.html': [],
@@ -83,13 +103,16 @@ function premiereDifference(a, b) {
 }
 
 // Applique les differences declarees au texte de depart. Retourne { texte, erreurs }.
-function appliquer(source, liste, ou) {
+// `apres` (le texte du fichier courant) ne sert qu'aux differences a variante : la variante rend la forme admise lue
+// dans `apres`, ou null (alors c'est l'arrivee de base `vers` qui est attendue, et la comparaison echoue si elle differe).
+function appliquer(source, liste, ou, apres) {
   const erreurs = [];
   let r = source;
   for (const d of liste.filter((x) => x.ou === ou)) {
     const n = source.split(d.de).length - 1;
     if (n !== 1) { erreurs.push(`difference declaree « ${d.nom} » : le fragment de depart existe ${n} fois dans ${BASE} (exactement 1 attendue)`); continue; }
-    r = r.replace(d.de, () => d.vers);
+    const arrivee = (d.variante && apres !== d.vers && d.variante(apres)) || d.vers;
+    r = r.replace(d.de, () => arrivee);
   }
   return { texte: r, erreurs };
 }
@@ -102,7 +125,7 @@ for (const page of PAGES) {
   }
   const liste = DIFFERENCES[page] || [];
   const corpsAv = texte(av.corps);
-  const dc = appliquer(corpsAv, liste, 'corps'), dv = appliquer(av.version, liste, 'version');
+  const dc = appliquer(corpsAv, liste, 'corps'), dv = appliquer(av.version, liste, 'version', ap.version);
   for (const e of [...dc.erreurs, ...dv.erreurs]) { console.log(`ECHEC  ${page} : ${e}`); echecs++; }
   const controles = [
     ['titre h1', av.h1, ap.h1],
