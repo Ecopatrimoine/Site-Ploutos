@@ -9,6 +9,7 @@
 // Accueil (lot S1-bis) : la ligne « Prix hors taxes. TVA non applicable, art. 293 B du CGI. » sous les cartes de la
 // section Tarifs. Sa couleur est lue dans la regle .price-tax-note de index.html, son fond dans la regle .pricing
 // (un var(--x) est resolu dans le :root de index.html). Regle ou valeur introuvable : « JETON ABSENT », la gate echoue.
+// Meme principe pour le paragraphe des cibles de la section « A propos » (regle .about-text .about-cibles, fond de .about).
 import { readFileSync } from 'node:fs';
 
 const lire = (f) => readFileSync(new URL(f, import.meta.url), 'utf8');
@@ -30,6 +31,10 @@ const accueilTexte = valeurAccueil(proprieteAccueil(regleAccueil('.price-tax-not
 const accueilFond = valeurAccueil(proprieteAccueil(regleAccueil('.pricing'), 'background'));
 if (accueilTexte) tok['accueil-ligne-sous-les-cartes'] = accueilTexte;
 if (accueilFond) tok['accueil-section-tarifs'] = accueilFond;
+const aProposTexte = valeurAccueil(proprieteAccueil(regleAccueil('.about-text .about-cibles'), 'color'));
+const aProposFond = valeurAccueil(proprieteAccueil(regleAccueil('.about'), 'background'));
+if (aProposTexte) tok['accueil-cibles-a-propos'] = aProposTexte;
+if (aProposFond) tok['accueil-section-a-propos'] = aProposFond;
 
 const rgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 const hex = (c) => '#' + c.map((v) => Math.round(v).toString(16).padStart(2, '0')).join('').toUpperCase();
@@ -104,7 +109,8 @@ const COUPLES = [
   ['R1 onglet actif : navy sur fond de page', 'pl-navy', 'doc-parch'],
 
   // index.html (S1-bis)
-  ['S1-bis accueil, ligne « Prix hors taxes... » sous les cartes : couleur de .price-tax-note sur le fond de la section Tarifs', 'accueil-ligne-sous-les-cartes', 'accueil-section-tarifs']
+  ['S1-bis accueil, ligne « Prix hors taxes... » sous les cartes : couleur de .price-tax-note sur le fond de la section Tarifs', 'accueil-ligne-sous-les-cartes', 'accueil-section-tarifs'],
+  ['S1-bis accueil, paragraphe des cibles de « A propos » : couleur de .about-cibles sur le fond de la section « A propos »', 'accueil-cibles-a-propos', 'accueil-section-a-propos']
 ];
 const EXCEPTIONS = [['placeholder : subtle sur carte (exception declaree)', 'pl-text-subtle', 'pl-card']];
 
