@@ -1,24 +1,55 @@
-// Gate (2) du lot R1 : le texte juridique des trois pages n'a pas change d'un mot.
+// Gate (2) des lots R1 puis S1-bis : le texte juridique des trois pages n'a change que des differences DECLAREES.
 // Usage (depuis la racine du depot) : node docs/maquettes/texte_identique.mjs
 //
-// Avant = la page telle qu'elle est dans le commit de depart (git show 6a7fd24:<page>).
+// Avant = la page telle qu'elle est dans le commit de base (git show <BASE>:<page>).
 // Apres = le fichier courant.
-// Compare, pour chaque page : le titre h1, la ligne de version, le corps (texte, espaces normalises), la liste
-// des liens du corps (href, target, rel, texte) et le « squelette » (suite des balises h2/h3/p/ul/li/tr/th/td/
-// strong/em/br/a). Seule difference neutralisee : le separateur des h2 (« Article N — » et « N. »), que la
-// nouvelle presentation retire de l'affichage au profit du <span class="no">.
-// Tout le reste (mot, ponctuation, lien, balise de contenu) fait echouer la gate. Le sommaire, les onglets,
-// l'eyebrow, la barre et le pied sont hors perimetre (ils ne font pas partie du texte juridique).
+// Les deux cotes ont la meme structure (h1, p.ver, article.feuille). Pour chaque page on compare : le titre h1, la
+// ligne de version, le corps (texte, espaces normalises), la liste des liens du corps (href, target, rel, texte) et
+// le « squelette » (suite des balises h2/h3/p/ul/li/tr/th/td/strong/em/br/a). Le sommaire, les onglets, l'eyebrow,
+// la barre et le pied sont hors perimetre (ils ne font pas partie du texte juridique).
+//
+// Differences admises : celles de DIFFERENCES ci-dessous, et aucune autre. Chacune est un couple (fragment de depart,
+// fragment d'arrivee), declare un a un, applique au TEXTE de depart (ou a la ligne de version) avant comparaison.
+// Si le fragment de depart n'existe pas exactement une fois dans la base, la gate echoue ; toute autre difference
+// (mot, ponctuation, lien, balise de contenu) echoue aussi. Les espaces sont normalises : cette gate ne voit pas la
+// difference entre espace ordinaire et espace insecable (c'est scripts/verif-seo.mjs qui la controle).
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-const BASE = '6a7fd24';
+const BASE = '1bf967e'; // tete de S1, avant le lot S1-bis
 const PAGES = ['cgu.html', 'dpa.html', 'politique-confidentialite.html'];
 const RACINE = fileURLToPath(new URL('../../', import.meta.url));
 
-const avant = (page) => execFileSync('git', ['show', `${BASE}:${page}`], { cwd: RACINE, encoding: 'utf8', maxBuffer: 1 << 24 });
-const apres = (page) => readFileSync(new URL(`../../${page}`, import.meta.url), 'utf8');
+// Differences declarees. « ou » : 'corps' (texte de l'article) ou 'version' (ligne de version).
+// Lot S1-bis : trois substitutions dans les CGU, aucune dans le DPA ni dans la politique de confidentialite.
+const DIFFERENCES = {
+  'cgu.html': [
+    {
+      nom: 'article 3 : liste des utilisateurs vises (CIF, agents d\'assurance, societes d\'assurance, agents immobiliers)',
+      ou: 'corps',
+      de: '(conseillers en gestion de patrimoine, courtiers, experts-comptables, professions du chiffre et du droit et assimilés)',
+      vers: '(conseillers en gestion de patrimoine, conseillers en investissements financiers, courtiers et agents d\'assurance, sociétés d\'assurance, agents immobiliers, experts-comptables, professions du chiffre et du droit et assimilés)'
+    },
+    {
+      nom: 'article 6 : prix hors taxes, franchise en base de TVA',
+      ou: 'corps',
+      de: 'exprimés toutes taxes comprises.',
+      vers: 'exprimés hors taxes. À la date des présentes, l\'Éditeur bénéficie de la franchise en base de TVA : la TVA n\'est pas applicable (article 293 B du Code général des impôts). Si l\'Éditeur devient redevable de la TVA, celle-ci s\'ajoute aux prix au taux en vigueur, y compris pour les abonnements en cours et pour ceux portant la mention « tarif bloqué », dont le prix hors taxes reste maintenu. L\'application de la TVA ne constitue pas une évolution tarifaire au sens du présent article.'
+    },
+    {
+      nom: 'ligne de version : date de mise en ligne provisoire',
+      ou: 'version',
+      de: 'Version en vigueur au 1er septembre 2026 · EcoPatrimoine Conseil',
+      vers: 'Version en vigueur au [date de mise en ligne] · EcoPatrimoine Conseil'
+    }
+  ],
+  'dpa.html': [],
+  'politique-confidentialite.html': []
+};
+
+const git = (page) => execFileSync('git', ['show', `${BASE}:${page}`], { cwd: RACINE, encoding: 'utf8', maxBuffer: 1 << 24 });
+const courant = (page) => readFileSync(new URL(`../../${page}`, import.meta.url), 'utf8');
 
 // balises de bloc -> espace ; balises en ligne -> rien (le texte colle comme dans le rendu)
 const BLOC = /<\/?(?:h[1-6]|p|ul|ol|li|div|table|thead|tbody|tr|td|th|br|article|section|header|footer|main|nav)\b[^>]*>/gi;
@@ -36,22 +67,11 @@ function liens(html) {
   );
 }
 
-// Retire, dans les h2 de l'ancienne page uniquement, le separateur « — » (CGU) ou « . » (DPA, politique).
-const sansSeparateur = (html) => html
-  .replace(/(<h2[^>]*>\s*Article\s+\d+)\s*—\s*/g, '$1 ')
-  .replace(/(<h2[^>]*>\s*\d+)\s*\.\s*/g, '$1 ');
-
-function extraireAvant(html) {
-  const tete = html.match(/<div class="hero">\s*<h1>([\s\S]*?)<\/h1>\s*<p>([\s\S]*?)<\/p>/);
-  const corps = html.match(/<div class="container">([\s\S]*?)<\/div>\s*<footer>/);
-  if (!tete || !corps) throw new Error('structure de depart introuvable');
-  return { h1: texte(tete[1]), version: texte(tete[2]), corps: sansSeparateur(corps[1]) };
-}
-function extraireApres(html) {
+function extraire(html) {
   const h1 = html.match(/<h1>([\s\S]*?)<\/h1>/);
-  const ver = html.match(/<p class="ver">([\s\S]*?)<\/p>/);
+  const ver = html.match(/<p class="ver"[^>]*>([\s\S]*?)<\/p>/);
   const corps = html.match(/<article class="feuille">([\s\S]*?)<\/article>/);
-  if (!h1 || !ver || !corps) throw new Error('structure d\'arrivee introuvable (h1, p.ver ou article.feuille)');
+  if (!h1 || !ver || !corps) throw new Error('structure introuvable (h1, p.ver ou article.feuille)');
   return { h1: texte(h1[1]), version: texte(ver[1]), corps: corps[1] };
 }
 
@@ -62,23 +82,40 @@ function premiereDifference(a, b) {
   return `position ${i}\n      avant : ${ctx(a)}\n      apres : ${ctx(b)}`;
 }
 
+// Applique les differences declarees au texte de depart. Retourne { texte, erreurs }.
+function appliquer(source, liste, ou) {
+  const erreurs = [];
+  let r = source;
+  for (const d of liste.filter((x) => x.ou === ou)) {
+    const n = source.split(d.de).length - 1;
+    if (n !== 1) { erreurs.push(`difference declaree « ${d.nom} » : le fragment de depart existe ${n} fois dans ${BASE} (exactement 1 attendue)`); continue; }
+    r = r.replace(d.de, () => d.vers);
+  }
+  return { texte: r, erreurs };
+}
+
 let echecs = 0;
 for (const page of PAGES) {
   let av, ap;
-  try { av = extraireAvant(avant(page)); ap = extraireApres(apres(page)); } catch (e) {
+  try { av = extraire(git(page)); ap = extraire(courant(page)); } catch (e) {
     console.log(`ECHEC  ${page} : ${e.message}`); echecs++; continue;
   }
+  const liste = DIFFERENCES[page] || [];
+  const corpsAv = texte(av.corps);
+  const dc = appliquer(corpsAv, liste, 'corps'), dv = appliquer(av.version, liste, 'version');
+  for (const e of [...dc.erreurs, ...dv.erreurs]) { console.log(`ECHEC  ${page} : ${e}`); echecs++; }
   const controles = [
     ['titre h1', av.h1, ap.h1],
-    ['ligne de version', av.version, ap.version],
-    ['texte du corps', texte(av.corps), texte(ap.corps)],
+    ['ligne de version (apres differences declarees)', dv.texte, ap.version],
+    ['texte du corps (apres differences declarees)', dc.texte, texte(ap.corps)],
     ['liens du corps', liens(av.corps).join('\n'), liens(ap.corps).join('\n')],
     ['squelette des balises', squelette(av.corps), squelette(ap.corps)]
   ];
   const ko = controles.filter(([, x, y]) => x !== y);
-  const mots = texte(av.corps).split(' ').length;
-  if (!ko.length) console.log(`OK     ${page} : ${mots} mots, ${liens(av.corps).length} liens, identiques`);
+  const mots = corpsAv.split(' ').length;
+  if (!ko.length) console.log(`OK     ${page} : ${mots} mots, ${liens(av.corps).length} liens, identiques a ${BASE}` + (liste.length ? ` hors ${liste.length} difference(s) declaree(s)` : ' (aucune difference declaree)'));
+  for (const d of liste) console.log(`       declaree : ${d.nom}`);
   for (const [nom, x, y] of ko) { console.log(`ECHEC  ${page} : ${nom}\n      ${premiereDifference(x, y)}`); echecs++; }
 }
-console.log(echecs ? `\n${echecs} difference(s) : la gate echoue` : '\nTexte identique sur les trois pages');
+console.log(echecs ? `\n${echecs} difference(s) : la gate echoue` : `\nTexte juridique identique a ${BASE} sur les trois pages, hors les differences declarees`);
 process.exit(echecs ? 1 : 0);
