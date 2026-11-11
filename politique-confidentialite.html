@@ -16,125 +16,61 @@
 <meta name="twitter:description" content="Comment Ploutos traite et protège vos données : hébergement, RGPD, droits d'accès et de suppression.">
 <meta name="twitter:image" content="https://ploutos-cgp.fr/og-image.png">
 <link rel="icon" href="/favicon.ico">
-<style>
-  @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 300; font-display: swap; src: url('/fonts/source-serif-4-latin-300-normal.woff2') format('woff2'); }
-  @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/source-serif-4-latin-400-normal.woff2') format('woff2'); }
-  @font-face { font-family: 'Source Serif 4'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/source-serif-4-latin-600-normal.woff2') format('woff2'); }
-  @font-face { font-family: 'Source Serif 4'; font-style: italic; font-weight: 300; font-display: swap; src: url('/fonts/source-serif-4-latin-300-italic.woff2') format('woff2'); }
-  :root {
-    --navy: #101B3B;
-    --sky: #26428B;
-    --gold: #E3AF64;
-    --cream: #FBECD7;
-    --text: #1a1a2e;
-    --muted: #64748b;
-    --border: rgba(16,27,59,0.12);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-weight: 300;
-    color: var(--text);
-    background: #faf9f7;
-    line-height: 1.8;
-  }
-  header {
-    background: var(--navy);
-    padding: 20px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  header img { height: 36px; }
-  header a {
-    color: rgba(255,255,255,0.6);
-    text-decoration: none;
-    font-size: 13px;
-    font-family: 'Source Serif 4', serif;
-    transition: color .2s;
-  }
-  header a:hover { color: var(--gold); }
-  .hero {
-    background: var(--navy);
-    padding: 48px 40px 56px;
-    text-align: center;
-    border-bottom: 3px solid var(--gold);
-  }
-  .hero h1 {
-    font-family: 'Source Serif 4', serif;
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 8px;
-  }
-  .hero p {
-    color: rgba(255,255,255,0.55);
-    font-size: 0.9rem;
-    font-weight: 300;
-  }
-  .container {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 56px 24px 80px;
-  }
-  h2 {
-    font-family: 'Source Serif 4', serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin: 40px 0 12px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-  }
-  h2:first-child { margin-top: 0; }
-  p { margin-bottom: 14px; color: #2d3748; }
-  ul { margin: 0 0 14px 20px; }
-  li { margin-bottom: 6px; color: #2d3748; }
-  strong { font-weight: 600; color: var(--navy); }
-  a { color: var(--sky); }
-  .notice {
-    background: var(--cream);
-    border-left: 3px solid var(--gold);
-    padding: 14px 18px;
-    border-radius: 0 8px 8px 0;
-    margin: 20px 0;
-    font-size: 0.9rem;
-  }
-  footer {
-    background: var(--navy);
-    padding: 24px 40px;
-    text-align: center;
-    color: rgba(255,255,255,0.4);
-    font-size: 12px;
-  }
-  footer a { color: var(--gold); text-decoration: none; }
-  a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
-</style>
+<link rel="stylesheet" href="/ploutos-carte.css">
+<link rel="stylesheet" href="/ploutos-doc.css">
+<script src="/ploutos-doc.js" defer></script>
 </head>
 <body>
 
-<header>
-  <a href="/" aria-label="Ploutos — accueil" style="display:inline-flex;align-items:center"><img src="/lettrage.ploutos.blanc.svg" alt="Lettrage Ploutos" onerror="this.style.color='#E3AF64';this.outerHTML='<span style=\'color:#E3AF64;font-size:20px;font-weight:600\'>Ploutos</span>'"></a>
-  <a href="/">← Retour</a>
+<header class="nav">
+  <div class="in">
+    <a class="tuile" href="/" aria-label="Ploutos — accueil"><svg viewBox="0 0 251 276" aria-hidden="true" focusable="false"><path d="M156.49 101.35C147.25 99.59 138.95 100.52 129.64 100.85C127.62 126.59 125.91 168.55 117.35 190.91C115.21 196.5 110.97 200.45 106.31 201.24C100 202.31 93.71 200.96 90.46 195.25C83.15 182.41 104.56 171.58 112.13 142.31C115.65 128.7 117.22 115.39 118.12 101.28C86.03 95.32 88.57 121.45 79.03 117.72C84.03 100.33 91.91 82.57 112.46 82.52L202.9 82.3L202.7 100.42L173.57 100.86L170.3 150.67C169.78 158.52 169.86 166.5 172.13 174.02C174.03 180.32 180.46 182.34 186.3 181.87C197.54 180.96 198.67 166.72 198.89 167.63C198.28 165.12 209.5 163.02 197.17 188.31C192.74 197.39 184.21 201.84 174.3 201.7C159.99 201.51 150.37 191 150.64 176.4C151.09 151.65 154.51 127.87 156.51 101.36L156.49 101.35Z"/><path d="M114.99 262.98C84.04 257.1 56.76 240.19 37.68 214.86C17.34 187.87 8.73 154.57 13.43 121.1C18.13 87.63 35.59 58 62.58 37.65C88.31 18.26 119.77 9.54 151.65 12.84C153.21 13 154.78 13.18 156.34 13.4C189.81 18.1 219.44 35.56 239.79 62.55L247.72 56.58C225.04 26.49 192.31 8.43 157.73 3.57C156.17 3.35 154.61 3.17 153.04 3C119.86 -0.5 85.34 8.07 56.6 29.72C-3.59 75.08 -15.61 160.64 29.74 220.83C51.07 249.14 81.31 266.78 113.61 272.82L114.98 262.98H114.99Z"/><circle class="dot" cx="206.7" cy="26.8" r="20"/></svg><div><b>PLOUTOS</b><span>by EcoPatrimoine Conseil</span></div></a>
+    <nav class="liens" aria-label="Navigation principale"><a href="/#fonctionnalites">Fonctionnalités</a><a href="/#tarifs">Tarifs</a><a href="/#faq">FAQ</a><a href="/#contact">Contact</a></nav>
+    <div class="cta"><a class="dc-btn dc-btn--ligne" href="https://app.ploutos-cgp.fr">Se connecter</a><a class="dc-btn dc-btn--or" href="/inscription.html">Essai gratuit 30 j</a></div>
+  </div>
+  <span class="prog" id="prog" aria-hidden="true"></span>
 </header>
 
-<div class="hero">
-  <h1>Politique de confidentialité</h1>
-  <p>Version en vigueur au 1er septembre 2026 · Conforme RGPD (Règlement UE 2016/679)</p>
-</div>
+<main>
+  <header class="haut">
+    <div class="wrap">
+      <span class="eb">Document d'information</span>
+      <h1>Politique de confidentialité</h1>
+      <p class="ver">Version en vigueur au 1er septembre 2026 · Conforme RGPD (Règlement UE 2016/679)</p>
+      <nav class="tabs" aria-label="Documents"><a href="/cgu">CGU</a><a href="/dpa">Traitement des données</a><a href="/politique-confidentialite" aria-current="page">Confidentialité</a></nav>
+    </div>
+  </header>
 
-<div class="container">
+  <div class="wrap">
+    <div class="cols">
+      <div class="som">
+        <nav aria-label="Sommaire">
+          <span class="eb">Sommaire</span>
+          <ol>
+            <li><a href="#section-1">Responsable de traitement</a></li>
+            <li><a href="#section-2">Données traitées, finalités et bases légales</a></li>
+            <li><a href="#section-3">Destinataires et sous-traitants</a></li>
+            <li><a href="#section-4">Durées de conservation</a></li>
+            <li><a href="#section-5">Vos droits</a></li>
+            <li><a href="#section-6">Cookies et traceurs</a></li>
+            <li><a href="#section-7">Sécurité</a></li>
+          </ol>
+        </nav>
+        <button class="imp" type="button" hidden>Imprimer ou enregistrer en PDF</button>
+      </div>
+
+      <article class="feuille">
+
 
   <div class="notice">
     EcoPatrimoine Conseil s'engage à protéger vos données personnelles. Cette politique explique quelles données sont traitées, pourquoi, sur quelles bases légales, avec quelles durées de conservation et quels sont vos droits.
   </div>
 
-  <h2>1. Responsable de traitement</h2>
+  <h2 id="section-1"><span class="no">1</span> Responsable de traitement</h2>
   <p><strong>EcoPatrimoine Conseil</strong>, SARL au capital de 1 000 €, RCS Perpignan 909 388 373, 6 rue Mirabeau, 66000 Perpignan. Contact pour toute question relative aux données : contact@ecopatrimoine-conseil.com.</p>
   <p>La présente politique couvre les traitements dont EcoPatrimoine Conseil est responsable : le site ploutos-cgp.fr, la création et la gestion des comptes Ploutos, la facturation et le support. <strong>Les données des clients des cabinets utilisateurs</strong>, saisies dans le logiciel, sont traitées pour le compte de ces cabinets, qui en sont responsables de traitement ; ce traitement est encadré par l'<a href="/dpa">Accord de traitement des données</a> annexé aux CGU.</p>
 
-  <h2>2. Données traitées, finalités et bases légales</h2>
+  <h2 id="section-2"><span class="no">2</span> Données traitées, finalités et bases légales</h2>
   <ul>
     <li><strong>Compte utilisateur</strong> (nom, email professionnel, mot de passe chiffré, informations du cabinet) — création et gestion du compte, fourniture du Service — <em>exécution du contrat</em>.</li>
     <li><strong>Facturation</strong> (identité, coordonnées, historique d'abonnement ; les données de carte bancaire sont traitées exclusivement par Stripe) — paiement, comptabilité — <em>exécution du contrat et obligation légale</em>.</li>
@@ -144,13 +80,13 @@
     <li><strong>Prospection professionnelle</strong> (coordonnées professionnelles publiques de cabinets de conseil) — information sur le Service, avec faculté de désinscription immédiate dans chaque message — <em>intérêt légitime, encadré B2B</em>.</li>
   </ul>
 
-  <h2>3. Destinataires et sous-traitants</h2>
+  <h2 id="section-3"><span class="no">3</span> Destinataires et sous-traitants</h2>
   <p>Les données sont accessibles au seul personnel habilité d'EcoPatrimoine Conseil et à ses sous-traitants techniques : Supabase (base de données et authentification — Union européenne, Irlande), Stripe (paiement), Resend (emails), Netlify (hébergement web), Cloudflare Web Analytics (mesure d'audience sans cookie), Cloudflare Turnstile (anti-abus) et Anthropic PBC (service d'intelligence artificielle utilisé, à la seule initiative de l'utilisateur, pour la lecture automatique de déclarations fiscales importées dans le logiciel). Les dossiers applicatifs sont hébergés en Union européenne ; lorsque des prestataires sont établis hors UE, les transferts sont encadrés par les garanties prévues au chapitre V du RGPD (clauses contractuelles types ou certification Data Privacy Framework, selon le prestataire). Aucune donnée n'est vendue ni transmise à des tiers à des fins publicitaires.</p>
 
   <h3>Lecture automatique de documents</h3>
   <p>Lorsqu'un utilisateur choisit d'importer une déclaration fiscale (formulaire 2035) pour en extraire les montants, le document est transmis à Anthropic PBC, fournisseur du service d'intelligence artificielle utilisé pour cette lecture, le temps du traitement. Cette transmission n'a lieu qu'à l'initiative de l'utilisateur, après information à l'écran ; les montants extraits sont présentés pour relecture et ne sont enregistrés qu'après validation par l'utilisateur. Le document transmis n'est pas conservé par le Service. En application des conditions commerciales du fournisseur, les données transmises ne sont pas utilisées pour l'entraînement de ses modèles. Le fournisseur étant établi aux États-Unis, ce transfert est encadré par les garanties du chapitre V du RGPD. L'utilisateur, responsable du traitement des données de ses clients, s'assure d'avoir informé ceux-ci de ce traitement ; les modalités de cette sous-traitance sont précisées dans l'<a href="/dpa">Accord de traitement des données</a>.</p>
 
-  <h2>4. Durées de conservation</h2>
+  <h2 id="section-4"><span class="no">4</span> Durées de conservation</h2>
   <ul>
     <li>Compte et données applicatives : durée de l'abonnement, puis suppression sous 90 jours après clôture, hors obligations légales.</li>
     <li>Documents de facturation : 10 ans (obligation comptable).</li>
@@ -158,20 +94,25 @@
     <li>Journaux techniques : 12 mois.</li>
   </ul>
 
-  <h2>5. Vos droits</h2>
+  <h2 id="section-5"><span class="no">5</span> Vos droits</h2>
   <p>Vous disposez des droits d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité, à exercer par email à contact@ecopatrimoine-conseil.com. Une réponse est apportée dans un délai d'un mois. Vous pouvez introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>).</p>
 
-  <h2>6. Cookies et traceurs</h2>
+  <h2 id="section-6"><span class="no">6</span> Cookies et traceurs</h2>
   <p>Le site ploutos-cgp.fr ne dépose aucun cookie publicitaire et n'utilise aucun traceur publicitaire tiers. Le site utilise une mesure d'audience anonyme et sans cookies (Cloudflare Web Analytics), qui ne suit pas les visiteurs d'un site à l'autre. Les polices de caractères sont hébergées sur nos propres serveurs. Le formulaire d'inscription utilise le dispositif anti-robots Cloudflare Turnstile, strictement nécessaire à la sécurité du service. L'application utilise le stockage local de votre appareil pour son fonctionnement hors-ligne (architecture locale-first).</p>
 
-  <h2>7. Sécurité</h2>
+  <h2 id="section-7"><span class="no">7</span> Sécurité</h2>
   <p>Chiffrement des échanges (TLS) et des données au repos, contrôle d'accès par cabinet, confirmation d'email obligatoire, protection anti-robots, sauvegardes régulières. En cas de violation de données susceptible d'engendrer un risque, la CNIL et, le cas échéant, les personnes concernées sont notifiées conformément aux articles 33 et 34 du RGPD.</p>
 
-</div>
+      </article>
+    </div>
+  </div>
+</main>
 
 <footer>
-  <p>© Ploutos 2026 — EcoPatrimoine Conseil · <a href="/cgu">CGU</a> · <a href="/dpa">DPA</a> · <a href="/politique-confidentialite">Politique de confidentialité</a> · <a href="/">Accueil</a></p>
-  <p>Contact : <a href="mailto:contact@ecopatrimoine-conseil.com">contact@ecopatrimoine-conseil.com</a></p>
+  <div class="wrap">
+    <p>© Ploutos 2026 — EcoPatrimoine Conseil · <a href="/cgu">CGU</a> · <a href="/dpa">DPA</a> · <a href="/politique-confidentialite">Politique de confidentialité</a> · <a href="/">Accueil</a></p>
+    <p>Contact : <a href="mailto:contact@ecopatrimoine-conseil.com">contact@ecopatrimoine-conseil.com</a></p>
+  </div>
 </footer>
 
 <!-- Cloudflare Web Analytics -->
