@@ -148,6 +148,14 @@ footer a { color: var(--pl-lin); text-underline-offset: 3px; }
   .feuille { padding: 28px 22px 34px; }
   .tabs a { height: 44px; padding: 0 14px; font-size: 14px; }
 }
+/* tableau qui defile : fondu sur le bord droit tant qu'il reste du contenu a droite (ploutos-doc.js pose
+   data-suite ; sans script, pas d'attribut, pas de fondu, le cadre defile comme avant) */
+@media (max-width: 600px) {
+  .table-wrap[data-suite] {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
+  }
+}
 @media (max-width: 480px) {
   .tuile { padding: 0 12px; gap: 8px; }
   .tuile svg { width: 36px; height: 40px; }
@@ -173,4 +181,5 @@ footer a { color: var(--pl-lin); text-underline-offset: 3px; }
   .feuille p, .feuille ul { max-width: none; }
   .feuille h2, .feuille h3 { break-after: avoid; }
   tr { break-inside: avoid; }
+  .table-wrap { -webkit-mask-image: none; mask-image: none; }
 }
